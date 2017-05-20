@@ -9,7 +9,6 @@
 
     <script src="./javascripts/bundle.js"></script>
     <script src="/socket.io/socket.io.js"></script>
-    <script src="../ccc-streamer-utilities.js"></script>
 
   </body>
 </html>

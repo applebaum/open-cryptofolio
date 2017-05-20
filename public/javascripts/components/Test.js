@@ -1,20 +1,25 @@
 import React, { Component } from "react";
 import io from 'socket.io-client';
 
+
+var socket = io.connect('http://localhost:3000');
+
+
 export default class Test extends Component {
-  constructor() {
-    super();
+    constructor() {
+        super();
+        this.state = {
+            price: 0
+        };
+    }
 
-    this.state = {
-      price: 0
-    };
-  }
+    componentDidMount(){
+        socket.on('m', (data) => this.handleStateChange(data.PRICE));
+    }
 
-//   updatePrice(res) {
-//     this.setState ={
-//       price: res.PRICE
-//     }
-// }
+    handleStateChange(newPriceState) {
+        this.setState({price: newPriceState});
+    }
 
 
   render() {
@@ -26,16 +31,6 @@ export default class Test extends Component {
   }
 }
 
-var socket = io.connect('http://localhost');
-socket.on('m', function (data) {
-    displayQuote(data);
-    console.log('client' + data.PRICE);
-    socket.emit('my other event', { my: 'data' });
-});
-
-let displayQuote = (data) => {
-  console.log('client' + data.PRICE);
-};
 
 var CCC = CCC || {};
 
