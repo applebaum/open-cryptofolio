@@ -103,8 +103,8 @@ var updateQuote = (result) => {
     for (var i = 0; i <keys.length; ++i) {
         quote[keys[i]] = result[keys[i]];
     }
-    io.on('connection', function (socket) {
-        socket.emit('updates', quote);
+    io.on('m', function (quote) {
+        io.emit('m', quote);
             });
     // console.log(quote.PRICE);
 

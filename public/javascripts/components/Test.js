@@ -27,14 +27,14 @@ export default class Test extends Component {
 }
 
 var socket = io.connect('http://localhost');
-socket.on('updates', function (data) {
+socket.on('m', function (data) {
     displayQuote(data);
-    console.log(data.PRICE);
+    console.log('client' + data.PRICE);
     socket.emit('my other event', { my: 'data' });
 });
 
 let displayQuote = (data) => {
-  console.log(data.PRICE);
+  console.log('client' + data.PRICE);
 };
 
 var CCC = CCC || {};
