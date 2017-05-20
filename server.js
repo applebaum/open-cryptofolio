@@ -1,41 +1,137 @@
-import React, { Component } from "react";
-import io from 'socket.io-client';
+var express = require('express');
+var path = require('path');
+var favicon = require('serve-favicon');
+var logger = require('morgan');
+var cookieParser = require('cookie-parser');
+var bodyParser = require('body-parser');
 
-export default class Test extends Component {
-  constructor() {
-    super();
+var routes = require('./routes/index');
+var users = require('./routes/users');
 
-    this.state = {
-      price: 0
-    };
-  }
+var app = express();
 
-//   updatePrice(res) {
-//     this.setState ={
-//       price: res.PRICE
-//     }
-// }
+// setuo socket.io
+var io = require('./io');
+import ioClient from 'socket.io-client';
 
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'hjs');
 
-  render() {
-    return (
-        <div>
-          BTC price is {this.state.price} USD
-        </div>
-    )
-  }
-}
+// uncomment after placing your favicon in /public
+app.use(favicon(__dirname + '/public/favicon.ico'));
+app.use(logger('dev'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
 
-var socket = io.connect('http://localhost');
-socket.on('updates', function (data) {
-    displayQuote(data);
-    console.log(data.PRICE);
-    socket.emit('my other event', { my: 'data' });
+app.use('/', routes);
+app.use('/users', users);
+
+// catch 404 and forward to error handler
+app.use(function(req, res, next) {
+    var err = new Error('Not Found');
+    err.status = 404;
+    next(err);
 });
 
-let displayQuote = (data) => {
-  console.log(data.PRICE);
+// error handlers
+
+// development error handler
+// will print stacktrace
+if (app.get('env') === 'development') {
+    app.use(function(err, req, res, next) {
+        res.status(err.status || 500);
+        res.render('error', {
+            message: err.message,
+            error: err
+        });
+    });
+}
+
+// production error handler
+// no stacktraces leaked to user
+app.use(function(err, req, res, next) {
+    res.status(err.status || 500);
+    res.render('error', {
+        message: err.message,
+        error: {}
+    });
+});
+
+//////////// Socket.io - SEND DATA TO CLIENT \\\\\\\\\\\\\\\\\\\
+// return value
+// var displayQuote = function(_quote) {
+//
+//     var fsym = CCC.STATIC.CURRENCY.SYMBOL[_quote.FROMSYMBOL];
+//     var tsym = CCC.STATIC.CURRENCY.SYMBOL[_quote.TOSYMBOL];
+//
+//     document.getElementById("market").innerHTML = _quote.LASTMARKET;
+//     document.getElementById("fsym").innerHTML = _quote.FROMSYMBOL;
+//     document.getElementById("tsym").innerHTML = _quote.TOSYMBOL;
+//     document.getElementById("price").innerHTML = _quote.PRICE;
+//     document.getElementById("volume").innerHTML = CCC.convertValueToDisplay(fsym, _quote.LASTVOLUME);
+//     document.getElementById("volumeto").innerHTML = CCC.convertValueToDisplay(tsym, _quote.LASTVOLUMETO);
+//     document.getElementById("24volume").innerHTML = CCC.convertValueToDisplay(fsym, _quote.VOLUME24HOUR);
+//     document.getElementById("24volumeto").innerHTML = CCC.convertValueToDisplay(tsym, _quote.VOLUME24HOURTO);
+//     document.getElementById("tradeid").innerHTML = _quote.LASTTRADEID.toFixed(0);
+//
+//     if (quote.FLAGS === "1"){
+//         document.getElementById("price").className = "up";
+//     }
+//     else if (quote.FLAGS === "2") {
+//         document.getElementById("price").className = "down";
+//     }
+//     else if (quote.FLAGS === "4") {
+//         document.getElementById("price").className = "";
+//     }
+// };
+// console.log(displayQuote);
+
+
+
+
+//////////// Socket.io - FETCH DATA FROM EXTERNAL SOCKET \\\\\\\\\\\\\\\\\\\
+var quote = {};
+
+// assign keys
+var updateQuote = (result) => {
+
+    var keys = Object.keys(result);
+
+    for (var i = 0; i <keys.length; ++i) {
+        quote[keys[i]] = result[keys[i]];
+    }
+    io.on('connection', function (socket) {
+        socket.emit('updates', quote);
+            });
+    // console.log(quote.PRICE);
+
 };
+
+// subscribe to external socket
+var socket = ioClient.connect('https://streamer.cryptocompare.com');
+
+//Format: {SubscriptionId}~{ExchangeName}~{FromSymbol}~{ToSymbol}
+//Use SubscriptionId 0 for TRADE, 2 for CURRENT and 5 for CURRENTAGG
+//For aggregate quote updates use CCCAGG as market
+var subscription = ['5~CCCAGG~BTC~USD'];
+
+socket.emit('SubAdd', {subs:subscription} );
+
+socket.on("m", function(message){
+    var messageType = message.substring(0, message.indexOf("~"));
+    var res = {};
+    if (messageType === CCC.STATIC.TYPE.CURRENTAGG) {
+        res = CCC.CURRENT.unpack(message);
+        // console.log(res);
+        updateQuote(res);
+    }
+});
+
+
+// define utilitites config
 
 var CCC = CCC || {};
 
@@ -513,3 +609,6 @@ CCC.convertValueToDisplay =  function(symbol,value,type,fullNumbers){
     }
 };
 
+
+
+module.exports = app;
