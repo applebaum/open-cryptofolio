@@ -1,9 +1,7 @@
 import React, { Component } from "react";
 import io from 'socket.io-client';
 
-
 var socket = io.connect('http://localhost:3000');
-
 
 export default class Test extends Component {
     constructor() {
@@ -14,13 +12,12 @@ export default class Test extends Component {
     }
 
     componentDidMount(){
-        socket.on('m', (data) => this.handleStateChange(data.PRICE));
+        socket.on('m', (data) => this.handleStateChange(data));
     }
 
     handleStateChange(newPriceState) {
-        this.setState({price: newPriceState});
+        this.setState({price: newPriceState.PRICE});
     }
-
 
   render() {
     return (
@@ -30,7 +27,6 @@ export default class Test extends Component {
     )
   }
 }
-
 
 var CCC = CCC || {};
 

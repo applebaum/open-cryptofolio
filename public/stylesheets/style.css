@@ -6,3 +6,69 @@ body {
 a {
   color: #00B7FF;
 }
+
+.header-container {
+  width: 100%;
+  height: 7%;
+  background-color: #282929;
+  position: fixed;
+  top: 0;
+  left: 0;
+    -webkit-box-shadow: 0px 5px 4px -2px rgba(0,0,0,0.77);
+    -moz-box-shadow: 0px 5px 4px -2px rgba(0,0,0,0.77);
+    box-shadow: 0px 5px 4px -2px rgba(0,0,0,0.77);
+}
+
+.logo {
+    left: 0.5%;
+    top: 0.3%;
+    width: 5%;
+    position: fixed;
+
+}
+
+.ticker {
+    width: 20%;
+    height: 100%;
+    top: 7%;
+    right: 0;
+    background-color: #727272;
+    position: fixed;
+}
+
+.graph-container {
+    top: 7%;
+    height: 37%;
+    width: 80%;
+    right: 20%;
+    background-color: #D5D5D5;
+    position: fixed;
+}
+
+.portfolio-toolbar {
+    top: 44%;
+    width: 80%;
+    height: 5%;
+    background-color: #3f4040;
+    right: 20%;
+    position: fixed;
+}
+
+.portfolio-performance {
+    top: 49%;
+    right: 20%;
+    width: 20%;
+    height: 100%;
+    background-color: #282929;
+    position: fixed;
+
+}
+
+.portfolio-container {
+    top: 49%;
+    right: 40%;
+    width: 100%;
+    height: 100%;
+    background-color: #ECECEC;
+    position: fixed;
+}
