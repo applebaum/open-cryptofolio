@@ -9,8 +9,15 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 
 var app = express();
+var http = require('http');
+var fs = require('fs');
+var url = require('url');
 
-// setuo socket.io
+// setup node-rest-client
+var Client = require('node-rest-client').Client;
+var client = new Client();
+
+// setup socket.io
 var io = require('./io');
 import ioClient from 'socket.io-client';
 
@@ -60,35 +67,50 @@ app.use(function(err, req, res, next) {
     });
 });
 
-//////////// Socket.io - SEND DATA TO CLIENT \\\\\\\\\\\\\\\\\\\
-// return value
-// var displayQuote = function(_quote) {
-//
-//     var fsym = CCC.STATIC.CURRENCY.SYMBOL[_quote.FROMSYMBOL];
-//     var tsym = CCC.STATIC.CURRENCY.SYMBOL[_quote.TOSYMBOL];
-//
-//     document.getElementById("market").innerHTML = _quote.LASTMARKET;
-//     document.getElementById("fsym").innerHTML = _quote.FROMSYMBOL;
-//     document.getElementById("tsym").innerHTML = _quote.TOSYMBOL;
-//     document.getElementById("price").innerHTML = _quote.PRICE;
-//     document.getElementById("volume").innerHTML = CCC.convertValueToDisplay(fsym, _quote.LASTVOLUME);
-//     document.getElementById("volumeto").innerHTML = CCC.convertValueToDisplay(tsym, _quote.LASTVOLUMETO);
-//     document.getElementById("24volume").innerHTML = CCC.convertValueToDisplay(fsym, _quote.VOLUME24HOUR);
-//     document.getElementById("24volumeto").innerHTML = CCC.convertValueToDisplay(tsym, _quote.VOLUME24HOURTO);
-//     document.getElementById("tradeid").innerHTML = _quote.LASTTRADEID.toFixed(0);
-//
-//     if (quote.FLAGS === "1"){
-//         document.getElementById("price").className = "up";
-//     }
-//     else if (quote.FLAGS === "2") {
-//         document.getElementById("price").className = "down";
-//     }
-//     else if (quote.FLAGS === "4") {
-//         document.getElementById("price").className = "";
+///////////// Get data from http request \\\\\\\\\\\\\\\
+
+// var args = {
+//         requestConfig: {
+//         keepAlive: true, //Enable/disable keep-alive functionalityidle socket.
+//         keepAliveDelay: 10000 //and optionally set the initial delay before the first keepalive probe is sent
 //     }
 // };
-// console.log(displayQuote);
 
+client.get("https://min-api.cryptocompare.com/data/pricemultifull?fsyms=ETH,DASH&tsyms=BTC,USD,EUR", function (data, response) {
+    // parsed response body as js object
+        console.log('initial get result ' + data.RAW.ETH.BTC.PRICE);
+    var marketData = data;
+    http.createServer(function(request, response){
+        var path = url.parse(request.url).pathname;
+        var dataToClient = marketData;
+        var string = JSON.stringify(dataToClient);
+        console.log('server ' + string);
+        if(path==="/getdata"){
+            console.log("request recieved");
+            console.log('data sent to client ' + dataToClient.RAW.ETH.BTC.PRICE);
+            response.writeHead(200, {
+                "Content-Type": "text/plain",
+                'Access-Control-Allow-Origin' : '*'
+            });
+            response.end(string);
+            console.log("data sent");
+        }else{
+            fs.readFile('./index.html', function(err, file) {
+                if(err) {
+                    // write an error response or nothing here
+                    return;
+                }
+                response.writeHead(200, { 'Content-Type': 'text/html' });
+                response.end(file, "utf-8");
+            });
+        }
+    }).listen(3001);
+    console.log("server initialized");
+    // raw response
+    // console.log(response);
+});
+
+///////////// Send data to client \\\\\\\\\\\\\\\
 
 
 
@@ -104,7 +126,7 @@ var updateQuote = (result) => {
         quote[keys[i]] = result[keys[i]];
     }
         io.emit('m', quote);
-    // console.log(quote.PRICE);
+    // console.log(quote);
 
 };
 
@@ -114,7 +136,11 @@ var socket = ioClient.connect('https://streamer.cryptocompare.com');
 //Format: {SubscriptionId}~{ExchangeName}~{FromSymbol}~{ToSymbol}
 //Use SubscriptionId 0 for TRADE, 2 for CURRENT and 5 for CURRENTAGG
 //For aggregate quote updates use CCCAGG as market
-var subscription = ['5~CCCAGG~BTC~USD'];
+var subscription = [
+    '5~CCCAGG~BTC~USD',
+    '5~CCCAGG~XMR~BTC',
+    '5~CCCAGG~BCN~BTC'
+];
 
 socket.emit('SubAdd', {subs:subscription} );
 

@@ -14,9 +14,10 @@ a {
   position: fixed;
   top: 0;
   left: 0;
-    -webkit-box-shadow: 0px 5px 4px -2px rgba(0,0,0,0.77);
-    -moz-box-shadow: 0px 5px 4px -2px rgba(0,0,0,0.77);
-    box-shadow: 0px 5px 4px -2px rgba(0,0,0,0.77);
+    -webkit-box-shadow: 0px 3px 6px 0px rgba(0,0,0,0.77);
+    -moz-box-shadow: 0px 3px 6px 0px rgba(0,0,0,0.77);
+    box-shadow: 0px 3px 6px 0px rgba(0,0,0,0.77);
+    z-index: 1;
 }
 
 .logo {
@@ -27,7 +28,7 @@ a {
 
 }
 
-.ticker {
+.ticker-container {
     width: 20%;
     height: 100%;
     top: 7%;
@@ -45,11 +46,20 @@ a {
     position: fixed;
 }
 
+.graph {
+    width: 78%;
+    height: 30%;
+    top: 9%;
+    left: 1%;
+    background-color: whitesmoke;
+    position: fixed;
+}
+
 .portfolio-toolbar {
     top: 44%;
     width: 80%;
     height: 5%;
-    background-color: #3f4040;
+    background-color: #282929;
     right: 20%;
     position: fixed;
 }
@@ -59,7 +69,7 @@ a {
     right: 20%;
     width: 20%;
     height: 100%;
-    background-color: #282929;
+    background-color: #3f4040;
     position: fixed;
 
 }
@@ -69,6 +79,7 @@ a {
     right: 40%;
     width: 100%;
     height: 100%;
-    background-color: #ECECEC;
+    background-color: #a6a3a9;
     position: fixed;
 }
+

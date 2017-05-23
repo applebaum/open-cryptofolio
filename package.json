@@ -8,6 +8,7 @@
     "build": "webpack"
   },
   "dependencies": {
+    "axios": "^0.16.1",
     "babel-preset-es2015": "^6.9.0",
     "babel-preset-react": "^6.11.1",
     "babel-register": "^6.9.0",
@@ -17,11 +18,15 @@
     "express": "^4.9.8",
     "hjs": "~0.0.6",
     "morgan": "^1.3.2",
+    "node-rest-client": "^3.1.0",
     "react": "^15.1.0",
     "react-dom": "^15.1.0",
+    "reactabular-resizable": "^8.9.0",
+    "reactabular-table": "^8.9.0",
     "serve-favicon": "^2.1.7",
     "socket.io": "^2.0.1",
-    "socket.io-client": "^2.0.1"
+    "socket.io-client": "^2.0.1",
+    "sortabular": "^1.4.0"
   },
   "devDependencies": {
     "babel-loader": "^6.2.4",
