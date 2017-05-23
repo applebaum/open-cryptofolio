@@ -1,29 +1,33 @@
 import React, {Component} from "react";
 import axios from 'axios';
 
-export default class Ticker extends Component {
+// let serverRequest = () =>
+//     axios
+//         .get("http://localhost:3001/getdata")
+//         .then(function(string) {
+//             Ticker(string);
+//             let data = string;
+//             let markup = React.renderToString(Component({data: data}));
+//         });
 
-    constructor() {
-        super();
+export default class TickerPreload extends Component {
+
+    constructor(props) {
+        super(props);
         this.state = {
             data: null
         };
     }
 
-    componentDidMount() {
+    componentDidMount () {
         let _this = this;
         this.serverRequest =
-            axios
-                .get("http://localhost:3001/getdata")
-                .then(function(string) {
-                    console.log(string);
-                    let data = string;
-                     console.log(data.data.RAW.ETH.BTC.PRICE);
-                    _this.setState({
-                        data: data
+        axios
+            .get("http://localhost:3001/getdata")
+            .then(function(data){
+            // console.log('response ' + data);
+                    _this.setState(Object.assign({}, _this.state, { data: data }))
                     });
-                    console.log(_this.state.data.data.DISPLAY.DASH.BTC.PRICE);
-                })
     }
 
     componentWillUnmount () {
@@ -31,12 +35,26 @@ export default class Ticker extends Component {
     }
 
     render() {
+        console.log('state ' + this.state.data);
+        if (this.state.data) {
+            return <Ticker data={this.state.data} />;
+        } else {
+            return <TickerPlaceHolder  />;
+        }
+    }
 
-        // console.log(this.state.rows.data.PRICE);
+}
 
+// const Ticker = (data) => {
+class Ticker extends Component {
+    constructor(props) {
+        super(props);
+    }
+
+    render() {
         return (
             <div className="ticker-container">
-                <table width="100%" >
+                <table width="100%">
                     <tbody>
                     <tr>
                         <th>Coin</th>
@@ -44,18 +62,81 @@ export default class Ticker extends Component {
                     </tr>
                     <tr>
                         <td>XMR</td>
-                        <td>1</td>
+                        <td>{this.props.data.data.RAW.ETH.BTC.PRICE}</td>
                     </tr>
                     <tr>
                         <td>BCN</td>
-                        <td>2</td>
+                        <td>{this.props.data.data.RAW.DASH.BTC.PRICE}</td>
                     </tr>
                     </tbody>
                 </table>
             </div>
         );
-    }
+// }
+    };
 }
+
+const TickerPlaceHolder = (props) => {
+return (
+    <div className="ticker-container"> Waiting </div>
+)
+};
+
+
+//
+// export default class Ticker extends Component {
+//
+//     constructor(props) {
+//         super(props);
+//         // this.state = {
+//         //     data: null
+//         // };
+//     }
+//
+//     // componentDidMount() {
+//     //     let _this = this;
+//     //     this.serverRequest =
+//     //         axios
+//     //             .get("http://localhost:3001/getdata")
+//     //             .then(function(string) {
+//     //                 console.log(string);
+//     //                 let data = string;
+//     //                  console.log(data.data.RAW.ETH.BTC.PRICE);
+//     //                 _this.setState({
+//     //                     data: data
+//     //                 });
+//     //                 console.log(_this.state.data.data.DISPLAY.DASH.BTC.PRICE);
+//     //             })
+//     // }
+//     //
+//
+//
+//     render() {
+//
+//         console.log(this.props.data.data.RAW.ETH.BTC.PRICE);
+//
+//         return (
+//             <div className="ticker-container">
+//                 <table width="100%" >
+//                     <tbody>
+//                     <tr>
+//                         <th>Coin</th>
+//                         <th>Price</th>
+//                     </tr>
+//                     <tr>
+//                         <td>XMR</td>
+//                         <td>{this.props.data.data.RAW.ETH.BTC.PRICE}</td>
+//                     </tr>
+//                     <tr>
+//                         <td>BCN</td>
+//                         <td>{this.props.data.data.RAW.DASH.BTC.PRICE}</td>
+//                     </tr>
+//                     </tbody>
+//                 </table>
+//             </div>
+//         );
+//     }
+// }
 
 // utilities config //
 var CCC = CCC || {};

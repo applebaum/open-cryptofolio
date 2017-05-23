@@ -84,10 +84,10 @@ client.get("https://min-api.cryptocompare.com/data/pricemultifull?fsyms=ETH,DASH
         var path = url.parse(request.url).pathname;
         var dataToClient = marketData;
         var string = JSON.stringify(dataToClient);
-        console.log('server ' + string);
+        // console.log('server ' + string);
         if(path==="/getdata"){
             console.log("request recieved");
-            console.log('data sent to client ' + dataToClient.RAW.ETH.BTC.PRICE);
+            // console.log('data sent to client ' + dataToClient.RAW.ETH.BTC.PRICE);
             response.writeHead(200, {
                 "Content-Type": "text/plain",
                 'Access-Control-Allow-Origin' : '*'
@@ -97,7 +97,7 @@ client.get("https://min-api.cryptocompare.com/data/pricemultifull?fsyms=ETH,DASH
         }else{
             fs.readFile('./index.html', function(err, file) {
                 if(err) {
-                    // write an error response or nothing here
+                    console.log('smth is wrong');
                     return;
                 }
                 response.writeHead(200, { 'Content-Type': 'text/html' });
