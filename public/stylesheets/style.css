@@ -10,7 +10,7 @@ a {
 .header-container {
   width: 100%;
   height: 7%;
-  background-color: #282929;
+  background-color: #1d1d1d;
   position: fixed;
   top: 0;
   left: 0;
@@ -30,11 +30,15 @@ a {
 
 .ticker-container {
     width: 20%;
-    height: 100%;
+    height: 93%;
     top: 7%;
     right: 0;
-    background-color: #727272;
+    background-color: #484848;
     position: fixed;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    font-family: 'Roboto', sans-serif;
+    color: whitesmoke;
 }
 
 .graph-container {
@@ -59,7 +63,7 @@ a {
     top: 44%;
     width: 80%;
     height: 5%;
-    background-color: #282929;
+    background-color: #1d1d1d;
     right: 20%;
     position: fixed;
 }
@@ -69,7 +73,7 @@ a {
     right: 20%;
     width: 20%;
     height: 100%;
-    background-color: #3f4040;
+    background-color: #303030;
     position: fixed;
 
 }

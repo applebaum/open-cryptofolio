@@ -67,95 +67,161 @@ app.use(function(err, req, res, next) {
     });
 });
 
-///////////// Get data from http request and send it to client\\\\\\\\\\\\\\\
-
-// var args = {
-//         requestConfig: {
-//         keepAlive: true, //Enable/disable keep-alive functionalityidle socket.
-//         keepAliveDelay: 10000 //and optionally set the initial delay before the first keepalive probe is sent
-//     }
-// };
-
-        client.get("https://min-api.cryptocompare.com/data/pricemultifull?fsyms=XMR,BCN&tsyms=BTC,USD,EUR", function (data, response) {
-            // parsed response body as js object
-                console.log('initial get result ' + data.RAW.XMR.BTC.PRICE);
-            server(data);
-        });
-
-
-
-            let server = (data) => {
-                http.createServer(function (request, response) {
-                    let path = url.parse(request.url).pathname;
-                        let dataToClient = data;
-                        let string = JSON.stringify(dataToClient);
-                        // let log = () => {
-                            console.log('server ' + string);
-                        // };
-                        // setInterval(log, 5000);
-                        if (path === "/getdata") {
-                            console.log("request recieved");
-                            // console.log('data sent to client ' + dataToClient.RAW.ETH.BTC.PRICE);
-                            response.writeHead(200, {
-                                "Content-Type": "text/plain",
-                                'Access-Control-Allow-Origin': '*'
-                            });
-                            response.end(string);
-                            console.log("data sent");
-                        } else {
-                            fs.readFile('./index.html', function (err, file) {
-                                if (err) {
-                                    console.log('smth is wrong');
-                                    return;
-                                }
-                                response.writeHead(200, {'Content-Type': 'text/html'});
-                                response.end(file, "utf-8");
-                            });
-                        }
-                }).listen(3001);
-            console.log("server initialized");
-            };
-
+// ///////////// Get data from http request and send it to client\\\\\\\\\\\\\\\
+//
+// // var args = {
+// //         requestConfig: {
+// //         keepAlive: true, //Enable/disable keep-alive functionalityidle socket.
+// //         keepAliveDelay: 10000 //and optionally set the initial delay before the first keepalive probe is sent
+// //     }
+// // };
+//
+//         client.get("https://min-api.cryptocompare.com/data/pricemultifull?fsyms=XMR,BCN&tsyms=BTC,USD,EUR", function (data, response) {
+//             // parsed response body as js object
+//                 console.log('initial get result ' + data.RAW.XMR.BTC.PRICE);
+//             server(data);
+//         });
+//
+//
+//
+//             let server = (data) => {
+//                 http.createServer(function (request, response) {
+//                     let path = url.parse(request.url).pathname;
+//                         let dataToClient = data;
+//                         let string = JSON.stringify(dataToClient);
+//                         // let log = () => {
+//                             console.log('server ' + string);
+//                         // };
+//                         // setInterval(log, 5000);
+//                         if (path === "/getdata") {
+//                             console.log("request recieved");
+//                             // console.log('data sent to client ' + dataToClient.RAW.ETH.BTC.PRICE);
+//                             response.writeHead(200, {
+//                                 "Content-Type": "text/plain",
+//                                 'Access-Control-Allow-Origin': '*'
+//                             });
+//                             response.end(string);
+//                             console.log("data sent");
+//                         } else {
+//                             fs.readFile('./index.html', function (err, file) {
+//                                 if (err) {
+//                                     console.log('smth is wrong');
+//                                     return;
+//                                 }
+//                                 response.writeHead(200, {'Content-Type': 'text/html'});
+//                                 response.end(file, "utf-8");
+//                             });
+//                         }
+//                 }).listen(3001);
+//             console.log("server initialized");
+//             };
+//
 
 //////////// Socket.io - FETCH DATA FROM EXTERNAL SOCKET \\\\\\\\\\\\\\\\\\\
 var quote = {};
 
-// assign keys
-var updateQuote = (result) => {
-
-    var keys = Object.keys(result);
-
-    for (var i = 0; i <keys.length; ++i) {
-        quote[keys[i]] = result[keys[i]];
-    }
-        io.emit('m', quote);
-    // console.log(quote);
-
-};
-
 // subscribe to external socket
 var socket = ioClient.connect('https://streamer.cryptocompare.com');
+
+
+    let subscription = [
+        '5~CCCAGG~XMR~BTC',
+        '5~CCCAGG~BCN~BTC',
+        '5~CCCAGG~AMP~BTC',
+        '5~CCCAGG~ARDR~BTC',
+        '5~CCCAGG~BCY~BTC',
+        '5~CCCAGG~BELA~BTC',
+        '5~CCCAGG~BLK~BTC',
+        '5~CCCAGG~BTM~BTC',
+        '5~CCCAGG~BTS~BTC',
+        '5~CCCAGG~BURST~BTC',
+        '5~CCCAGG~CLAM~BTC',
+        '5~CCCAGG~DASH~BTC',
+        '5~CCCAGG~DCR~BTC',
+        '5~CCCAGG~DGB~BTC',
+        '5~CCCAGG~DOGE~BTC',
+        '5~CCCAGG~EMC2~BTC',
+        '5~CCCAGG~ETC~BTC',
+        '5~CCCAGG~ETH~BTC',
+        '5~CCCAGG~EXP~BTC',
+        '5~CCCAGG~FCT~BTC',
+        '5~CCCAGG~FLDC~BTC',
+        '5~CCCAGG~FLO~BTC',
+        '5~CCCAGG~GAME~BTC',
+        '5~CCCAGG~GNO~BTC',
+        '5~CCCAGG~GNT~BTC',
+        '5~CCCAGG~GRC~BTC',
+        '5~CCCAGG~HUC~BTC',
+        '5~CCCAGG~LBC~BTC',
+        '5~CCCAGG~LSK~BTC',
+        '5~CCCAGG~LTC~BTC',
+        '5~CCCAGG~MAID~BTC',
+        '5~CCCAGG~NAUT~BTC',
+        '5~CCCAGG~NAV~BTC',
+        '5~CCCAGG~NEOS~BTC',
+        '5~CCCAGG~NMC~BTC',
+        '5~CCCAGG~NOTE~BTC',
+        '5~CCCAGG~NXC~BTC',
+        '5~CCCAGG~NXT~BTC',
+        '5~CCCAGG~OMNI~BTC',
+        '5~CCCAGG~PASC~BTC',
+        '5~CCCAGG~PINK~BTC',
+        '5~CCCAGG~POT~BTC',
+        '5~CCCAGG~PPC~BTC',
+        '5~CCCAGG~RADS~BTC',
+        '5~CCCAGG~REP~BTC',
+        '5~CCCAGG~RIC~BTC',
+        '5~CCCAGG~SBD~BTC',
+        '5~CCCAGG~SC~BTC',
+        '5~CCCAGG~SJCX~BTC',
+        '5~CCCAGG~STEEM~BTC',
+        '5~CCCAGG~STR~BTC',
+        '5~CCCAGG~STRAT~BTC',
+        '5~CCCAGG~SYS~BTC',
+        '5~CCCAGG~VIA~BTC',
+        '5~CCCAGG~VRC~BTC',
+        '5~CCCAGG~VTC~BTC',
+        '5~CCCAGG~XBC~BTC',
+        '5~CCCAGG~XCP~BTC',
+        '5~CCCAGG~XEM~BTC',
+        '5~CCCAGG~XPM~BTC',
+        '5~CCCAGG~XRP~BTC',
+        '5~CCCAGG~XVC~BTC',
+        '5~CCCAGG~ZEC~BTC'];
+
+    socket.emit('SubAdd', {subs:subscription} );
+
+    //receive data
+    socket.on("m", function(message){
+        let messageType = message.substring(0, message.indexOf("~"));
+        let res = {};
+        if (messageType === CCC.STATIC.TYPE.CURRENTAGG) {
+            res = CCC.CURRENT.unpack(message);
+            // console.log(res);
+            updateQuote(res);
+        }
+    });
+
+    // assign keys, send to client
+    let updateQuote = (result) => {
+
+        let keys = Object.keys(result);
+
+        for (let i = 0; i <keys.length; ++i) {
+            quote[keys[i]] = result[keys[i]];
+        }
+        io.emit('m', quote);
+        // console.log(quote);
+    };
+
+
 
 //Format: {SubscriptionId}~{ExchangeName}~{FromSymbol}~{ToSymbol}
 //Use SubscriptionId 0 for TRADE, 2 for CURRENT and 5 for CURRENTAGG
 //For aggregate quote updates use CCCAGG as market
-var subscription = [
-    '5~CCCAGG~BTC~USD',
-    '5~CCCAGG~XMR~BTC',
-    '5~CCCAGG~BCN~BTC'
-];
 
-socket.emit('SubAdd', {subs:subscription} );
 
-socket.on("m", function(message){
-    var messageType = message.substring(0, message.indexOf("~"));
-    var res = {};
-    if (messageType === CCC.STATIC.TYPE.CURRENTAGG) {
-        res = CCC.CURRENT.unpack(message);
-        // console.log(res);
-        updateQuote(res);
-    }
-});
+
 
 
 // define utilitites config

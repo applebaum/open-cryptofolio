@@ -1,75 +1,896 @@
 import React, {Component} from "react";
-import axios from 'axios';
+import io from 'socket.io-client';
+import Reactable from 'reactable';
+let socket = io.connect('http://localhost:3000');
+let Table = Reactable.Table;
+let Tr = Reactable.Tr;
 
-export default class TickerPreload extends Component {
-
+export default class Ticker extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            data: null
+            data: {
+                FROMSYMBOL:  null,
+                TOSYMBOL: null,
+                FLAGS: null,
+                PRICE: null,
+                LASTUPDATE: null,
+                LASTVOLUME: null,
+                LASTVOLUMETO: null,
+                LASTTRADEID: null,
+                VOLUME24HOUR: null,
+                VOLUME24HOURTO: null,
+                OPEN24HOUR: null,
+                HIGH24HOUR: null,
+                LOW24HOUR: null,
+                LASTMARKET: null },
+            XMR: {
+                FLAGS: null,
+                PRICE: null },
+            AMP: {
+                FLAGS: null,
+                PRICE: null },
+            ARDR: {
+                FLAGS: null,
+                PRICE: null },
+            BCY: {
+                FLAGS: null,
+                PRICE: null },
+            BELA: {
+                FLAGS: null,
+                PRICE: null },
+            BLK: {
+                FLAGS: null,
+                PRICE: null },
+            BTM: {
+                FLAGS: null,
+                PRICE: null },
+            BTS: {
+                FLAGS: null,
+                PRICE: null },
+            BURST: {
+                FLAGS: null,
+                PRICE: null },
+            CLAM: {
+                FLAGS: null,
+                PRICE: null },
+            DASH: {
+                FLAGS: null,
+                PRICE: null },
+            DCR: {
+                FLAGS: null,
+                PRICE: null },
+            DGB: {
+                FLAGS: null,
+                PRICE: null },
+            DOGE: {
+                FLAGS: null,
+                PRICE: null },
+            EMC2: {
+                FLAGS: null,
+                PRICE: null },
+            ETC: {
+                FLAGS: null,
+                PRICE: null },
+            ETH: {
+                FLAGS: null,
+                PRICE: null },
+            EXP: {
+                FLAGS: null,
+                PRICE: null },
+            FCT: {
+                FLAGS: null,
+                PRICE: null },
+            FLDC: {
+                FLAGS: null,
+                PRICE: null },
+            FLO: {
+                FLAGS: null,
+                PRICE: null },
+            GAME: {
+                FLAGS: null,
+                PRICE: null },
+            GNO: {
+                FLAGS: null,
+                PRICE: null },
+            GNT: {
+                FLAGS: null,
+                PRICE: null },
+            GRC: {
+                FLAGS: null,
+                PRICE: null },
+            HUC: {
+                FLAGS: null,
+                PRICE: null },
+            LBC: {
+                FLAGS: null,
+                PRICE: null },
+            LSK: {
+                FLAGS: null,
+                PRICE: null },
+            LTC: {
+                FLAGS: null,
+                PRICE: null },
+            MAID: {
+                FLAGS: null,
+                PRICE: null },
+            NAUT: {
+                FLAGS: null,
+                PRICE: null },
+            NAV: {
+                FLAGS: null,
+                PRICE: null },
+            NEOS: {
+                FLAGS: null,
+                PRICE: null },
+            NMC: {
+                FLAGS: null,
+                PRICE: null },
+            NOTE: {
+                FLAGS: null,
+                PRICE: null },
+            NXC: {
+                FLAGS: null,
+                PRICE: null },
+            NXT: {
+                FLAGS: null,
+                PRICE: null },
+            OMNI: {
+                FLAGS: null,
+                PRICE: null },
+            PASC: {
+                FLAGS: null,
+                PRICE: null },
+            PINK: {
+                FLAGS: null,
+                PRICE: null },
+            POT: {
+                FLAGS: null,
+                PRICE: null },
+            PPC: {
+                FLAGS: null,
+                PRICE: null },
+            RADS: {
+                FLAGS: null,
+                PRICE: null },
+            REP: {
+                FLAGS: null,
+                PRICE: null },
+            RIC: {
+                FLAGS: null,
+                PRICE: null },
+            SBD: {
+                FLAGS: null,
+                PRICE: null },
+            SC: {
+                FLAGS: null,
+                PRICE: null },
+            SJCX: {
+                FLAGS: null,
+                PRICE: null },
+            STEEM: {
+                FLAGS: null,
+                PRICE: null },
+            STR: {
+                FLAGS: null,
+                PRICE: null },
+            STRAT: {
+                FLAGS: null,
+                PRICE: null },
+            SYS: {
+                FLAGS: null,
+                PRICE: null },
+            VIA: {
+                FLAGS: null,
+                PRICE: null },
+            VRC: {
+                FLAGS: null,
+                PRICE: null },
+            VTC: {
+                FLAGS: null,
+                PRICE: null },
+            XBC: {
+                FLAGS: null,
+                PRICE: null },
+            XCP: {
+                FLAGS: null,
+                PRICE: null },
+            XEM: {
+                FLAGS: null,
+                PRICE: null },
+            XPM: {
+                FLAGS: null,
+                PRICE: null },
+            XRP: {
+                FLAGS: null,
+                PRICE: null },
+            XVC: {
+                FLAGS: null,
+                PRICE: null },
+            ZEC: {
+                FLAGS: null,
+                PRICE: null },
+            BCN: {
+                FLAGS: null,
+                PRICE: null }
         };
     }
 
-    componentDidMount () {
-        let _this = this;
-        this.serverRequest =
-        axios
-            .get("http://localhost:3001/getdata")
-            .then(function(data){
-                    _this.setState(Object.assign({}, _this.state, { data: data }))
-                    });
+    componentDidMount(){
+        socket.on('m', (data) => this.setData(data));
+
     }
 
-    componentWillUnmount () {
-        this.serverRequest.abort();
-    }
+    setData(data) {
+        this.setState({
+            data: data
+        });
+        this.updateXMR();
+        this.updateBCN();
+        this.updateAMP();
+        this.updateARDR();
+        this.updateBCY();
+        this.updateBELA();
+        this.updateBLK();
+        this.updateBTM();
+        this.updateBTS();
+        this.updateBURST();
+        this.updateCLAM();
+        this.updateDASH();
+        this.updateDCR();
+        this.updateDGB();
+        this.updateDOGE();
+        this.updateEMC2();
+        this.updateETC();
+        this.updateETH();
+        this.updateEXP();
+        this.updateFCT();
+        this.updateFLDC();
+        this.updateFLO();
+        this.updateGAME();
+        this.updateGNO();
+        this.updateGNT();
+        this.updateGRC();
+        this.updateHUC();
+        this.updateLBC();
+        this.updateLSK();
+        this.updateLTC();
+        this.updateMAID();
+        this.updateNAUT();
+        this.updateNAV();
+        this.updateNEOS();
+        this.updateNMC();
+        this.updateNOTE();
+        this.updateNXC();
+        this.updateNXT();
+        this.updateOMNI();
+        this.updatePASC();
+        this.updatePINK();
+        this.updatePOT();
+        this.updatePPC();
+        this.updateRADS();
+        this.updateREP();
+        this.updateRIC();
+        this.updateSBD();
+        this.updateSC();
+        this.updateSJCX();
+        this.updateSTEEM();
+        this.updateSTR();
+        this.updateSTRAT();
+        this.updateSYS();
+        this.updateVIA();
+        this.updateVRC();
+        this.updateVTC();
+        this.updateXBC();
+        this.updateXCP();
+        this.updateXEM();
+        this.updateXPM();
+        this.updateXRP();
+        this.updateXVC();
+        this.updateZEC();
+           }
 
-    render() {
-        console.log('state ' + this.state.data);
-        if (this.state.data) {
-            return <Ticker data={this.state.data.data} />;
-        } else {
-            return <TickerPlaceHolder  />;
+    updateXMR() {
+        if (this.state.data.FROMSYMBOL === 'XMR' && this.state.data.FLAGS !== '4') {
+            this.setState({
+                XMR: this.state.data
+            })
         }
     }
 
-}
+    updateBCN() {
+        if (this.state.data.FROMSYMBOL === 'BCN' && this.state.data.FLAGS !== '4') {
+            this.setState({
+                BCN: this.state.data
+            })
+        }
+    }
 
-class Ticker extends Component {
-    constructor(props) {
-        super(props);
+    updateAMP() {
+        if (this.state.data.FROMSYMBOL === 'AMP' && this.state.data.FLAGS !== '4') {
+            this.setState({
+                AMP: this.state.data
+            })
+        }
+    }
+
+    updateARDR() {
+        if (this.state.data.FROMSYMBOL === 'ARDR' && this.state.data.FLAGS !== '4') {
+            this.setState({
+                ARDR: this.state.data
+            })
+        }
+    }
+
+    updateBCY() {
+        if (this.state.data.FROMSYMBOL === 'BCY' && this.state.data.FLAGS !== '4') {
+            this.setState({
+                BCY: this.state.data
+            })
+        }
+    }
+
+    updateBELA() {
+        if (this.state.data.FROMSYMBOL === 'BELA' && this.state.data.FLAGS !== '4') {
+            this.setState({
+                BELA: this.state.data
+            })
+        }
+    }
+
+    updateBLK() {
+        if (this.state.data.FROMSYMBOL === 'BLK' && this.state.data.FLAGS !== '4') {
+            this.setState({
+                BLK: this.state.data
+            })
+        }
+    }
+
+    updateBTM() {
+        if (this.state.data.FROMSYMBOL === 'BTM' && this.state.data.FLAGS !== '4') {
+            this.setState({
+                BTM: this.state.data
+            })
+        }
+    }
+
+    updateBTS() {
+        if (this.state.data.FROMSYMBOL === 'BTS' && this.state.data.FLAGS !== '4') {
+            this.setState({
+                BTS: this.state.data
+            })
+        }
+    }
+
+    updateBURST() {
+        if (this.state.data.FROMSYMBOL === 'BURST' && this.state.data.FLAGS !== '4') {
+            this.setState({
+                BURST: this.state.data
+            })
+        }
+    }
+
+    updateCLAM() {
+        if (this.state.data.FROMSYMBOL === 'CLAM' && this.state.data.FLAGS !== '4') {
+            this.setState({
+                CLAM: this.state.data
+            })
+        }
+    }
+
+    updateDASH() {
+        if (this.state.data.FROMSYMBOL === 'DASH' && this.state.data.FLAGS !== '4') {
+            this.setState({
+                DASH: this.state.data
+            })
+        }
+    }
+
+    updateDCR() {
+        if (this.state.data.FROMSYMBOL === 'DCR' && this.state.data.FLAGS !== '4') {
+            this.setState({
+                DCR: this.state.data
+            })
+        }
+    }
+
+    updateDGB() {
+        if (this.state.data.FROMSYMBOL === 'DGB' && this.state.data.FLAGS !== '4') {
+            this.setState({
+                DGB: this.state.data
+            })
+        }
+    }
+
+    updateDOGE() {
+        if (this.state.data.FROMSYMBOL === 'DOGE' && this.state.data.FLAGS !== '4') {
+            this.setState({
+                DOGE: this.state.data
+            })
+        }
+    }
+
+    updateEMC2() {
+        if (this.state.data.FROMSYMBOL === 'EMC2' && this.state.data.FLAGS !== '4') {
+            this.setState({
+                EMC2: this.state.data
+            })
+        }
+    }
+
+    updateETC() {
+        if (this.state.data.FROMSYMBOL === 'ETC' && this.state.data.FLAGS !== '4') {
+            this.setState({
+                ETC: this.state.data
+            })
+        }
+    }
+
+    updateETH() {
+        if (this.state.data.FROMSYMBOL === 'ETH' && this.state.data.FLAGS !== '4') {
+            this.setState({
+                ETH: this.state.data
+            })
+        }
+    }
+
+    updateEXP() {
+        if (this.state.data.FROMSYMBOL === 'EXP' && this.state.data.FLAGS !== '4') {
+            this.setState({
+                EXP: this.state.data
+            })
+        }
+    }
+
+    updateFCT() {
+        if (this.state.data.FROMSYMBOL === 'FCT' && this.state.data.FLAGS !== '4') {
+            this.setState({
+                FCT: this.state.data
+            })
+        }
+    }
+
+    updateFLDC() {
+        if (this.state.data.FROMSYMBOL === 'FLDC' && this.state.data.FLAGS !== '4') {
+            this.setState({
+                FLDC: this.state.data
+            })
+        }
+    }
+
+    updateFLO() {
+        if (this.state.data.FROMSYMBOL === 'FLO' && this.state.data.FLAGS !== '4') {
+            this.setState({
+                FLO: this.state.data
+            })
+        }
+    }
+
+    updateGAME() {
+        if (this.state.data.FROMSYMBOL === 'GAME' && this.state.data.FLAGS !== '4') {
+            this.setState({
+                GAME: this.state.data
+            })
+        }
+    }
+
+    updateGNO() {
+        if (this.state.data.FROMSYMBOL === 'GNO' && this.state.data.FLAGS !== '4') {
+            this.setState({
+                GNO: this.state.data
+            })
+        }
+    }
+
+    updateGNT() {
+        if (this.state.data.FROMSYMBOL === 'GNT' && this.state.data.FLAGS !== '4') {
+            this.setState({
+                GNT: this.state.data
+            })
+        }
+    }
+
+    updateGRC() {
+        if (this.state.data.FROMSYMBOL === 'GRC' && this.state.data.FLAGS !== '4') {
+            this.setState({
+                GRC: this.state.data
+            })
+        }
+    }
+
+    updateHUC() {
+        if (this.state.data.FROMSYMBOL === 'HUC' && this.state.data.FLAGS !== '4') {
+            this.setState({
+                HUC: this.state.data
+            })
+        }
+    }
+
+    updateLBC() {
+        if (this.state.data.FROMSYMBOL === 'LBC' && this.state.data.FLAGS !== '4') {
+            this.setState({
+                LBC: this.state.data
+            })
+        }
+    }
+
+    updateLSK() {
+        if (this.state.data.FROMSYMBOL === 'LSK' && this.state.data.FLAGS !== '4') {
+            this.setState({
+                LSK: this.state.data
+            })
+        }
+    }
+
+    updateLTC() {
+        if (this.state.data.FROMSYMBOL === 'LTC' && this.state.data.FLAGS !== '4') {
+            this.setState({
+                LTC: this.state.data
+            })
+        }
+    }
+
+    updateMAID() {
+        if (this.state.data.FROMSYMBOL === 'MAID' && this.state.data.FLAGS !== '4') {
+            this.setState({
+                MAID: this.state.data
+            })
+        }
+    }
+
+    updateNAUT() {
+        if (this.state.data.FROMSYMBOL === 'NAUT' && this.state.data.FLAGS !== '4') {
+            this.setState({
+                NAUT: this.state.data
+            })
+        }
+    }
+
+    updateNAV() {
+        if (this.state.data.FROMSYMBOL === 'NAV' && this.state.data.FLAGS !== '4') {
+            this.setState({
+                NAV: this.state.data
+            })
+        }
+    }
+
+    updateNEOS() {
+        if (this.state.data.FROMSYMBOL === 'NEOS' && this.state.data.FLAGS !== '4') {
+            this.setState({
+                NEOS: this.state.data
+            })
+        }
+    }
+
+    updateNMC() {
+        if (this.state.data.FROMSYMBOL === 'NMC' && this.state.data.FLAGS !== '4') {
+            this.setState({
+                NMC: this.state.data
+            })
+        }
+    }
+
+    updateNOTE() {
+        if (this.state.data.FROMSYMBOL === 'NOTE' && this.state.data.FLAGS !== '4') {
+            this.setState({
+                NOTE: this.state.data
+            })
+        }
+    }
+
+    updateNXC() {
+        if (this.state.data.FROMSYMBOL === 'NXC' && this.state.data.FLAGS !== '4') {
+            this.setState({
+                NXC: this.state.data
+            })
+        }
+    }
+
+    updateNXT() {
+        if (this.state.data.FROMSYMBOL === 'NXT' && this.state.data.FLAGS !== '4') {
+            this.setState({
+                NXT: this.state.data
+            })
+        }
+    }
+
+    updateOMNI() {
+        if (this.state.data.FROMSYMBOL === 'OMNI' && this.state.data.FLAGS !== '4') {
+            this.setState({
+                OMNI: this.state.data
+            })
+        }
+    }
+
+    updatePASC() {
+        if (this.state.data.FROMSYMBOL === 'PASC' && this.state.data.FLAGS !== '4') {
+            this.setState({
+                PASC: this.state.data
+            })
+        }
+    }
+
+    updatePINK() {
+        if (this.state.data.FROMSYMBOL === 'PINK' && this.state.data.FLAGS !== '4') {
+            this.setState({
+                PINK: this.state.data
+            })
+        }
+    }
+
+    updatePOT() {
+        if (this.state.data.FROMSYMBOL === 'POT' && this.state.data.FLAGS !== '4') {
+            this.setState({
+                POT: this.state.data
+            })
+        }
+    }
+
+    updatePPC() {
+        if (this.state.data.FROMSYMBOL === 'PPC' && this.state.data.FLAGS !== '4') {
+            this.setState({
+                PPC: this.state.data
+            })
+        }
+    }
+
+    updateRADS() {
+        if (this.state.data.FROMSYMBOL === 'RADS' && this.state.data.FLAGS !== '4') {
+            this.setState({
+                RADS: this.state.data
+            })
+        }
+    }
+
+    updateREP() {
+        if (this.state.data.FROMSYMBOL === 'REP' && this.state.data.FLAGS !== '4') {
+            this.setState({
+                REP: this.state.data
+            })
+        }
+    }
+
+    updateRIC() {
+        if (this.state.data.FROMSYMBOL === 'RIC' && this.state.data.FLAGS !== '4') {
+            this.setState({
+                RIC: this.state.data
+            })
+        }
+    }
+
+    updateSBD() {
+        if (this.state.data.FROMSYMBOL === 'SBD' && this.state.data.FLAGS !== '4') {
+            this.setState({
+                SBD: this.state.data
+            })
+        }
+    }
+
+    updateSTEEM() {
+        if (this.state.data.FROMSYMBOL === 'STEEM' && this.state.data.FLAGS !== '4') {
+            this.setState({
+                STEEM: this.state.data
+            })
+        }
+    }
+
+    updateSC() {
+        if (this.state.data.FROMSYMBOL === 'SC' && this.state.data.FLAGS !== '4') {
+            this.setState({
+                SC: this.state.data
+            })
+        }
+    }
+
+    updateSJCX() {
+        if (this.state.data.FROMSYMBOL === 'SJCX' && this.state.data.FLAGS !== '4') {
+            this.setState({
+                SJCX: this.state.data
+            })
+        }
+    }
+
+    updateSTR() {
+        if (this.state.data.FROMSYMBOL === 'STR' && this.state.data.FLAGS !== '4') {
+            this.setState({
+                STR: this.state.data
+            })
+        }
+    }
+
+    updateSTRAT() {
+        if (this.state.data.FROMSYMBOL === 'STRAT' && this.state.data.FLAGS !== '4') {
+            this.setState({
+                STRAT: this.state.data
+            })
+        }
+    }
+
+    updateSYS() {
+        if (this.state.data.FROMSYMBOL === 'SYS' && this.state.data.FLAGS !== '4') {
+            this.setState({
+                SYS: this.state.data
+            })
+        }
+    }
+
+    updateVIA() {
+        if (this.state.data.FROMSYMBOL === 'VIA' && this.state.data.FLAGS !== '4') {
+            this.setState({
+                VIA: this.state.data
+            })
+        }
+    }
+
+    updateVRC() {
+        if (this.state.data.FROMSYMBOL === 'VRC' && this.state.data.FLAGS !== '4') {
+            this.setState({
+                VRC: this.state.data
+            })
+        }
+    }
+
+    updateVTC() {
+        if (this.state.data.FROMSYMBOL === 'VTC' && this.state.data.FLAGS !== '4') {
+            this.setState({
+                VTC: this.state.data
+            })
+        }
+    }
+
+    updateXBC() {
+        if (this.state.data.FROMSYMBOL === 'XBC' && this.state.data.FLAGS !== '4') {
+            this.setState({
+                XBC: this.state.data
+            })
+        }
+    }
+
+    updateXCP() {
+        if (this.state.data.FROMSYMBOL === 'XCP' && this.state.data.FLAGS !== '4') {
+            this.setState({
+                XCP: this.state.data
+            })
+        }
+    }
+
+    updateXEM() {
+        if (this.state.data.FROMSYMBOL === 'XEM' && this.state.data.FLAGS !== '4') {
+            this.setState({
+                XEM: this.state.data
+            })
+        }
+    }
+
+    updateXPM() {
+        if (this.state.data.FROMSYMBOL === 'XPM' && this.state.data.FLAGS !== '4') {
+            this.setState({
+                XPM: this.state.data
+            })
+        }
+    }
+
+    updateXRP() {
+        if (this.state.data.FROMSYMBOL === 'XRP' && this.state.data.FLAGS !== '4') {
+            this.setState({
+                XRP: this.state.data
+            })
+        }
+    }
+
+    updateXVC() {
+        if (this.state.data.FROMSYMBOL === 'XVC' && this.state.data.FLAGS !== '4') {
+            this.setState({
+                XVC: this.state.data
+            })
+        }
+    }
+
+    updateZEC() {
+        if (this.state.data.FROMSYMBOL === 'ZEC' && this.state.data.FLAGS !== '4') {
+            this.setState({
+                ZEC: this.state.data
+            })
+        }
     }
 
     render() {
+        // console.log(this.state.XMR);
         return (
             <div className="ticker-container">
-                <table width="100%">
-                    <tbody>
-                    <tr>
-                        <th>Coin</th>
-                        <th>Price</th>
-                    </tr>
-                    <tr>
-                        <td>XMR</td>
-                        <td>{this.props.data.RAW.XMR.BTC.PRICE}</td>
-                    </tr>
-                    <tr>
-                        <td>BCN</td>
-                        <td>{this.props.data.RAW.BCN.BTC.PRICE}</td>
-                    </tr>
-                    </tbody>
-                </table>
+            <Table  width="100%" height="100%" id="table"
+                    noDataText="Loading"
+                    sortable={true}
+                    defaultSort={{column: 'Coin', direction: 'asc'}}>
+                <Tr data={{ Coin: 'XMR', Price: this.state.XMR.PRICE }} />
+                <Tr data={{ Coin: 'DOGE', Price: this.state.DOGE.PRICE }} />
+                <Tr data={{ Coin: 'AMP', Price: this.state.AMP.PRICE }} />
+                <Tr data={{ Coin: 'ARDR', Price: this.state.ARDR.PRICE }} />
+                <Tr data={{ Coin: 'BCN', Price: this.state.BCN.PRICE }} />
+                <Tr data={{ Coin: 'BCY', Price: this.state.BCY.PRICE }} />
+                <Tr data={{ Coin: 'BELA', Price: this.state.BELA.PRICE }} />
+                <Tr data={{ Coin: 'BLK', Price: this.state.BLK.PRICE }} />
+                <Tr data={{ Coin: 'BTM', Price: this.state.BTM.PRICE }} />
+                <Tr data={{ Coin: 'BTS', Price: this.state.BTS.PRICE }} />
+                <Tr data={{ Coin: 'BURST', Price: this.state.BURST.PRICE }} />
+                <Tr data={{ Coin: 'CLAM', Price: this.state.CLAM.PRICE }} />
+                <Tr data={{ Coin: 'DASH', Price: this.state.DASH.PRICE }} />
+                <Tr data={{ Coin: 'DCR', Price: this.state.DCR.PRICE }} />
+                <Tr data={{ Coin: 'DGB', Price: this.state.DGB.PRICE }} />
+                <Tr data={{ Coin: 'EMC2', Price: this.state.EMC2.PRICE }} />
+                <Tr data={{ Coin: 'ETC', Price: this.state.ETC.PRICE }} />
+                <Tr data={{ Coin: 'ETH', Price: this.state.ETH.PRICE }} />
+                <Tr data={{ Coin: 'EXP', Price: this.state.EXP.PRICE }} />
+                <Tr data={{ Coin: 'FCT', Price: this.state.FCT.PRICE }} />
+                <Tr data={{ Coin: 'FLDC', Price: this.state.FLDC.PRICE }} />
+                <Tr data={{ Coin: 'FLO', Price: this.state.FLO.PRICE }} />
+                <Tr data={{ Coin: 'GAME', Price: this.state.GAME.PRICE }} />
+                <Tr data={{ Coin: 'GNO', Price: this.state.GNO.PRICE }} />
+                <Tr data={{ Coin: 'GNT', Price: this.state.GNT.PRICE }} />
+                <Tr data={{ Coin: 'GRC', Price: this.state.GRC.PRICE }} />
+                <Tr data={{ Coin: 'HUC', Price: this.state.HUC.PRICE }} />
+                <Tr data={{ Coin: 'LBC', Price: this.state.LBC.PRICE }} />
+                <Tr data={{ Coin: 'LSK', Price: this.state.LSK.PRICE }} />
+                <Tr data={{ Coin: 'LTC', Price: this.state.LTC.PRICE }} />
+                <Tr data={{ Coin: 'MAID', Price: this.state.MAID.PRICE }} />
+                <Tr data={{ Coin: 'NAUT', Price: this.state.NAUT.PRICE }} />
+                <Tr data={{ Coin: 'NAV', Price: this.state.NAV.PRICE }} />
+                <Tr data={{ Coin: 'NEOS', Price: this.state.NEOS.PRICE }} />
+                <Tr data={{ Coin: 'NMC', Price: this.state.NMC.PRICE }} />
+                <Tr data={{ Coin: 'NOTE', Price: this.state.NOTE.PRICE }} />
+                <Tr data={{ Coin: 'NXC', Price: this.state.NXC.PRICE }} />
+                <Tr data={{ Coin: 'NXT', Price: this.state.NXT.PRICE }} />
+                <Tr data={{ Coin: 'OMNI', Price: this.state.OMNI.PRICE }} />
+                <Tr data={{ Coin: 'PASC', Price: this.state.PASC.PRICE }} />
+                <Tr data={{ Coin: 'PINK', Price: this.state.PINK.PRICE }} />
+                <Tr data={{ Coin: 'POT', Price: this.state.POT.PRICE }} />
+                <Tr data={{ Coin: 'PPC', Price: this.state.PPC.PRICE }} />
+                <Tr data={{ Coin: 'RADS', Price: this.state.RADS.PRICE }} />
+                <Tr data={{ Coin: 'REP', Price: this.state.REP.PRICE }} />
+                <Tr data={{ Coin: 'RIC', Price: this.state.RIC.PRICE }} />
+                <Tr data={{ Coin: 'SBD', Price: this.state.SBD.PRICE }} />
+                <Tr data={{ Coin: 'SC', Price: this.state.SC.PRICE }} />
+                <Tr data={{ Coin: 'SJCX', Price: this.state.SJCX.PRICE }} />
+                <Tr data={{ Coin: 'STEEM', Price: this.state.STEEM.PRICE }} />
+                <Tr data={{ Coin: 'STR', Price: this.state.STR.PRICE }} />
+                <Tr data={{ Coin: 'STRAT', Price: this.state.STRAT.PRICE }} />
+                <Tr data={{ Coin: 'SYS', Price: this.state.SYS.PRICE }} />
+                <Tr data={{ Coin: 'VIA', Price: this.state.VIA.PRICE }} />
+                <Tr data={{ Coin: 'VRC', Price: this.state.VRC.PRICE }} />
+                <Tr data={{ Coin: 'VTC', Price: this.state.VTC.PRICE }} />
+                <Tr data={{ Coin: 'XBC', Price: this.state.XBC.PRICE }} />
+                <Tr data={{ Coin: 'XCP', Price: this.state.XCP.PRICE }} />
+                <Tr data={{ Coin: 'XEM', Price: this.state.XEM.PRICE }} />
+                <Tr data={{ Coin: 'XPM', Price: this.state.XPM.PRICE }} />
+                <Tr data={{ Coin: 'XRP', Price: this.state.XRP.PRICE }} />
+                <Tr data={{ Coin: 'XVC', Price: this.state.XVC.PRICE }} />
+                <Tr data={{ Coin: 'ZEC', Price: this.state.ZEC.PRICE }} />
+            </Table>
             </div>
-        );
+
+        //
+        //     {/*<div className="ticker-container">*/}
+        //         {/*<table width="100%">*/}
+        //             {/*<tbody>*/}
+        //             {/*<tr>*/}
+        //                 {/*<th>Coin</th>*/}
+        //                 {/*<th>Price  [Ƀ]</th>*/}
+        //             {/*</tr>*/}
+        //             {/*<tr>*/}
+        //                 {/*<td>XMR</td>*/}
+        //                 {/*<td>{this.state.XMR.PRICE}</td>*/}
+        //             {/*</tr>*/}
+        //             {/*<tr>*/}
+        //                 {/*<td>BCN</td>*/}
+        //                 {/*<td>{this.state.BCN.PRICE}</td>*/}
+        //             {/*</tr>*/}
+        //             {/*</tbody>*/}
+        //         {/*</table>*/}
+        //     {/*</div>*/}
+        )
 // }
     };
 }
-
-const TickerPlaceHolder = (props) => {
-return (
-    <div className="ticker-container"> Waiting </div>
-)
-};
 
 // utilities config //
 var CCC = CCC || {};
