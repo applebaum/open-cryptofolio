@@ -67,7 +67,7 @@ app.use(function(err, req, res, next) {
     });
 });
 
-///////////// Get data from http request \\\\\\\\\\\\\\\
+///////////// Get data from http request and send it to client\\\\\\\\\\\\\\\
 
 // var args = {
 //         requestConfig: {
@@ -76,42 +76,45 @@ app.use(function(err, req, res, next) {
 //     }
 // };
 
-client.get("https://min-api.cryptocompare.com/data/pricemultifull?fsyms=ETH,DASH&tsyms=BTC,USD,EUR", function (data, response) {
-    // parsed response body as js object
-        console.log('initial get result ' + data.RAW.ETH.BTC.PRICE);
-    var marketData = data;
-    http.createServer(function(request, response){
-        var path = url.parse(request.url).pathname;
-        var dataToClient = marketData;
-        var string = JSON.stringify(dataToClient);
-        // console.log('server ' + string);
-        if(path==="/getdata"){
-            console.log("request recieved");
-            // console.log('data sent to client ' + dataToClient.RAW.ETH.BTC.PRICE);
-            response.writeHead(200, {
-                "Content-Type": "text/plain",
-                'Access-Control-Allow-Origin' : '*'
-            });
-            response.end(string);
-            console.log("data sent");
-        }else{
-            fs.readFile('./index.html', function(err, file) {
-                if(err) {
-                    console.log('smth is wrong');
-                    return;
-                }
-                response.writeHead(200, { 'Content-Type': 'text/html' });
-                response.end(file, "utf-8");
-            });
-        }
-    }).listen(3001);
-    console.log("server initialized");
-    // raw response
-    // console.log(response);
-});
+        client.get("https://min-api.cryptocompare.com/data/pricemultifull?fsyms=XMR,BCN&tsyms=BTC,USD,EUR", function (data, response) {
+            // parsed response body as js object
+                console.log('initial get result ' + data.RAW.XMR.BTC.PRICE);
+            server(data);
+        });
 
-///////////// Send data to client \\\\\\\\\\\\\\\
 
+
+            let server = (data) => {
+                http.createServer(function (request, response) {
+                    let path = url.parse(request.url).pathname;
+                        let dataToClient = data;
+                        let string = JSON.stringify(dataToClient);
+                        // let log = () => {
+                            console.log('server ' + string);
+                        // };
+                        // setInterval(log, 5000);
+                        if (path === "/getdata") {
+                            console.log("request recieved");
+                            // console.log('data sent to client ' + dataToClient.RAW.ETH.BTC.PRICE);
+                            response.writeHead(200, {
+                                "Content-Type": "text/plain",
+                                'Access-Control-Allow-Origin': '*'
+                            });
+                            response.end(string);
+                            console.log("data sent");
+                        } else {
+                            fs.readFile('./index.html', function (err, file) {
+                                if (err) {
+                                    console.log('smth is wrong');
+                                    return;
+                                }
+                                response.writeHead(200, {'Content-Type': 'text/html'});
+                                response.end(file, "utf-8");
+                            });
+                        }
+                }).listen(3001);
+            console.log("server initialized");
+            };
 
 
 //////////// Socket.io - FETCH DATA FROM EXTERNAL SOCKET \\\\\\\\\\\\\\\\\\\
