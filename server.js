@@ -175,7 +175,7 @@ var socket = ioClient.connect('https://streamer.cryptocompare.com');
         '5~CCCAGG~SC~BTC',
         '5~CCCAGG~SJCX~BTC',
         '5~CCCAGG~STEEM~BTC',
-        '5~CCCAGG~STR~BTC',
+        '5~CCCAGG~XLM~BTC',
         '5~CCCAGG~STRAT~BTC',
         '5~CCCAGG~SYS~BTC',
         '5~CCCAGG~VIA~BTC',
@@ -189,32 +189,38 @@ var socket = ioClient.connect('https://streamer.cryptocompare.com');
         '5~CCCAGG~XVC~BTC',
         '5~CCCAGG~ZEC~BTC'];
 
-    socket.emit('SubAdd', {subs:subscription} );
+    let fetchData = () => {
 
-    //receive data
-    socket.on("m", function(message){
-        let messageType = message.substring(0, message.indexOf("~"));
-        let res = {};
-        if (messageType === CCC.STATIC.TYPE.CURRENTAGG) {
-            res = CCC.CURRENT.unpack(message);
-            // console.log(res);
-            updateQuote(res);
-        }
-    });
-
-    // assign keys, send to client
-    let updateQuote = (result) => {
-
-        let keys = Object.keys(result);
-
-        for (let i = 0; i <keys.length; ++i) {
-            quote[keys[i]] = result[keys[i]];
-        }
-        io.emit('m', quote);
-        // console.log(quote);
+        socket.emit('SubAdd', {subs: subscription});
     };
 
 
+//receive data
+        socket.on("m", function (message) {
+            let messageType = message.substring(0, message.indexOf("~"));
+            let res = {};
+            if (messageType === CCC.STATIC.TYPE.CURRENTAGG) {
+                res = CCC.CURRENT.unpack(message);
+                console.log(res);
+                updateQuote(res);
+            }
+        });
+
+        // assign keys, send to client
+        let updateQuote = (result) => {
+
+            let keys = Object.keys(result);
+
+            for (let i = 0; i < keys.length; ++i) {
+                quote[keys[i]] = result[keys[i]];
+            }
+            io.emit('m', quote);
+            // console.log(quote);
+        };
+
+setTimeout(fetchData, 100);
+
+setInterval(fetchData, 180000);
 
 //Format: {SubscriptionId}~{ExchangeName}~{FromSymbol}~{ToSymbol}
 //Use SubscriptionId 0 for TRADE, 2 for CURRENT and 5 for CURRENTAGG

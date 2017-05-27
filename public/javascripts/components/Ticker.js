@@ -171,7 +171,7 @@ export default class Ticker extends Component {
             STEEM: {
                 FLAGS: null,
                 PRICE: null },
-            STR: {
+            XLM: {
                 FLAGS: null,
                 PRICE: null },
             STRAT: {
@@ -275,7 +275,7 @@ export default class Ticker extends Component {
         this.updateSC();
         this.updateSJCX();
         this.updateSTEEM();
-        this.updateSTR();
+        this.updateXLM();
         this.updateSTRAT();
         this.updateSYS();
         this.updateVIA();
@@ -690,10 +690,10 @@ export default class Ticker extends Component {
         }
     }
 
-    updateSTR() {
-        if (this.state.data.FROMSYMBOL === 'STR' && this.state.data.FLAGS !== '4') {
+    updateXLM() {
+        if (this.state.data.FROMSYMBOL === 'XLM' && this.state.data.FLAGS !== '4') {
             this.setState({
-                STR: this.state.data
+                XLM: this.state.data
             })
         }
     }
@@ -802,7 +802,7 @@ export default class Ticker extends Component {
                     noDataText="Loading"
                     sortable={true}
                     defaultSort={{column: 'Coin', direction: 'asc'}}>
-                <Tr data={{ Coin: 'XMR', Price: this.state.XMR.PRICE }} />
+                <Tr  className={this.state.XMR.FLAGS} onClick={() => console.log('Clicked XMR!')} data={{ Coin: 'XMR', Price: this.state.XMR.PRICE }} />
                 <Tr data={{ Coin: 'DOGE', Price: this.state.DOGE.PRICE }} />
                 <Tr data={{ Coin: 'AMP', Price: this.state.AMP.PRICE }} />
                 <Tr data={{ Coin: 'ARDR', Price: this.state.ARDR.PRICE }} />
@@ -852,7 +852,7 @@ export default class Ticker extends Component {
                 <Tr data={{ Coin: 'SC', Price: this.state.SC.PRICE }} />
                 <Tr data={{ Coin: 'SJCX', Price: this.state.SJCX.PRICE }} />
                 <Tr data={{ Coin: 'STEEM', Price: this.state.STEEM.PRICE }} />
-                <Tr data={{ Coin: 'STR', Price: this.state.STR.PRICE }} />
+                <Tr data={{ Coin: 'XLM', Price: this.state.XLM.PRICE }} />
                 <Tr data={{ Coin: 'STRAT', Price: this.state.STRAT.PRICE }} />
                 <Tr data={{ Coin: 'SYS', Price: this.state.SYS.PRICE }} />
                 <Tr data={{ Coin: 'VIA', Price: this.state.VIA.PRICE }} />

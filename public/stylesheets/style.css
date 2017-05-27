@@ -41,6 +41,16 @@ a {
     color: whitesmoke;
 }
 
+.price-up {
+    color: #00C853;
+    font-family: 'Roboto', sans-serif;
+}
+
+.price-down {
+    color: #BF360C;
+    font-family: 'Roboto', sans-serif;
+}
+
 .graph-container {
     top: 7%;
     height: 37%;
