@@ -6,7 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
-var users = require('./routes/users');
+var histBTC = require('./routes/hist/btc');
 
 var app = express();
 var http = require('http');
@@ -33,8 +33,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+
+//setup routes for historical data
 app.use('/', routes);
-app.use('/users', users);
+app.use('/hist/btc', histBTC);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -67,62 +69,12 @@ app.use(function(err, req, res, next) {
     });
 });
 
-// ///////////// Get data from http request and send it to client\\\\\\\\\\\\\\\
-//
-// // var args = {
-// //         requestConfig: {
-// //         keepAlive: true, //Enable/disable keep-alive functionalityidle socket.
-// //         keepAliveDelay: 10000 //and optionally set the initial delay before the first keepalive probe is sent
-// //     }
-// // };
-//
-//         client.get("https://min-api.cryptocompare.com/data/pricemultifull?fsyms=XMR,BCN&tsyms=BTC,USD,EUR", function (data, response) {
-//             // parsed response body as js object
-//                 console.log('initial get result ' + data.RAW.XMR.BTC.PRICE);
-//             server(data);
-//         });
-//
-//
-//
-//             let server = (data) => {
-//                 http.createServer(function (request, response) {
-//                     let path = url.parse(request.url).pathname;
-//                         let dataToClient = data;
-//                         let string = JSON.stringify(dataToClient);
-//                         // let log = () => {
-//                             console.log('server ' + string);
-//                         // };
-//                         // setInterval(log, 5000);
-//                         if (path === "/getdata") {
-//                             console.log("request recieved");
-//                             // console.log('data sent to client ' + dataToClient.RAW.ETH.BTC.PRICE);
-//                             response.writeHead(200, {
-//                                 "Content-Type": "text/plain",
-//                                 'Access-Control-Allow-Origin': '*'
-//                             });
-//                             response.end(string);
-//                             console.log("data sent");
-//                         } else {
-//                             fs.readFile('./index.html', function (err, file) {
-//                                 if (err) {
-//                                     console.log('smth is wrong');
-//                                     return;
-//                                 }
-//                                 response.writeHead(200, {'Content-Type': 'text/html'});
-//                                 response.end(file, "utf-8");
-//                             });
-//                         }
-//                 }).listen(3001);
-//             console.log("server initialized");
-//             };
-//
-
 //////////// Socket.io - FETCH DATA FROM EXTERNAL SOCKET \\\\\\\\\\\\\\\\\\\
-var quote = {};
-
-// subscribe to external socket
-var socket = ioClient.connect('https://streamer.cryptocompare.com');
-
+// var quote = {};
+//
+// // subscribe to external socket
+// var socket = ioClient.connect('https://streamer.cryptocompare.com');
+//
 
     let subscription = [
         '5~CCCAGG~XMR~BTC',
@@ -189,44 +141,56 @@ var socket = ioClient.connect('https://streamer.cryptocompare.com');
         '5~CCCAGG~XVC~BTC',
         '5~CCCAGG~ZEC~BTC'];
 
-    let fetchData = () => {
-
-        socket.emit('SubAdd', {subs: subscription});
-    };
+    // let fetchData = () => {
+    //
+    //     socket.emit('SubAdd', {subs: subscription});
+    // };
 
 
 //receive data
-        socket.on("m", function (message) {
-            let messageType = message.substring(0, message.indexOf("~"));
-            let res = {};
-            if (messageType === CCC.STATIC.TYPE.CURRENTAGG) {
-                res = CCC.CURRENT.unpack(message);
-                console.log(res);
-                updateQuote(res);
-            }
-        });
 
-        // assign keys, send to client
-        let updateQuote = (result) => {
-
-            let keys = Object.keys(result);
-
-            for (let i = 0; i < keys.length; ++i) {
-                quote[keys[i]] = result[keys[i]];
-            }
-            io.emit('m', quote);
-            // console.log(quote);
-        };
-
-setTimeout(fetchData, 100);
-
-setInterval(fetchData, 180000);
+// CRYPTOCOMPARE
+//         socket.on("m", function (message) {
+//             let messageType = message.substring(0, message.indexOf("~"));
+//             let res = {};
+//             if (messageType === CCC.STATIC.TYPE.CURRENTAGG) {
+//                 res = CCC.CURRENT.unpack(message);
+//                 console.log(res);
+//                 updateQuote(res);
+//             }
+//         });
+//
+//         // assign keys, send to client
+//         let updateQuote = (result) => {
+//
+//             let keys = Object.keys(result);
+//
+//             for (let i = 0; i < keys.length; ++i) {
+//                 quote[keys[i]] = result[keys[i]];
+//             }
+//             io.emit('m', quote);
+//             // console.log(quote);
+//         };
+//
+// setTimeout(fetchData, 100);
+//
+// setInterval(fetchData, 180000);
 
 //Format: {SubscriptionId}~{ExchangeName}~{FromSymbol}~{ToSymbol}
 //Use SubscriptionId 0 for TRADE, 2 for CURRENT and 5 for CURRENTAGG
 //For aggregate quote updates use CCCAGG as market
 
+// COINCAP
 
+var socket = ioClient.connect('http://socket.coincap.io');
+
+socket.on('trades', function (tradeMsg) {
+    // console.log(tradeMsg);
+});
+
+// socket.on('global', function (globalMsg) {
+//     console.log(globalMsg);
+// });
 
 
 
