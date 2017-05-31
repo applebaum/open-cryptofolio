@@ -88,6 +88,9 @@ class Graph extends Component {
 // placeholder element returns text
 class GraphPlaceHolder extends Component {
     render(){
-        return <div className="graph">Loading chart data...</div>
+        return (
+            <div className="graph-placeholder">
+                Loading chart data...
+            </div>)
     }
 }

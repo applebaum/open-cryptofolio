@@ -10,215 +10,332 @@ export default class Ticker extends Component {
         super(props);
         this.state = {
             data: {
-                FROMSYMBOL:  null,
-                TOSYMBOL: null,
-                FLAGS: null,
-                PRICE: null,
-                LASTUPDATE: null,
-                LASTVOLUME: null,
-                LASTVOLUMETO: null,
-                LASTTRADEID: null,
-                VOLUME24HOUR: null,
-                VOLUME24HOURTO: null,
-                OPEN24HOUR: null,
-                HIGH24HOUR: null,
-                LOW24HOUR: null,
-                LASTMARKET: null },
+            message: {
+                coin: null,
+                msg: {
+                    price: null,
+                    volume: null,
+                    long: null,
+                    cap24hrChange: null
+                }
+            }
+        },
             XMR: {
-                FLAGS: null,
-                PRICE: null },
+                price: null,
+                volume: null,
+                long: null,
+                cap24hrChange: null },
             AMP: {
-                FLAGS: null,
-                PRICE: null },
+                price: null,
+                volume: null,
+                long: null,
+                cap24hrChange: null },
             ARDR: {
-                FLAGS: null,
-                PRICE: null },
+                price: null,
+                volume: null,
+                long: null,
+                cap24hrChange: null },
             BCY: {
-                FLAGS: null,
-                PRICE: null },
+                price: null,
+                volume: null,
+                long: null,
+                cap24hrChange: null },
             BELA: {
-                FLAGS: null,
-                PRICE: null },
+                price: null,
+                volume: null,
+                long: null,
+                cap24hrChange: null },
             BLK: {
-                FLAGS: null,
-                PRICE: null },
+                price: null,
+                volume: null,
+                long: null,
+                cap24hrChange: null },
             BTM: {
-                FLAGS: null,
-                PRICE: null },
+                price: null,
+                volume: null,
+                long: null,
+                cap24hrChange: null },
             BTS: {
-                FLAGS: null,
-                PRICE: null },
+                price: null,
+                volume: null,
+                long: null,
+                cap24hrChange: null },
             BURST: {
-                FLAGS: null,
-                PRICE: null },
+                price: null,
+                volume: null,
+                long: null,
+                cap24hrChange: null },
             CLAM: {
-                FLAGS: null,
-                PRICE: null },
+                price: null,
+                volume: null,
+                long: null,
+                cap24hrChange: null },
             DASH: {
-                FLAGS: null,
-                PRICE: null },
+                price: null,
+                volume: null,
+                long: null,
+                cap24hrChange: null },
             DCR: {
-                FLAGS: null,
-                PRICE: null },
+                price: null,
+                volume: null,
+                long: null,
+                cap24hrChange: null },
             DGB: {
-                FLAGS: null,
-                PRICE: null },
+                price: null,
+                volume: null,
+                long: null,
+                cap24hrChange: null },
             DOGE: {
-                FLAGS: null,
-                PRICE: null },
+                price: null,
+                volume: null,
+                long: null,
+                cap24hrChange: null },
             EMC2: {
-                FLAGS: null,
-                PRICE: null },
+                price: null,
+                volume: null,
+                long: null,
+                cap24hrChange: null },
             ETC: {
-                FLAGS: null,
-                PRICE: null },
+                price: null,
+                volume: null,
+                long: null,
+                cap24hrChange: null },
             ETH: {
-                FLAGS: null,
-                PRICE: null },
+                price: null,
+                volume: null,
+                long: null,
+                cap24hrChange: null },
             EXP: {
-                FLAGS: null,
-                PRICE: null },
+                price: null,
+                volume: null,
+                long: null,
+                cap24hrChange: null },
             FCT: {
-                FLAGS: null,
-                PRICE: null },
+                price: null,
+                volume: null,
+                long: null,
+                cap24hrChange: null },
             FLDC: {
-                FLAGS: null,
-                PRICE: null },
+                price: null,
+                volume: null,
+                long: null,
+                cap24hrChange: null },
             FLO: {
-                FLAGS: null,
-                PRICE: null },
+                price: null,
+                volume: null,
+                long: null,
+                cap24hrChange: null },
             GAME: {
-                FLAGS: null,
-                PRICE: null },
+                price: null,
+                volume: null,
+                long: null,
+                cap24hrChange: null },
             GNO: {
-                FLAGS: null,
-                PRICE: null },
+                price: null,
+                volume: null,
+                long: null,
+                cap24hrChange: null },
             GNT: {
-                FLAGS: null,
-                PRICE: null },
+                price: null,
+                volume: null,
+                long: null,
+                cap24hrChange: null },
             GRC: {
-                FLAGS: null,
-                PRICE: null },
+                price: null,
+                volume: null,
+                long: null,
+                cap24hrChange: null },
             HUC: {
-                FLAGS: null,
-                PRICE: null },
+                price: null,
+                volume: null,
+                long: null,
+                cap24hrChange: null },
             LBC: {
-                FLAGS: null,
-                PRICE: null },
+                price: null,
+                volume: null,
+                long: null,
+                cap24hrChange: null },
             LSK: {
-                FLAGS: null,
-                PRICE: null },
+                price: null,
+                volume: null,
+                long: null,
+                cap24hrChange: null },
             LTC: {
-                FLAGS: null,
-                PRICE: null },
+                price: null,
+                volume: null,
+                long: null,
+                cap24hrChange: null },
             MAID: {
-                FLAGS: null,
-                PRICE: null },
+                price: null,
+                volume: null,
+                long: null,
+                cap24hrChange: null },
             NAUT: {
-                FLAGS: null,
-                PRICE: null },
-            NAV: {
-                FLAGS: null,
-                PRICE: null },
+                price: null,
+                volume: null,
+                long: null,
+                cap24hrChange: null },
             NEOS: {
-                FLAGS: null,
-                PRICE: null },
+                price: null,
+                volume: null,
+                long: null,
+                cap24hrChange: null },
             NMC: {
-                FLAGS: null,
-                PRICE: null },
+                price: null,
+                volume: null,
+                long: null,
+                cap24hrChange: null },
             NOTE: {
-                FLAGS: null,
-                PRICE: null },
+                price: null,
+                volume: null,
+                long: null,
+                cap24hrChange: null },
             NXC: {
-                FLAGS: null,
-                PRICE: null },
+                price: null,
+                volume: null,
+                long: null,
+                cap24hrChange: null },
             NXT: {
-                FLAGS: null,
-                PRICE: null },
+                price: null,
+                volume: null,
+                long: null,
+                cap24hrChange: null },
             OMNI: {
-                FLAGS: null,
-                PRICE: null },
+                price: null,
+                volume: null,
+                long: null,
+                cap24hrChange: null },
             PASC: {
-                FLAGS: null,
-                PRICE: null },
+                price: null,
+                volume: null,
+                long: null,
+                cap24hrChange: null },
             PINK: {
-                FLAGS: null,
-                PRICE: null },
+                price: null,
+                volume: null,
+                long: null,
+                cap24hrChange: null },
             POT: {
-                FLAGS: null,
-                PRICE: null },
+                price: null,
+                volume: null,
+                long: null,
+                cap24hrChange: null },
             PPC: {
-                FLAGS: null,
-                PRICE: null },
+                price: null,
+                volume: null,
+                long: null,
+                cap24hrChange: null },
             RADS: {
-                FLAGS: null,
-                PRICE: null },
+                price: null,
+                volume: null,
+                long: null,
+                cap24hrChange: null },
             REP: {
-                FLAGS: null,
-                PRICE: null },
+                price: null,
+                volume: null,
+                long: null,
+                cap24hrChange: null },
             RIC: {
-                FLAGS: null,
-                PRICE: null },
+                price: null,
+                volume: null,
+                long: null,
+                cap24hrChange: null },
             SBD: {
-                FLAGS: null,
-                PRICE: null },
+                price: null,
+                volume: null,
+                long: null,
+                cap24hrChange: null },
             SC: {
-                FLAGS: null,
-                PRICE: null },
+                price: null,
+                volume: null,
+                long: null,
+                cap24hrChange: null },
             SJCX: {
-                FLAGS: null,
-                PRICE: null },
+                price: null,
+                volume: null,
+                long: null,
+                cap24hrChange: null },
             STEEM: {
-                FLAGS: null,
-                PRICE: null },
+                price: null,
+                volume: null,
+                long: null,
+                cap24hrChange: null },
             XLM: {
-                FLAGS: null,
-                PRICE: null },
+                price: null,
+                volume: null,
+                long: null,
+                cap24hrChange: null },
             STRAT: {
                 FLAGS: null,
-                PRICE: null },
+                price: null,
+                volume: null,
+                long: null,
+                cap24hrChange: null },
             SYS: {
-                FLAGS: null,
-                PRICE: null },
+                price: null,
+                volume: null,
+                long: null,
+                cap24hrChange: null },
             VIA: {
-                FLAGS: null,
-                PRICE: null },
+                price: null,
+                volume: null,
+                long: null,
+                cap24hrChange: null },
             VRC: {
-                FLAGS: null,
-                PRICE: null },
+                price: null,
+                volume: null,
+                long: null,
+                cap24hrChange: null },
             VTC: {
-                FLAGS: null,
-                PRICE: null },
+                price: null,
+                volume: null,
+                long: null,
+                cap24hrChange: null },
             XBC: {
-                FLAGS: null,
-                PRICE: null },
+                price: null,
+                volume: null,
+                long: null,
+                cap24hrChange: null },
             XCP: {
-                FLAGS: null,
-                PRICE: null },
+                price: null,
+                volume: null,
+                long: null,
+                cap24hrChange: null },
             XEM: {
-                FLAGS: null,
-                PRICE: null },
+                price: null,
+                volume: null,
+                long: null,
+                cap24hrChange: null },
             XPM: {
-                FLAGS: null,
-                PRICE: null },
+                price: null,
+                volume: null,
+                long: null,
+                cap24hrChange: null },
             XRP: {
-                FLAGS: null,
-                PRICE: null },
+                price: null,
+                volume: null,
+                long: null,
+                cap24hrChange: null },
             XVC: {
-                FLAGS: null,
-                PRICE: null },
+                price: null,
+                volume: null,
+                long: null,
+                cap24hrChange: null },
             ZEC: {
-                FLAGS: null,
-                PRICE: null },
+                price: null,
+                volume: null,
+                long: null,
+                cap24hrChange: null },
             BCN: {
-                FLAGS: null,
-                PRICE: null }
+                price: null,
+                volume: null,
+                long: null,
+                cap24hrChange: null }
         };
     }
 
     componentDidMount(){
-        socket.on('m', (data) => this.setData(data));
-
+        socket.on('trades', (data) => this.setData(data));
     }
 
     setData(data) {
@@ -257,7 +374,6 @@ export default class Ticker extends Component {
         this.updateLTC();
         this.updateMAID();
         this.updateNAUT();
-        this.updateNAV();
         this.updateNEOS();
         this.updateNMC();
         this.updateNOTE();
@@ -290,581 +406,883 @@ export default class Ticker extends Component {
         this.updateZEC();
            }
 
+           // update functions
     updateXMR() {
-        if (this.state.data.FROMSYMBOL === 'XMR' && this.state.data.FLAGS !== '4') {
+        if (this.state.data.message.coin === 'XMR') {
             this.setState({
-                XMR: this.state.data
+                XMR: this.state.data.message.msg
             })
         }
     }
 
     updateBCN() {
-        if (this.state.data.FROMSYMBOL === 'BCN' && this.state.data.FLAGS !== '4') {
+        if (this.state.data.message.coin === 'BCN') {
             this.setState({
-                BCN: this.state.data
+                BCN: this.state.data.message.msg
             })
         }
     }
 
     updateAMP() {
-        if (this.state.data.FROMSYMBOL === 'AMP' && this.state.data.FLAGS !== '4') {
+        if (this.state.data.message.coin === 'AMP') {
             this.setState({
-                AMP: this.state.data
+                AMP: this.state.data.message.msg
             })
         }
     }
 
     updateARDR() {
-        if (this.state.data.FROMSYMBOL === 'ARDR' && this.state.data.FLAGS !== '4') {
+        if (this.state.data.message.coin === 'ARDR') {
             this.setState({
-                ARDR: this.state.data
+                ARDR: this.state.data.message.msg
             })
         }
     }
 
     updateBCY() {
-        if (this.state.data.FROMSYMBOL === 'BCY' && this.state.data.FLAGS !== '4') {
+        if (this.state.data.message.coin === 'BCY') {
             this.setState({
-                BCY: this.state.data
+                BCY: this.state.data.message.msg
             })
         }
     }
 
     updateBELA() {
-        if (this.state.data.FROMSYMBOL === 'BELA' && this.state.data.FLAGS !== '4') {
+        if (this.state.data.message.coin === 'BELA') {
             this.setState({
-                BELA: this.state.data
+                BELA: this.state.data.message.msg
             })
         }
     }
 
     updateBLK() {
-        if (this.state.data.FROMSYMBOL === 'BLK' && this.state.data.FLAGS !== '4') {
+        if (this.state.data.message.coin === 'BLK') {
             this.setState({
-                BLK: this.state.data
+                BLK: this.state.data.message.msg
             })
         }
     }
 
     updateBTM() {
-        if (this.state.data.FROMSYMBOL === 'BTM' && this.state.data.FLAGS !== '4') {
+        if (this.state.data.message.coin === 'BTM') {
             this.setState({
-                BTM: this.state.data
+                BTM: this.state.data.message.msg
             })
         }
     }
 
     updateBTS() {
-        if (this.state.data.FROMSYMBOL === 'BTS' && this.state.data.FLAGS !== '4') {
+        if (this.state.data.message.coin === 'BTS') {
             this.setState({
-                BTS: this.state.data
+                BTS: this.state.data.message.msg
             })
         }
     }
 
     updateBURST() {
-        if (this.state.data.FROMSYMBOL === 'BURST' && this.state.data.FLAGS !== '4') {
+        if (this.state.data.message.coin === 'BURST') {
             this.setState({
-                BURST: this.state.data
+                BURST: this.state.data.message.msg
             })
         }
     }
 
     updateCLAM() {
-        if (this.state.data.FROMSYMBOL === 'CLAM' && this.state.data.FLAGS !== '4') {
+        if (this.state.data.message.coin === 'CLAM') {
             this.setState({
-                CLAM: this.state.data
+                CLAM: this.state.data.message.msg
             })
         }
     }
 
     updateDASH() {
-        if (this.state.data.FROMSYMBOL === 'DASH' && this.state.data.FLAGS !== '4') {
+        if (this.state.data.message.coin === 'DASH') {
             this.setState({
-                DASH: this.state.data
+                DASH: this.state.data.message.msg
             })
         }
     }
 
     updateDCR() {
-        if (this.state.data.FROMSYMBOL === 'DCR' && this.state.data.FLAGS !== '4') {
+        if (this.state.data.message.coin === 'DCR') {
             this.setState({
-                DCR: this.state.data
+                DCR: this.state.data.message.msg
             })
         }
     }
 
     updateDGB() {
-        if (this.state.data.FROMSYMBOL === 'DGB' && this.state.data.FLAGS !== '4') {
+        if (this.state.data.message.coin === 'DGB') {
             this.setState({
-                DGB: this.state.data
+                DGB: this.state.data.message.msg
             })
         }
     }
 
     updateDOGE() {
-        if (this.state.data.FROMSYMBOL === 'DOGE' && this.state.data.FLAGS !== '4') {
+        if (this.state.data.message.coin === 'DOGE') {
             this.setState({
-                DOGE: this.state.data
+                DOGE: this.state.data.message.msg
             })
         }
     }
 
     updateEMC2() {
-        if (this.state.data.FROMSYMBOL === 'EMC2' && this.state.data.FLAGS !== '4') {
+        if (this.state.data.message.coin === 'EMC2') {
             this.setState({
-                EMC2: this.state.data
+                EMC2: this.state.data.message.msg
             })
         }
     }
 
     updateETC() {
-        if (this.state.data.FROMSYMBOL === 'ETC' && this.state.data.FLAGS !== '4') {
+        if (this.state.data.message.coin === 'ETC') {
             this.setState({
-                ETC: this.state.data
+                ETC: this.state.data.message.msg
             })
         }
     }
 
     updateETH() {
-        if (this.state.data.FROMSYMBOL === 'ETH' && this.state.data.FLAGS !== '4') {
+        if (this.state.data.message.coin === 'ETH') {
             this.setState({
-                ETH: this.state.data
+                ETH: this.state.data.message.msg
             })
         }
     }
 
     updateEXP() {
-        if (this.state.data.FROMSYMBOL === 'EXP' && this.state.data.FLAGS !== '4') {
+        if (this.state.data.message.coin === 'EXP') {
             this.setState({
-                EXP: this.state.data
+                EXP: this.state.data.message.msg
             })
         }
     }
 
     updateFCT() {
-        if (this.state.data.FROMSYMBOL === 'FCT' && this.state.data.FLAGS !== '4') {
+        if (this.state.data.message.coin === 'FCT') {
             this.setState({
-                FCT: this.state.data
+                FCT: this.state.data.message.msg
             })
         }
     }
 
     updateFLDC() {
-        if (this.state.data.FROMSYMBOL === 'FLDC' && this.state.data.FLAGS !== '4') {
+        if (this.state.data.message.coin === 'FLDC') {
             this.setState({
-                FLDC: this.state.data
+                FLDC: this.state.data.message.msg
             })
         }
     }
 
     updateFLO() {
-        if (this.state.data.FROMSYMBOL === 'FLO' && this.state.data.FLAGS !== '4') {
+        if (this.state.data.message.coin === 'FLO') {
             this.setState({
-                FLO: this.state.data
+                FLO: this.state.data.message.msg
             })
         }
     }
 
     updateGAME() {
-        if (this.state.data.FROMSYMBOL === 'GAME' && this.state.data.FLAGS !== '4') {
+        if (this.state.data.message.coin === 'GAME') {
             this.setState({
-                GAME: this.state.data
+                GAME: this.state.data.message.msg
             })
         }
     }
 
     updateGNO() {
-        if (this.state.data.FROMSYMBOL === 'GNO' && this.state.data.FLAGS !== '4') {
+        if (this.state.data.message.coin === 'GNO') {
             this.setState({
-                GNO: this.state.data
+                GNO: this.state.data.message.msg
             })
         }
     }
 
     updateGNT() {
-        if (this.state.data.FROMSYMBOL === 'GNT' && this.state.data.FLAGS !== '4') {
+        if (this.state.data.message.coin === 'GNT') {
             this.setState({
-                GNT: this.state.data
+                GNT: this.state.data.message.msg
             })
         }
     }
 
     updateGRC() {
-        if (this.state.data.FROMSYMBOL === 'GRC' && this.state.data.FLAGS !== '4') {
+        if (this.state.data.message.coin === 'GRC') {
             this.setState({
-                GRC: this.state.data
+                GRC: this.state.data.message.msg
             })
         }
     }
 
     updateHUC() {
-        if (this.state.data.FROMSYMBOL === 'HUC' && this.state.data.FLAGS !== '4') {
+        if (this.state.data.message.coin === 'HUC') {
             this.setState({
-                HUC: this.state.data
+                HUC: this.state.data.message.msg
             })
         }
     }
 
     updateLBC() {
-        if (this.state.data.FROMSYMBOL === 'LBC' && this.state.data.FLAGS !== '4') {
+        if (this.state.data.message.coin === 'LBC') {
             this.setState({
-                LBC: this.state.data
+                LBC: this.state.data.message.msg
             })
         }
     }
 
     updateLSK() {
-        if (this.state.data.FROMSYMBOL === 'LSK' && this.state.data.FLAGS !== '4') {
+        if (this.state.data.message.coin === 'LSK') {
             this.setState({
-                LSK: this.state.data
+                LSK: this.state.data.message.msg
             })
         }
     }
 
     updateLTC() {
-        if (this.state.data.FROMSYMBOL === 'LTC' && this.state.data.FLAGS !== '4') {
+        if (this.state.data.message.coin === 'LTC') {
             this.setState({
-                LTC: this.state.data
+                LTC: this.state.data.message.msg
             })
         }
     }
 
     updateMAID() {
-        if (this.state.data.FROMSYMBOL === 'MAID' && this.state.data.FLAGS !== '4') {
+        if (this.state.data.message.coin === 'MAID') {
             this.setState({
-                MAID: this.state.data
+                MAID: this.state.data.message.msg
             })
         }
     }
 
     updateNAUT() {
-        if (this.state.data.FROMSYMBOL === 'NAUT' && this.state.data.FLAGS !== '4') {
+        if (this.state.data.message.coin === 'NAUT') {
             this.setState({
-                NAUT: this.state.data
-            })
-        }
-    }
-
-    updateNAV() {
-        if (this.state.data.FROMSYMBOL === 'NAV' && this.state.data.FLAGS !== '4') {
-            this.setState({
-                NAV: this.state.data
+                NAUT: this.state.data.message.msg
             })
         }
     }
 
     updateNEOS() {
-        if (this.state.data.FROMSYMBOL === 'NEOS' && this.state.data.FLAGS !== '4') {
+        if (this.state.data.message.coin === 'NEOS') {
             this.setState({
-                NEOS: this.state.data
+                NEOS: this.state.data.message.msg
             })
         }
     }
 
     updateNMC() {
-        if (this.state.data.FROMSYMBOL === 'NMC' && this.state.data.FLAGS !== '4') {
+        if (this.state.data.message.coin === 'NMC') {
             this.setState({
-                NMC: this.state.data
+                NMC: this.state.data.message.msg
             })
         }
     }
 
     updateNOTE() {
-        if (this.state.data.FROMSYMBOL === 'NOTE' && this.state.data.FLAGS !== '4') {
+        if (this.state.data.message.coin === 'NOTE') {
             this.setState({
-                NOTE: this.state.data
+                NOTE: this.state.data.message.msg
             })
         }
     }
 
     updateNXC() {
-        if (this.state.data.FROMSYMBOL === 'NXC' && this.state.data.FLAGS !== '4') {
+        if (this.state.data.message.coin === 'NXC') {
             this.setState({
-                NXC: this.state.data
+                NXC: this.state.data.message.msg
             })
         }
     }
 
     updateNXT() {
-        if (this.state.data.FROMSYMBOL === 'NXT' && this.state.data.FLAGS !== '4') {
+        if (this.state.data.message.coin === 'NXT') {
             this.setState({
-                NXT: this.state.data
+                NXT: this.state.data.message.msg
             })
         }
     }
 
     updateOMNI() {
-        if (this.state.data.FROMSYMBOL === 'OMNI' && this.state.data.FLAGS !== '4') {
+        if (this.state.data.message.coin === 'OMNI') {
             this.setState({
-                OMNI: this.state.data
+                OMNI: this.state.data.message.msg
             })
         }
     }
 
     updatePASC() {
-        if (this.state.data.FROMSYMBOL === 'PASC' && this.state.data.FLAGS !== '4') {
+        if (this.state.data.message.coin === 'PASC') {
             this.setState({
-                PASC: this.state.data
+                PASC: this.state.data.message.msg
             })
         }
     }
 
     updatePINK() {
-        if (this.state.data.FROMSYMBOL === 'PINK' && this.state.data.FLAGS !== '4') {
+        if (this.state.data.message.coin === 'PINK') {
             this.setState({
-                PINK: this.state.data
+                PINK: this.state.data.message.msg
             })
         }
     }
 
     updatePOT() {
-        if (this.state.data.FROMSYMBOL === 'POT' && this.state.data.FLAGS !== '4') {
+        if (this.state.data.message.coin === 'POT') {
             this.setState({
-                POT: this.state.data
+                POT: this.state.data.message.msg
             })
         }
     }
 
     updatePPC() {
-        if (this.state.data.FROMSYMBOL === 'PPC' && this.state.data.FLAGS !== '4') {
+        if (this.state.data.message.coin === 'PPC') {
             this.setState({
-                PPC: this.state.data
+                PPC: this.state.data.message.msg
             })
         }
     }
 
     updateRADS() {
-        if (this.state.data.FROMSYMBOL === 'RADS' && this.state.data.FLAGS !== '4') {
+        if (this.state.data.message.coin === 'RADS') {
             this.setState({
-                RADS: this.state.data
+                RADS: this.state.data.message.msg
             })
         }
     }
 
     updateREP() {
-        if (this.state.data.FROMSYMBOL === 'REP' && this.state.data.FLAGS !== '4') {
+        if (this.state.data.message.coin === 'REP') {
             this.setState({
-                REP: this.state.data
+                REP: this.state.data.message.msg
             })
         }
     }
 
     updateRIC() {
-        if (this.state.data.FROMSYMBOL === 'RIC' && this.state.data.FLAGS !== '4') {
+        if (this.state.data.message.coin === 'RIC') {
             this.setState({
-                RIC: this.state.data
+                RIC: this.state.data.message.msg
             })
         }
     }
 
     updateSBD() {
-        if (this.state.data.FROMSYMBOL === 'SBD' && this.state.data.FLAGS !== '4') {
+        if (this.state.data.message.coin === 'SBD') {
             this.setState({
-                SBD: this.state.data
+                SBD: this.state.data.message.msg
             })
         }
     }
 
     updateSTEEM() {
-        if (this.state.data.FROMSYMBOL === 'STEEM' && this.state.data.FLAGS !== '4') {
+        if (this.state.data.message.coin === 'STEEM') {
             this.setState({
-                STEEM: this.state.data
+                STEEM: this.state.data.message.msg
             })
         }
     }
 
     updateSC() {
-        if (this.state.data.FROMSYMBOL === 'SC' && this.state.data.FLAGS !== '4') {
+        if (this.state.data.message.coin === 'SC') {
             this.setState({
-                SC: this.state.data
+                SC: this.state.data.message.msg
             })
         }
     }
 
     updateSJCX() {
-        if (this.state.data.FROMSYMBOL === 'SJCX' && this.state.data.FLAGS !== '4') {
+        if (this.state.data.message.coin === 'SJCX') {
             this.setState({
-                SJCX: this.state.data
+                SJCX: this.state.data.message.msg
             })
         }
     }
 
     updateXLM() {
-        if (this.state.data.FROMSYMBOL === 'XLM' && this.state.data.FLAGS !== '4') {
+        if (this.state.data.message.coin === 'XLM') {
             this.setState({
-                XLM: this.state.data
+                XLM: this.state.data.message.msg
             })
         }
     }
 
     updateSTRAT() {
-        if (this.state.data.FROMSYMBOL === 'STRAT' && this.state.data.FLAGS !== '4') {
+        if (this.state.data.message.coin === 'STRAT') {
             this.setState({
-                STRAT: this.state.data
+                STRAT: this.state.data.message.msg
             })
         }
     }
 
     updateSYS() {
-        if (this.state.data.FROMSYMBOL === 'SYS' && this.state.data.FLAGS !== '4') {
+        if (this.state.data.message.coin === 'SYS') {
             this.setState({
-                SYS: this.state.data
+                SYS: this.state.data.message.msg
             })
         }
     }
-
     updateVIA() {
-        if (this.state.data.FROMSYMBOL === 'VIA' && this.state.data.FLAGS !== '4') {
+        if (this.state.data.message.coin === 'VIA') {
             this.setState({
-                VIA: this.state.data
+                VIA: this.state.data.message.msg
             })
         }
     }
 
     updateVRC() {
-        if (this.state.data.FROMSYMBOL === 'VRC' && this.state.data.FLAGS !== '4') {
+        if (this.state.data.message.coin === 'VRC') {
             this.setState({
-                VRC: this.state.data
+                VRC: this.state.data.message.msg
             })
         }
     }
 
     updateVTC() {
-        if (this.state.data.FROMSYMBOL === 'VTC' && this.state.data.FLAGS !== '4') {
+        if (this.state.data.message.coin === 'VTC') {
             this.setState({
-                VTC: this.state.data
+                VTC: this.state.data.message.msg
             })
         }
     }
 
     updateXBC() {
-        if (this.state.data.FROMSYMBOL === 'XBC' && this.state.data.FLAGS !== '4') {
+        if (this.state.data.message.coin === 'XBC') {
             this.setState({
-                XBC: this.state.data
+                XBC: this.state.data.message.msg
             })
         }
     }
-
     updateXCP() {
-        if (this.state.data.FROMSYMBOL === 'XCP' && this.state.data.FLAGS !== '4') {
+        if (this.state.data.message.coin === 'XCP') {
             this.setState({
-                XCP: this.state.data
+                XCP: this.state.data.message.msg
             })
         }
     }
-
     updateXEM() {
-        if (this.state.data.FROMSYMBOL === 'XEM' && this.state.data.FLAGS !== '4') {
+        if (this.state.data.message.coin === 'XEM') {
             this.setState({
-                XEM: this.state.data
+                XEM: this.state.data.message.msg
             })
         }
     }
 
     updateXPM() {
-        if (this.state.data.FROMSYMBOL === 'XPM' && this.state.data.FLAGS !== '4') {
+        if (this.state.data.message.coin === 'XPM') {
             this.setState({
-                XPM: this.state.data
+                XPM: this.state.data.message.msg
             })
         }
     }
 
     updateXRP() {
-        if (this.state.data.FROMSYMBOL === 'XRP' && this.state.data.FLAGS !== '4') {
+        if (this.state.data.message.coin === 'XRP') {
             this.setState({
-                XRP: this.state.data
+                XRP: this.state.data.message.msg
             })
         }
     }
 
     updateXVC() {
-        if (this.state.data.FROMSYMBOL === 'XVC' && this.state.data.FLAGS !== '4') {
+        if (this.state.data.message.coin === 'XVC') {
             this.setState({
-                XVC: this.state.data
+                XVC: this.state.data.message.msg
             })
         }
     }
 
     updateZEC() {
-        if (this.state.data.FROMSYMBOL === 'ZEC' && this.state.data.FLAGS !== '4') {
+        if (this.state.data.message.coin === 'ZEC') {
             this.setState({
-                ZEC: this.state.data
+                ZEC: this.state.data.message.msg
             })
         }
     }
 
+
     render() {
-        // console.log(this.state.XMR);
+        console.log(this.state.data.message.coin);
         return (
             <div className="ticker-container">
             <Table  width="100%" height="100%" id="table"
                     noDataText="Loading"
                     sortable={true}
                     defaultSort={{column: 'Coin', direction: 'asc'}}>
-                <Tr  className={this.state.XMR.FLAGS} onClick={() => console.log('Clicked XMR!')} data={{ Coin: 'XMR', Price: this.state.XMR.PRICE }} />
-                <Tr data={{ Coin: 'DOGE', Price: this.state.DOGE.PRICE }} />
-                <Tr data={{ Coin: 'AMP', Price: this.state.AMP.PRICE }} />
-                <Tr data={{ Coin: 'ARDR', Price: this.state.ARDR.PRICE }} />
-                <Tr data={{ Coin: 'BCN', Price: this.state.BCN.PRICE }} />
-                <Tr data={{ Coin: 'BCY', Price: this.state.BCY.PRICE }} />
-                <Tr data={{ Coin: 'BELA', Price: this.state.BELA.PRICE }} />
-                <Tr data={{ Coin: 'BLK', Price: this.state.BLK.PRICE }} />
-                <Tr data={{ Coin: 'BTM', Price: this.state.BTM.PRICE }} />
-                <Tr data={{ Coin: 'BTS', Price: this.state.BTS.PRICE }} />
-                <Tr data={{ Coin: 'BURST', Price: this.state.BURST.PRICE }} />
-                <Tr data={{ Coin: 'CLAM', Price: this.state.CLAM.PRICE }} />
-                <Tr data={{ Coin: 'DASH', Price: this.state.DASH.PRICE }} />
-                <Tr data={{ Coin: 'DCR', Price: this.state.DCR.PRICE }} />
-                <Tr data={{ Coin: 'DGB', Price: this.state.DGB.PRICE }} />
-                <Tr data={{ Coin: 'EMC2', Price: this.state.EMC2.PRICE }} />
-                <Tr data={{ Coin: 'ETC', Price: this.state.ETC.PRICE }} />
-                <Tr data={{ Coin: 'ETH', Price: this.state.ETH.PRICE }} />
-                <Tr data={{ Coin: 'EXP', Price: this.state.EXP.PRICE }} />
-                <Tr data={{ Coin: 'FCT', Price: this.state.FCT.PRICE }} />
-                <Tr data={{ Coin: 'FLDC', Price: this.state.FLDC.PRICE }} />
-                <Tr data={{ Coin: 'FLO', Price: this.state.FLO.PRICE }} />
-                <Tr data={{ Coin: 'GAME', Price: this.state.GAME.PRICE }} />
-                <Tr data={{ Coin: 'GNO', Price: this.state.GNO.PRICE }} />
-                <Tr data={{ Coin: 'GNT', Price: this.state.GNT.PRICE }} />
-                <Tr data={{ Coin: 'GRC', Price: this.state.GRC.PRICE }} />
-                <Tr data={{ Coin: 'HUC', Price: this.state.HUC.PRICE }} />
-                <Tr data={{ Coin: 'LBC', Price: this.state.LBC.PRICE }} />
-                <Tr data={{ Coin: 'LSK', Price: this.state.LSK.PRICE }} />
-                <Tr data={{ Coin: 'LTC', Price: this.state.LTC.PRICE }} />
-                <Tr data={{ Coin: 'MAID', Price: this.state.MAID.PRICE }} />
-                <Tr data={{ Coin: 'NAUT', Price: this.state.NAUT.PRICE }} />
-                <Tr data={{ Coin: 'NAV', Price: this.state.NAV.PRICE }} />
-                <Tr data={{ Coin: 'NEOS', Price: this.state.NEOS.PRICE }} />
-                <Tr data={{ Coin: 'NMC', Price: this.state.NMC.PRICE }} />
-                <Tr data={{ Coin: 'NOTE', Price: this.state.NOTE.PRICE }} />
-                <Tr data={{ Coin: 'NXC', Price: this.state.NXC.PRICE }} />
-                <Tr data={{ Coin: 'NXT', Price: this.state.NXT.PRICE }} />
-                <Tr data={{ Coin: 'OMNI', Price: this.state.OMNI.PRICE }} />
-                <Tr data={{ Coin: 'PASC', Price: this.state.PASC.PRICE }} />
-                <Tr data={{ Coin: 'PINK', Price: this.state.PINK.PRICE }} />
-                <Tr data={{ Coin: 'POT', Price: this.state.POT.PRICE }} />
-                <Tr data={{ Coin: 'PPC', Price: this.state.PPC.PRICE }} />
-                <Tr data={{ Coin: 'RADS', Price: this.state.RADS.PRICE }} />
-                <Tr data={{ Coin: 'REP', Price: this.state.REP.PRICE }} />
-                <Tr data={{ Coin: 'RIC', Price: this.state.RIC.PRICE }} />
-                <Tr data={{ Coin: 'SBD', Price: this.state.SBD.PRICE }} />
-                <Tr data={{ Coin: 'SC', Price: this.state.SC.PRICE }} />
-                <Tr data={{ Coin: 'SJCX', Price: this.state.SJCX.PRICE }} />
-                <Tr data={{ Coin: 'STEEM', Price: this.state.STEEM.PRICE }} />
-                <Tr data={{ Coin: 'XLM', Price: this.state.XLM.PRICE }} />
-                <Tr data={{ Coin: 'STRAT', Price: this.state.STRAT.PRICE }} />
-                <Tr data={{ Coin: 'SYS', Price: this.state.SYS.PRICE }} />
-                <Tr data={{ Coin: 'VIA', Price: this.state.VIA.PRICE }} />
-                <Tr data={{ Coin: 'VRC', Price: this.state.VRC.PRICE }} />
-                <Tr data={{ Coin: 'VTC', Price: this.state.VTC.PRICE }} />
-                <Tr data={{ Coin: 'XBC', Price: this.state.XBC.PRICE }} />
-                <Tr data={{ Coin: 'XCP', Price: this.state.XCP.PRICE }} />
-                <Tr data={{ Coin: 'XEM', Price: this.state.XEM.PRICE }} />
-                <Tr data={{ Coin: 'XPM', Price: this.state.XPM.PRICE }} />
-                <Tr data={{ Coin: 'XRP', Price: this.state.XRP.PRICE }} />
-                <Tr data={{ Coin: 'XVC', Price: this.state.XVC.PRICE }} />
-                <Tr data={{ Coin: 'ZEC', Price: this.state.ZEC.PRICE }} />
+                <Tr data={{
+                    Coin: 'XMR',
+                    Price: this.state.XMR.price,
+                    Volume: this.state.XMR.volume,
+                    Change: this.state.XMR.cap24hrChange,
+                    Name: this.state.XMR.long
+                }} />
+                <Tr data={{
+                    Coin: 'AMP',
+                    Price: this.state.AMP.price,
+                    Volume: this.state.AMP.volume,
+                    Change: this.state.AMP.cap24hrChange,
+                    Name: this.state.AMP.long
+                }} /><Tr data={{
+                Coin: 'ARDR',
+                Price: this.state.ARDR.price,
+                Volume: this.state.ARDR.volume,
+                Change: this.state.ARDR.cap24hrChange,
+                Name: this.state.ARDR.long
+            }} /><Tr data={{
+                Coin: 'BCN',
+                Price: this.state.BCN.price,
+                Volume: this.state.BCN.volume,
+                Change: this.state.BCN.cap24hrChange,
+                Name: this.state.BCN.long
+            }} /><Tr data={{
+                Coin: 'BCY',
+                Price: this.state.BCY.price,
+                Volume: this.state.BCY.volume,
+                Change: this.state.BCY.cap24hrChange,
+                Name: this.state.BCY.long
+            }} /><Tr data={{
+                Coin: 'BELA',
+                Price: this.state.BELA.price,
+                Volume: this.state.BELA.volume,
+                Change: this.state.BELA.cap24hrChange,
+                Name: this.state.BELA.long
+            }} /><Tr data={{
+                Coin: 'BLK',
+                Price: this.state.BLK.price,
+                Volume: this.state.BLK.volume,
+                Change: this.state.BLK.cap24hrChange,
+                Name: this.state.BLK.long
+            }} /><Tr data={{
+                Coin: 'BTM',
+                Price: this.state.BTM.price,
+                Volume: this.state.BTM.volume,
+                Change: this.state.BTM.cap24hrChange,
+                Name: this.state.BTM.long
+            }} /><Tr data={{
+                Coin: 'BTS',
+                Price: this.state.BTS.price,
+                Volume: this.state.BTS.volume,
+                Change: this.state.BTS.cap24hrChange,
+                Name: this.state.BTS.long
+            }} /><Tr data={{
+                Coin: 'BURST',
+                Price: this.state.BURST.price,
+                Volume: this.state.BURST.volume,
+                Change: this.state.BURST.cap24hrChange,
+                Name: this.state.BURST.long
+            }} /><Tr data={{
+                Coin: 'CLAM',
+                Price: this.state.CLAM.price,
+                Volume: this.state.CLAM.volume,
+                Change: this.state.CLAM.cap24hrChange,
+                Name: this.state.CLAM.long
+            }} /><Tr data={{
+                Coin: 'DASH',
+                Price: this.state.DASH.price,
+                Volume: this.state.DASH.volume,
+                Change: this.state.DASH.cap24hrChange,
+                Name: this.state.DASH.long
+            }} /><Tr data={{
+                Coin: 'DCR',
+                Price: this.state.DCR.price,
+                Volume: this.state.DCR.volume,
+                Change: this.state.DCR.cap24hrChange,
+                Name: this.state.DCR.long
+            }} /><Tr data={{
+                Coin: 'DGB',
+                Price: this.state.DGB.price,
+                Volume: this.state.DGB.volume,
+                Change: this.state.DGB.cap24hrChange,
+                Name: this.state.DGB.long
+            }} /><Tr data={{
+                Coin: 'DOGE',
+                Price: this.state.DOGE.price,
+                Volume: this.state.DOGE.volume,
+                Change: this.state.DOGE.cap24hrChange,
+                Name: this.state.DOGE.long
+            }} /><Tr data={{
+                Coin: 'EMC2',
+                Price: this.state.EMC2.price,
+                Volume: this.state.EMC2.volume,
+                Change: this.state.EMC2.cap24hrChange,
+                Name: this.state.EMC2.long
+            }} /><Tr data={{
+                Coin: 'ETC',
+                Price: this.state.ETC.price,
+                Volume: this.state.ETC.volume,
+                Change: this.state.ETC.cap24hrChange,
+                Name: this.state.ETC.long
+            }} /><Tr data={{
+                Coin: 'ETH',
+                Price: this.state.ETH.price,
+                Volume: this.state.ETH.volume,
+                Change: this.state.ETH.cap24hrChange,
+                Name: this.state.ETH.long
+            }} /><Tr data={{
+                Coin: 'EXP',
+                Price: this.state.EXP.price,
+                Volume: this.state.EXP.volume,
+                Change: this.state.EXP.cap24hrChange,
+                Name: this.state.EXP.long
+            }} /><Tr data={{
+                Coin: 'FCT',
+                Price: this.state.FCT.price,
+                Volume: this.state.FCT.volume,
+                Change: this.state.FCT.cap24hrChange,
+                Name: this.state.FCT.long
+            }} /><Tr data={{
+                Coin: 'FLDC',
+                Price: this.state.FLDC.price,
+                Volume: this.state.FLDC.volume,
+                Change: this.state.FLDC.cap24hrChange,
+                Name: this.state.FLDC.long
+            }} /><Tr data={{
+                Coin: 'FLO',
+                Price: this.state.FLO.price,
+                Volume: this.state.FLO.volume,
+                Change: this.state.FLO.cap24hrChange,
+                Name: this.state.FLO.long
+            }} /><Tr data={{
+                Coin: 'GAME',
+                Price: this.state.GAME.price,
+                Volume: this.state.GAME.volume,
+                Change: this.state.GAME.cap24hrChange,
+                Name: this.state.GAME.long
+            }} /><Tr data={{
+                Coin: 'GNO',
+                Price: this.state.GNO.price,
+                Volume: this.state.GNO.volume,
+                Change: this.state.GNO.cap24hrChange,
+                Name: this.state.GNO.long
+            }} /><Tr data={{
+                Coin: 'GNT',
+                Price: this.state.GNT.price,
+                Volume: this.state.GNT.volume,
+                Change: this.state.GNT.cap24hrChange,
+                Name: this.state.GNT.long
+            }} /><Tr data={{
+                Coin: 'GRC',
+                Price: this.state.GRC.price,
+                Volume: this.state.GRC.volume,
+                Change: this.state.GRC.cap24hrChange,
+                Name: this.state.GRC.long
+            }} /><Tr data={{
+                Coin: 'HUC',
+                Price: this.state.HUC.price,
+                Volume: this.state.HUC.volume,
+                Change: this.state.HUC.cap24hrChange,
+                Name: this.state.HUC.long
+            }} /><Tr data={{
+                Coin: 'LBC',
+                Price: this.state.LBC.price,
+                Volume: this.state.LBC.volume,
+                Change: this.state.LBC.cap24hrChange,
+                Name: this.state.LBC.long
+            }} /><Tr data={{
+                Coin: 'LSK',
+                Price: this.state.LSK.price,
+                Volume: this.state.LSK.volume,
+                Change: this.state.LSK.cap24hrChange,
+                Name: this.state.LSK.long
+            }} /><Tr data={{
+                Coin: 'LTC',
+                Price: this.state.LTC.price,
+                Volume: this.state.LTC.volume,
+                Change: this.state.LTC.cap24hrChange,
+                Name: this.state.LTC.long
+            }} /><Tr data={{
+                Coin: 'MAID',
+                Price: this.state.MAID.price,
+                Volume: this.state.MAID.volume,
+                Change: this.state.MAID.cap24hrChange,
+                Name: this.state.MAID.long
+            }} /><Tr data={{
+                Coin: 'NAUT',
+                Price: this.state.NAUT.price,
+                Volume: this.state.NAUT.volume,
+                Change: this.state.NAUT.cap24hrChange,
+                Name: this.state.NAUT.long
+            }} /><Tr data={{
+                Coin: 'NEOS',
+                Price: this.state.NEOS.price,
+                Volume: this.state.NEOS.volume,
+                Change: this.state.NEOS.cap24hrChange,
+                Name: this.state.NEOS.long
+            }} /><Tr data={{
+                Coin: 'NMC',
+                Price: this.state.NMC.price,
+                Volume: this.state.NMC.volume,
+                Change: this.state.NMC.cap24hrChange,
+                Name: this.state.NMC.long
+            }} /><Tr data={{
+                Coin: 'NOTE',
+                Price: this.state.NOTE.price,
+                Volume: this.state.NOTE.volume,
+                Change: this.state.NOTE.cap24hrChange,
+                Name: this.state.NOTE.long
+            }} /><Tr data={{
+                Coin: 'NXC',
+                Price: this.state.NXC.price,
+                Volume: this.state.NXC.volume,
+                Change: this.state.NXC.cap24hrChange,
+                Name: this.state.NXC.long
+            }} /><Tr data={{
+                Coin: 'NXT',
+                Price: this.state.NXT.price,
+                Volume: this.state.NXT.volume,
+                Change: this.state.NXT.cap24hrChange,
+                Name: this.state.NXT.long
+            }} /><Tr data={{
+                Coin: 'OMNI',
+                Price: this.state.OMNI.price,
+                Volume: this.state.OMNI.volume,
+                Change: this.state.OMNI.cap24hrChange,
+                Name: this.state.OMNI.long
+            }} /><Tr data={{
+                Coin: 'PASC',
+                Price: this.state.PASC.price,
+                Volume: this.state.PASC.volume,
+                Change: this.state.PASC.cap24hrChange,
+                Name: this.state.PASC.long
+            }} /><Tr data={{
+                Coin: 'PINK',
+                Price: this.state.PINK.price,
+                Volume: this.state.PINK.volume,
+                Change: this.state.PINK.cap24hrChange,
+                Name: this.state.PINK.long
+            }} /><Tr data={{
+                Coin: 'POT',
+                Price: this.state.POT.price,
+                Volume: this.state.POT.volume,
+                Change: this.state.POT.cap24hrChange,
+                Name: this.state.POT.long
+            }} /><Tr data={{
+                Coin: 'PPC',
+                Price: this.state.PPC.price,
+                Volume: this.state.PPC.volume,
+                Change: this.state.PPC.cap24hrChange,
+                Name: this.state.PPC.long
+            }} /><Tr data={{
+                Coin: 'RADS',
+                Price: this.state.RADS.price,
+                Volume: this.state.RADS.volume,
+                Change: this.state.RADS.cap24hrChange,
+                Name: this.state.RADS.long
+            }} /><Tr data={{
+                Coin: 'REP',
+                Price: this.state.REP.price,
+                Volume: this.state.REP.volume,
+                Change: this.state.REP.cap24hrChange,
+                Name: this.state.REP.long
+            }} /><Tr data={{
+                Coin: 'RIC',
+                Price: this.state.RIC.price,
+                Volume: this.state.RIC.volume,
+                Change: this.state.RIC.cap24hrChange,
+                Name: this.state.RIC.long
+            }} /><Tr data={{
+                Coin: 'SBD',
+                Price: this.state.SBD.price,
+                Volume: this.state.SBD.volume,
+                Change: this.state.SBD.cap24hrChange,
+                Name: this.state.SBD.long
+            }} /><Tr data={{
+                Coin: 'SC',
+                Price: this.state.SC.price,
+                Volume: this.state.SC.volume,
+                Change: this.state.SC.cap24hrChange,
+                Name: this.state.SC.long
+            }} /><Tr data={{
+                Coin: 'SJCX',
+                Price: this.state.SJCX.price,
+                Volume: this.state.SJCX.volume,
+                Change: this.state.SJCX.cap24hrChange,
+                Name: this.state.SJCX.long
+            }} /><Tr data={{
+                Coin: 'STEEM',
+                Price: this.state.STEEM.price,
+                Volume: this.state.STEEM.volume,
+                Change: this.state.STEEM.cap24hrChange,
+                Name: this.state.STEEM.long
+            }} /><Tr data={{
+                Coin: 'XLM',
+                Price: this.state.XLM.price,
+                Volume: this.state.XLM.volume,
+                Change: this.state.XLM.cap24hrChange,
+                Name: this.state.XLM.long
+            }} /><Tr data={{
+                Coin: 'STRAT',
+                Price: this.state.STRAT.price,
+                Volume: this.state.STRAT.volume,
+                Change: this.state.STRAT.cap24hrChange,
+                Name: this.state.STRAT.long
+            }} /><Tr data={{
+                Coin: 'SYS',
+                Price: this.state.SYS.price,
+                Volume: this.state.SYS.volume,
+                Change: this.state.SYS.cap24hrChange,
+                Name: this.state.SYS.long
+            }} /><Tr data={{
+                Coin: 'VIA',
+                Price: this.state.VIA.price,
+                Volume: this.state.VIA.volume,
+                Change: this.state.VIA.cap24hrChange,
+                Name: this.state.VIA.long
+            }} /><Tr data={{
+                Coin: 'VRC',
+                Price: this.state.VRC.price,
+                Volume: this.state.VRC.volume,
+                Change: this.state.VRC.cap24hrChange,
+                Name: this.state.VRC.long
+            }} /><Tr data={{
+                Coin: 'VTC',
+                Price: this.state.VTC.price,
+                Volume: this.state.VTC.volume,
+                Change: this.state.VTC.cap24hrChange,
+                Name: this.state.VTC.long
+            }} /><Tr data={{
+                Coin: 'XBC',
+                Price: this.state.XBC.price,
+                Volume: this.state.XBC.volume,
+                Change: this.state.XBC.cap24hrChange,
+                Name: this.state.XBC.long
+            }} /><Tr data={{
+                Coin: 'XCP',
+                Price: this.state.XCP.price,
+                Volume: this.state.XCP.volume,
+                Change: this.state.XCP.cap24hrChange,
+                Name: this.state.XCP.long
+            }} /><Tr data={{
+                Coin: 'XEM',
+                Price: this.state.XEM.price,
+                Volume: this.state.XEM.volume,
+                Change: this.state.XEM.cap24hrChange,
+                Name: this.state.XEM.long
+            }} /><Tr data={{
+                Coin: 'XPM',
+                Price: this.state.XPM.price,
+                Volume: this.state.XPM.volume,
+                Change: this.state.XPM.cap24hrChange,
+                Name: this.state.XPM.long
+            }} /><Tr data={{
+                Coin: 'XVC',
+                Price: this.state.XVC.price,
+                Volume: this.state.XVC.volume,
+                Change: this.state.XVC.cap24hrChange,
+                Name: this.state.XVC.long
+            }} /><Tr data={{
+                Coin: 'XRP',
+                Price: this.state.XRP.price,
+                Volume: this.state.XRP.volume,
+                Change: this.state.XRP.cap24hrChange,
+                Name: this.state.XRP.long
+            }} /><Tr data={{
+                Coin: 'ZEC',
+                Price: this.state.ZEC.price,
+                Volume: this.state.ZEC.volume,
+                Change: this.state.ZEC.cap24hrChange,
+                Name: this.state.ZEC.long
+            }} />
             </Table>
             </div>
 
@@ -888,485 +1306,6 @@ export default class Ticker extends Component {
         //         {/*</table>*/}
         //     {/*</div>*/}
         )
-// }
+
     };
 }
-
-// utilities config //
-var CCC = CCC || {};
-
-CCC.STATIC=CCC.STATIC || {};
-
-CCC.STATIC.TYPE={
-    'TRADE'                  : '0'
-    , 'FEEDNEWS'               : '1'
-    , 'CURRENT'                : '2'
-    , 'LOADCOMPLATE'           : '3'
-    , 'COINPAIRS'              : '4'
-    , 'CURRENTAGG'             : '5'
-    , 'TOPLIST'                : '6'
-    , 'TOPLISTCHANGE'          : '7'
-    , 'ORDERBOOK'              : '8'
-    , 'FULLORDERBOOK'          : '9'
-    , 'ACTIVATION'             : '10'
-
-    , 'TRADECATCHUP'           : '100'
-    , 'NEWSCATCHUP'            : '101'
-
-    , 'TRADECATCHUPCOMPLETE'   : '300'
-    , 'NEWSCATCHUPCOMPLETE'    : '301'
-
-};
-
-CCC.STATIC.CURRENCY = CCC.STATIC.CURRENCY || {};
-
-CCC.STATIC.CURRENCY.SYMBOL = {
-    'BTC'  : 'Ƀ'
-    , 'LTC'  : 'Ł'
-    , 'DAO'  : 'Ð'
-    , 'USD'  : '$'
-    , 'CNY'  : '¥'
-    , 'EUR'  : '€'
-    , 'GBP'  : '£'
-    , 'JPY'  : '¥'
-    , 'PLN'  : 'zł'
-    , 'RUB'  : '₽'
-    , 'ETH'  : 'Ξ'
-    , 'GOLD' : 'Gold g'
-    , 'INR'  : '₹'
-    , 'BRL'  : 'R$'
-};
-
-CCC.STATIC.CURRENCY.getSymbol = function(symbol){
-    return CCC.STATIC.CURRENCY.SYMBOL[symbol] || symbol;
-};
-
-CCC.STATIC.UTIL = {
-    exchangeNameMapping : {
-        'CCCAGG':'CryptoCompare Index',
-        'BTCChina':'BTCC'
-    },
-    isMobile: function(userAgent){
-        if(/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|ipad|iris|kindle|Android|Silk|lge |maemo|midp|mmp|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows (ce|phone)|xda|xiino/i.test(userAgent)
-            || /1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(userAgent.substr(0,4)))
-            return true;
-        return false;
-    },
-    convertToMB : function(bytes){
-        return (parseInt(bytes,10)/1024/1024).toFixed(2)+' MB';
-    },
-    getNameForExchange : function(exchangeName){
-        if(this.exchangeNameMapping.hasOwnProperty(exchangeName)){
-            return this.exchangeNameMapping[exchangeName];
-        }
-        return exchangeName;
-    },
-    noExponents : function(value){
-        var data= String(value).split(/[eE]/);
-        if(data.length== 1) return data[0];
-
-        var  z= '', sign= value<0? '-':'',
-            str= data[0].replace('.', ''),
-            mag= Number(data[1])+ 1;
-
-        if(mag<0){
-            z= sign + '0.';
-            while(mag++) z += '0';
-            return z + str.replace(/^\-/,'');
-        }
-        mag -= str.length;
-        while(mag--) z += '0';
-        return str + z;
-    },
-    reduceFloatVal : function(value){
-        value = parseFloat(value);
-        if(value>1){
-            value = Math.round(value * 100) / 100;
-            return value;
-        }
-        if(value>=0.00001000){
-            return parseFloat(value.toPrecision(4));
-        }
-        if(value>=0.00000100){
-            return parseFloat(value.toPrecision(3));
-        }
-        if(value>=0.00000010){
-            return parseFloat(value.toPrecision(2));
-        }
-        return parseFloat(value.toPrecision(1));
-    },
-    reduceReal : function(value){
-        value = parseFloat(value);
-        return parseFloat(value.toFixed(8));
-    },
-    convertCurrentKeyToAll : function(key){
-        var valuesArray = key.split("~");
-        valuesArray[0]=CCC.STATIC.TYPE.CURRENTAGG;
-        valuesArray[1]='CCCAGG';
-        return valuesArray.join('~');
-    },
-    convertCurrentKeyToTrade : function(key){
-        var valuesArray = key.split("~");
-        valuesArray[0]=CCC.STATIC.TYPE.TRADE;
-        return valuesArray.join('~');
-    },
-    convertValueToDisplay: function(symbol,value,filterNumberFunctionAngularJS,type,fullNumbers){
-        var prefix = '';
-        var valueSign=1;
-        value = parseFloat(value);
-        var valueAbs=Math.abs(value);
-        var decimalsOnBigNumbers = 2;
-        var decimalsOnNormalNumbers = 2;
-        var decimalsOnSmallNumbers = 4;
-        if(fullNumbers===true){
-            decimalsOnBigNumbers =2;
-            decimalsOnNormalNumbers = 0;
-            decimalsOnSmallNumbers= 4;
-        }
-        if(type=="8decimals"){
-            decimalsOnBigNumbers =4;
-            decimalsOnNormalNumbers = 8;
-            decimalsOnSmallNumbers= 8;
-            if(value<0.0001 && value>=0.00001){decimalsOnSmallNumbers=4;}
-            if(value<0.001 && value>=0.0001){decimalsOnSmallNumbers=5;}
-            if(value<0.01 && value>=0.001){decimalsOnSmallNumbers=6;}
-            if(value<0.1 && value>=0.01){decimalsOnSmallNumbers=7;}
-        }
-        if(symbol!=''){prefix = symbol+' ';}
-        if(value<0){valueSign = -1;}
-        if(value==0){return prefix+'0';}
-
-        if(value<0.00001000 && value>=0.00000100 && decimalsOnSmallNumbers>3){
-            decimalsOnSmallNumbers=3;
-        }
-        if(value<0.00000100 && value>=0.00000010 && decimalsOnSmallNumbers>2){
-            decimalsOnSmallNumbers=2;
-        }
-        if(value<0.00000010 && decimalsOnSmallNumbers>1){
-            decimalsOnSmallNumbers=1;
-        }
-
-        if(type=="short"||type=="8decimals"){
-            if(valueAbs>10000000000){
-                valueAbs=valueAbs/1000000000;
-                return prefix+filterNumberFunctionAngularJS(valueSign*valueAbs,decimalsOnBigNumbers)+' B';
-            }
-            if(valueAbs>10000000){
-                valueAbs=valueAbs/1000000;
-                return prefix+filterNumberFunctionAngularJS(valueSign*valueAbs,decimalsOnBigNumbers)+' M';
-            }
-            if(valueAbs>10000){
-                valueAbs=valueAbs/1000;
-                return prefix+filterNumberFunctionAngularJS(valueSign*valueAbs,decimalsOnBigNumbers)+' K';
-            }
-            if(type=="8decimals" && valueAbs>=100){
-                return prefix+filterNumberFunctionAngularJS(valueSign*valueAbs,decimalsOnBigNumbers);
-            }
-            if(valueAbs>=1){
-                return prefix+filterNumberFunctionAngularJS(valueSign*valueAbs,decimalsOnNormalNumbers);
-            }
-            return prefix+(valueSign*valueAbs).toPrecision(decimalsOnSmallNumbers);
-        }else{
-            if(valueAbs>=1){
-                return prefix+filterNumberFunctionAngularJS(valueSign*valueAbs,decimalsOnNormalNumbers);
-            }
-
-            return prefix+this.noExponents((valueSign*valueAbs).toPrecision(decimalsOnSmallNumbers));
-        }
-    }
-};
-
-
-CCC.TRADE=CCC.TRADE || {};
-/*
- trade fields binary values always in the last ~
- */
-
-CCC.TRADE.FLAGS = {
-    'SELL'       : 0x1 // hex for binary 1
-    , 'BUY'        : 0x2 // hex for binary 10
-    , 'UNKNOWN'    : 0x4 // hex for binary 100
-}
-
-CCC.TRADE.FIELDS = {
-    'T'          : 0x0  // hex for binary 0, it is a special case of fields that are always there TYPE
-    , 'M'          : 0x0  // hex for binary 0, it is a special case of fields that are always there MARKET
-    , 'FSYM'       : 0x0  // hex for binary 0, it is a special case of fields that are always there FROM SYMBOL
-    , 'TSYM'       : 0x0  // hex for binary 0, it is a special case of fields that are always there TO SYMBOL
-    , 'F'          : 0x0  // hex for binary 0, it is a special case of fields that are always there FLAGS
-    , 'ID'         : 0x1  // hex for binary 1                                                       ID
-    , 'TS'         : 0x2  // hex for binary 10                                                      TIMESTAMP
-    , 'Q'          : 0x4  // hex for binary 100                                                     QUANTITY
-    , 'P'          : 0x8  // hex for binary 1000                                                    PRICE
-    , 'TOTAL'      : 0x10 // hex for binary 10000                                                   TOTAL
-
-};
-
-CCC.TRADE.DISPLAY = CCC.TRADE.DISPLAY||{};
-CCC.TRADE.DISPLAY.FIELDS = {
-    'T'          : {"Show":false}
-    , 'M'          : {"Show":true, 'Filter':'Market'}
-    , 'FSYM'       : {"Show":true, 'Filter':'CurrencySymbol'}
-    , 'TSYM'       : {"Show":true, 'Filter':'CurrencySymbol'}
-    , 'F'          : {"Show":true, 'Filter':'TradeFlag'}
-    , 'ID'         : {"Show":true, 'Filter':'Text'}
-    , 'TS'         : {'Show':true, 'Filter':'Date'  , 'Format':'yyyy MMMM dd HH:mm:ss'}
-    , 'Q'          : {'Show':true, 'Filter':'Number', 'Symbol':'FSYM'}
-    , 'P'          : {'Show':true, 'Filter':'Number', 'Symbol':'TSYM'}
-    , 'TOTAL'      : {'Show':true, 'Filter':'Number', 'Symbol':'TSYM'}
-
-};
-
-CCC.TRADE.pack = function(tradeObject){
-    var mask = 0;
-    var packedTrade ='';
-    for (var field in tradeObject) {
-        packedTrade += '~'+tradeObject[field];
-        mask|=this.FIELDS[field];
-    }
-    return packedTrade.substr(1)+'~'+mask.toString(16);
-};
-
-CCC.TRADE.unpack = function(tradeString){
-    var valuesArray = tradeString.split("~");
-    var valuesArrayLenght = valuesArray.length;
-    var mask = valuesArray[valuesArrayLenght-1];
-    var maskInt = parseInt(mask,16);
-    var unpackedTrade = {};
-    var currentField = 0;
-    for(var property in this.FIELDS){
-        if(this.FIELDS[property] === 0)
-        {
-            unpackedTrade[property] = valuesArray[currentField];
-            currentField++;
-        }
-        else if(maskInt&this.FIELDS[property])
-        {
-            unpackedTrade[property] = valuesArray[currentField];
-            currentField++;
-        }
-    }
-
-    return unpackedTrade;
-}
-
-CCC.TRADE.getKey = function(tradeObject){
-    return tradeObject['T']+'~'+tradeObject['M']+'~'+tradeObject['FSYM']+'~'+tradeObject['TSYM'];
-};
-
-CCC.CURRENT=CCC.CURRENT || {};
-/*
- current fields mask values always in the last ~
- */
-
-CCC.CURRENT.FLAGS = {
-    'PRICEUP'        : 0x1    // hex for binary 1
-    , 'PRICEDOWN'      : 0x2    // hex for binary 10
-    , 'PRICEUNCHANGED' : 0x4    // hex for binary 100
-    , 'BIDUP'          : 0x8    // hex for binary 1000
-    , 'BIDDOWN'        : 0x10   // hex for binary 10000
-    , 'BIDUNCHANGED'   : 0x20   // hex for binary 100000
-    , 'OFFERUP'        : 0x40   // hex for binary 1000000
-    , 'OFFERDOWN'      : 0x80   // hex for binary 10000000
-    , 'OFFERUNCHANGED' : 0x100  // hex for binary 100000000
-    , 'AVGUP'          : 0x200  // hex for binary 1000000000
-    , 'AVGDOWN'        : 0x400  // hex for binary 10000000000
-    , 'AVGUNCHANGED'   : 0x800  // hex for binary 100000000000
-};
-
-
-CCC.CURRENT.FIELDS={
-    'TYPE'            : 0x0       // hex for binary 0, it is a special case of fields that are always there
-    , 'MARKET'          : 0x0       // hex for binary 0, it is a special case of fields that are always there
-    , 'FROMSYMBOL'      : 0x0       // hex for binary 0, it is a special case of fields that are always there
-    , 'TOSYMBOL'        : 0x0       // hex for binary 0, it is a special case of fields that are always there
-    , 'FLAGS'           : 0x0       // hex for binary 0, it is a special case of fields that are always there
-    , 'PRICE'           : 0x1       // hex for binary 1
-    , 'BID'             : 0x2       // hex for binary 10
-    , 'OFFER'           : 0x4       // hex for binary 100
-    , 'LASTUPDATE'      : 0x8       // hex for binary 1000
-    , 'AVG'             : 0x10      // hex for binary 10000
-    , 'LASTVOLUME'      : 0x20      // hex for binary 100000
-    , 'LASTVOLUMETO'    : 0x40      // hex for binary 1000000
-    , 'LASTTRADEID'     : 0x80      // hex for binary 10000000
-    , 'VOLUMEHOUR'      : 0x100     // hex for binary 100000000
-    , 'VOLUMEHOURTO'    : 0x200     // hex for binary 1000000000
-    , 'VOLUME24HOUR'    : 0x400     // hex for binary 10000000000
-    , 'VOLUME24HOURTO'  : 0x800     // hex for binary 100000000000
-    , 'OPENHOUR'        : 0x1000    // hex for binary 1000000000000
-    , 'HIGHHOUR'        : 0x2000    // hex for binary 10000000000000
-    , 'LOWHOUR'         : 0x4000    // hex for binary 100000000000000
-    , 'OPEN24HOUR'      : 0x8000    // hex for binary 1000000000000000
-    , 'HIGH24HOUR'      : 0x10000   // hex for binary 10000000000000000
-    , 'LOW24HOUR'       : 0x20000   // hex for binary 100000000000000000
-    , 'LASTMARKET'      : 0x40000   // hex for binary 1000000000000000000, this is a special case and will only appear on CCCAGG messages
-};
-
-CCC.CURRENT.DISPLAY = CCC.CURRENT.DISPLAY||{};
-CCC.CURRENT.DISPLAY.FIELDS={
-    'TYPE'            : {'Show':false}
-    , 'MARKET'          : {'Show':true, 'Filter':'Market'}
-    , 'FROMSYMBOL'      : {'Show':false}
-    , 'TOSYMBOL'        : {'Show':false}
-    , 'FLAGS'           : {'Show':false}
-    , 'PRICE'           : {'Show':true, 'Filter':'Number', 'Symbol':'TOSYMBOL'}
-    , 'BID'             : {'Show':true, 'Filter':'Number', 'Symbol':'TOSYMBOL'}
-    , 'OFFER'           : {'Show':true, 'Filter':'Number', 'Symbol':'TOSYMBOL'}
-    , 'LASTUPDATE'      : {'Show':true, 'Filter':'Date'  , 'Format':'yyyy MMMM dd HH:mm:ss'}
-    , 'AVG'             : {'Show':true,' Filter':'Number', 'Symbol':'TOSYMBOL'}
-    , 'LASTVOLUME'      : {'Show':true, 'Filter':'Number', 'Symbol':'FROMSYMBOL'}
-    , 'LASTVOLUMETO'    : {'Show':true, 'Filter':'Number', 'Symbol':'TOSYMBOL'}
-    , 'LASTTRADEID'     : {'Show':true, 'Filter':'String'}
-    , 'VOLUMEHOUR'      : {'Show':true, 'Filter':'Number', 'Symbol':'FROMSYMBOL'}
-    , 'VOLUMEHOURTO'    : {'Show':true, 'Filter':'Number', 'Symbol':'TOSYMBOL'}
-    , 'VOLUME24HOUR'    : {'Show':true, 'Filter':'Number', 'Symbol':'FROMSYMBOL'}
-    , 'VOLUME24HOURTO'  : {'Show':true, 'Filter':'Number', 'Symbol':'TOSYMBOL'}
-    , 'OPENHOUR'        : {'Show':true, 'Filter':'Number', 'Symbol':'TOSYMBOL'}
-    , 'HIGHHOUR'        : {'Show':true, 'Filter':'Number', 'Symbol':'TOSYMBOL'}
-    , 'LOWHOUR'         : {'Show':true, 'Filter':'Number', 'Symbol':'TOSYMBOL'}
-    , 'OPEN24HOUR'      : {'Show':true, 'Filter':'Number', 'Symbol':'TOSYMBOL'}
-    , 'HIGH24HOUR'      : {'Show':true, 'Filter':'Number', 'Symbol':'TOSYMBOL'}
-    , 'LOW24HOUR'       : {'Show':true, 'Filter':'Number', 'Symbol':'TOSYMBOL'}
-    , 'LASTMARKET'      : {'Show':true, 'Filter':'String'}
-};
-
-CCC.CURRENT.pack = function(currentObject)
-{
-    var mask = 0;
-    var packedCurrent ='';
-    for(var property in this.FIELDS)
-    {
-        if(currentObject.hasOwnProperty(property)){
-            packedCurrent += '~'+currentObject[property];
-            mask|=this.FIELDS[property];
-        }
-    }
-    //removing first character beacsue it is a ~
-    return packedCurrent.substr(1)+'~'+mask.toString(16);
-};
-
-CCC.CURRENT.unpack = function(value)
-{
-    var valuesArray = value.split("~");
-    var valuesArrayLenght = valuesArray.length;
-    var mask = valuesArray[valuesArrayLenght-1];
-    var maskInt = parseInt(mask,16);
-    var unpackedCurrent = {};
-    var currentField = 0;
-    for(var property in this.FIELDS)
-    {
-        if(this.FIELDS[property] === 0)
-        {
-            unpackedCurrent[property] = valuesArray[currentField];
-            currentField++;
-        }
-        else if(maskInt&this.FIELDS[property])
-        {
-            //i know this is a hack, for cccagg, future code please don't hate me:(, i did this to avoid
-            //subscribing to trades as well in order to show the last market
-            if(property === 'LASTMARKET'){
-                unpackedCurrent[property] = valuesArray[currentField];
-            }else{
-                unpackedCurrent[property] = parseFloat(valuesArray[currentField]);
-            }
-            currentField++;
-        }
-    }
-
-    return unpackedCurrent;
-};
-CCC.CURRENT.getKey = function(currentObject){
-    return currentObject['TYPE']+'~'+currentObject['MARKET']+'~'+currentObject['FROMSYMBOL']+'~'+currentObject['TOSYMBOL'];
-};
-CCC.CURRENT.getKeyFromStreamerData = function(streamerData){
-    var valuesArray = streamerData.split("~");
-    return valuesArray[0]+'~'+valuesArray[1]+'~'+valuesArray[2]+'~'+valuesArray[3];
-};
-
-CCC.noExponents = function(value){
-    var data= String(value).split(/[eE]/);
-    if(data.length== 1) return data[0];
-
-    var  z= '', sign= value<0? '-':'',
-        str= data[0].replace('.', ''),
-        mag= Number(data[1])+ 1;
-
-    if(mag<0){
-        z= sign + '0.';
-        while(mag++) z += '0';
-        return z + str.replace(/^\-/,'');
-    }
-    mag -= str.length;
-    while(mag--) z += '0';
-    return str + z;
-};
-
-CCC.filterNumberFunctionPolyfill = function(value,decimals){
-    var decimalsDenominator = Math.pow(10,decimals);
-    var numberWithCorrectDecimals = Math.round(value*decimalsDenominator)/decimalsDenominator;
-    var parts = numberWithCorrectDecimals.toString().split(".");
-    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    return parts.join(".");
-}
-
-CCC.convertValueToDisplay =  function(symbol,value,type,fullNumbers){
-    var prefix = '';
-    var valueSign=1;
-    value = parseFloat(value);
-    var valueAbs=Math.abs(value);
-    var decimalsOnBigNumbers = 2;
-    var decimalsOnNormalNumbers = 2;
-    var decimalsOnSmallNumbers = 4;
-    if(fullNumbers===true){
-        decimalsOnBigNumbers =2;
-        decimalsOnNormalNumbers = 0;
-        decimalsOnSmallNumbers= 4;
-    }
-    if(symbol!=''){
-        prefix = symbol+' ';
-    }
-    if(value<0){
-        valueSign = -1;
-    }
-
-    if(value==0){
-        return prefix+'0';
-    }
-
-    if(value<0.00001000 && value>=0.00000100 && decimalsOnSmallNumbers>3){
-        decimalsOnSmallNumbers=3;
-    }
-    if(value<0.00000100 && value>=0.00000010 && decimalsOnSmallNumbers>2){
-        decimalsOnSmallNumbers=2;
-    }
-    if(value<0.00000010 && value>=0.00000001 && decimalsOnSmallNumbers>1){
-        decimalsOnSmallNumbers=1;
-    }
-
-    if(type=="short"){
-        if(valueAbs>10000000000){
-            valueAbs=valueAbs/1000000000;
-            return prefix+CCC.filterNumberFunctionPolyfill(valueSign*valueAbs,decimalsOnBigNumbers)+' B';
-        }
-        if(valueAbs>10000000){
-            valueAbs=valueAbs/1000000;
-            return prefix+CCC.filterNumberFunctionPolyfill(valueSign*valueAbs,decimalsOnBigNumbers)+' M';
-        }
-        if(valueAbs>10000){
-            valueAbs=valueAbs/1000;
-            return prefix+CCC.filterNumberFunctionPolyfill(valueSign*valueAbs,decimalsOnBigNumbers)+' K';
-        }
-        if(valueAbs>=1){
-            return prefix+CCC.filterNumberFunctionPolyfill(valueSign*valueAbs,decimalsOnNormalNumbers);
-        }
-        return prefix+(valueSign*valueAbs).toPrecision(decimalsOnSmallNumbers);
-    }else{
-        if(valueAbs>=1){
-            return prefix+CCC.filterNumberFunctionPolyfill(valueSign*valueAbs,decimalsOnNormalNumbers);
-        }
-
-        return prefix+CCC.noExponents((valueSign*valueAbs).toPrecision(decimalsOnSmallNumbers));
-    }
-};
-
-
