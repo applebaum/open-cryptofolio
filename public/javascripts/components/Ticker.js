@@ -819,7 +819,7 @@ export default class Ticker extends Component {
     }
 
     updateXLM() {
-        if (this.state.data.message.coin === 'XLM') {
+        if (this.state.data.message.coin === 'STR') {
             this.setState({
                 XLM: this.state.data.message.msg
             })

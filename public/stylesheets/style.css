@@ -41,6 +41,11 @@ a {
     color: whitesmoke;
 }
 
+Tr:hover {
+    background-color: #393939;
+}
+
+
 .graph-container {
     top: 7%;
     height: 37%;
@@ -67,8 +72,9 @@ a {
     background-color: whitesmoke;
     position: fixed;
     color: #1d1d1d;
-    box-sizing: border-box;
-    /*padding: 49% 47% 49% 47%;*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
     font-family: 'Open Sans', sans-serif;
     font-size: 24px;
     z-index: 1;
@@ -101,4 +107,5 @@ a {
     background-color: #a6a3a9;
     position: fixed;
 }
+
 

@@ -100,7 +100,7 @@ class GraphPlaceHolder extends Component {
     render(){
         return (
             <div className="graph-placeholder">
-                Loading chart data...
+                To see chart please select coin on the right
             </div>)
     }
 }
