@@ -1,14 +1,20 @@
 import React, {Component} from "react";
 import io from 'socket.io-client';
 import Reactable from 'reactable';
-let socket = io.connect('http://localhost:3000');
 let Table = Reactable.Table;
 let Tr = Reactable.Tr;
+let socket = io.connect('http://localhost:3000');
+
+/* This component connects to Node.js using socket.io to receive trading data stream, which is then passed to state.
+*  It then compares coin name from received data to corresponding coin name and if it matches,
+*  sets received data as an individual state of that coin. Table then accesses this data from state
+*  and displays it to user. A table is sortable by columns. */
 
 export default class Ticker extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            //set empty data to initial state so it would render before actual data is loaded
             data: {
             message: {
                 coin: null,
@@ -334,10 +340,12 @@ export default class Ticker extends Component {
         };
     }
 
+    //connect to Node.js via socket.io and pass received data to handler function
     componentDidMount(){
         socket.on('trades', (data) => this.setData(data));
     }
 
+    //handler function passes received data to component state and fires update functions on all of the coins
     setData(data) {
         this.setState({
             data: data
@@ -406,7 +414,8 @@ export default class Ticker extends Component {
         this.updateZEC();
            }
 
-           // update functions
+           // update functions compare coin name from component state to specified coin name,
+           // and if it matches sets components state as specified coin state
     updateXMR() {
         if (this.state.data.message.coin === 'XMR') {
             this.setState({
@@ -902,13 +911,16 @@ export default class Ticker extends Component {
 
 
     render() {
-        console.log(this.state.data.message.coin);
         return (
             <div className="ticker-container">
+                
+                /*setup table according to Reactable documentation*/
             <Table  width="100%" height="100%" id="table"
                     noDataText="Loading"
                     sortable={true}
                     defaultSort={{column: 'Coin', direction: 'asc'}}>
+
+                /* table rows display data from state */
                 <Tr data={{
                     Coin: 'XMR',
                     Price: this.state.XMR.price,
@@ -1285,26 +1297,6 @@ export default class Ticker extends Component {
             }} />
             </Table>
             </div>
-
-        //
-        //     {/*<div className="ticker-container">*/}
-        //         {/*<table width="100%">*/}
-        //             {/*<tbody>*/}
-        //             {/*<tr>*/}
-        //                 {/*<th>Coin</th>*/}
-        //                 {/*<th>Price  [Ƀ]</th>*/}
-        //             {/*</tr>*/}
-        //             {/*<tr>*/}
-        //                 {/*<td>XMR</td>*/}
-        //                 {/*<td>{this.state.XMR.PRICE}</td>*/}
-        //             {/*</tr>*/}
-        //             {/*<tr>*/}
-        //                 {/*<td>BCN</td>*/}
-        //                 {/*<td>{this.state.BCN.PRICE}</td>*/}
-        //             {/*</tr>*/}
-        //             {/*</tbody>*/}
-        //         {/*</table>*/}
-        //     {/*</div>*/}
         )
 
     };
