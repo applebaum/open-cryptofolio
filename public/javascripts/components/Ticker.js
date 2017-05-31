@@ -909,18 +909,18 @@ export default class Ticker extends Component {
         }
     }
 
+    /* setup table according to Reactable documentation */
+    /* table rows display data from state */
 
     render() {
         return (
             <div className="ticker-container">
-                
-                /*setup table according to Reactable documentation*/
+
             <Table  width="100%" height="100%" id="table"
                     noDataText="Loading"
                     sortable={true}
                     defaultSort={{column: 'Coin', direction: 'asc'}}>
 
-                /* table rows display data from state */
                 <Tr data={{
                     Coin: 'XMR',
                     Price: this.state.XMR.price,
