@@ -942,7 +942,8 @@ export default class Ticker extends Component {
                     sortable={true}
                     defaultSort={{column: 'Coin', direction: 'asc'}}>
 
-                <Tr data={{
+                <Tr onClick={() => this.displayChart('http://localhost:3000/hist/xmr', 'XMR')}
+                    data={{
                     Coin: 'XMR',
                     Price: this.state.XMR.price,
                     Volume: this.state.XMR.volume,
@@ -956,361 +957,422 @@ export default class Ticker extends Component {
                     Volume: this.state.AMP.volume,
                     Change: this.state.AMP.cap24hrChange,
                     Name: this.state.AMP.long
-                }} /><Tr data={{
+                }} /><Tr
+                onClick={() => this.displayChart('http://localhost:3000/hist/ardr', 'ARDR')}
+                data={{
                 Coin: 'ARDR',
                 Price: this.state.ARDR.price,
                 Volume: this.state.ARDR.volume,
                 Change: this.state.ARDR.cap24hrChange,
                 Name: this.state.ARDR.long
-            }} /><Tr data={{
+            }} /><Tr onClick={() => this.displayChart('http://localhost:3000/hist/bcn', 'BCN')}
+                data={{
                 Coin: 'BCN',
                 Price: this.state.BCN.price,
                 Volume: this.state.BCN.volume,
                 Change: this.state.BCN.cap24hrChange,
                 Name: this.state.BCN.long
-            }} /><Tr data={{
+            }} /><Tr onClick={() => this.displayChart('http://localhost:3000/hist/bcy', 'BCY')}
+                data={{
                 Coin: 'BCY',
                 Price: this.state.BCY.price,
                 Volume: this.state.BCY.volume,
                 Change: this.state.BCY.cap24hrChange,
                 Name: this.state.BCY.long
-            }} /><Tr data={{
+            }} /><Tr onClick={() => this.displayChart('http://localhost:3000/hist/BELA', 'BELA')}
+                data={{
                 Coin: 'BELA',
                 Price: this.state.BELA.price,
                 Volume: this.state.BELA.volume,
                 Change: this.state.BELA.cap24hrChange,
                 Name: this.state.BELA.long
-            }} /><Tr data={{
+            }} /><Tr onClick={() => this.displayChart('http://localhost:3000/hist/blk', 'BLK')}
+                data={{
                 Coin: 'BLK',
                 Price: this.state.BLK.price,
                 Volume: this.state.BLK.volume,
                 Change: this.state.BLK.cap24hrChange,
                 Name: this.state.BLK.long
-            }} /><Tr data={{
+            }} /><Tr onClick={() => this.displayChart('http://localhost:3000/hist/btm', 'BTM')}
+                data={{
                 Coin: 'BTM',
                 Price: this.state.BTM.price,
                 Volume: this.state.BTM.volume,
                 Change: this.state.BTM.cap24hrChange,
                 Name: this.state.BTM.long
-            }} /><Tr data={{
+            }} /><Tr onClick={() => this.displayChart('http://localhost:3000/hist/bts', 'BTS')}
+                data={{
                 Coin: 'BTS',
                 Price: this.state.BTS.price,
                 Volume: this.state.BTS.volume,
                 Change: this.state.BTS.cap24hrChange,
                 Name: this.state.BTS.long
-            }} /><Tr data={{
+            }} /><Tr onClick={() => this.displayChart('http://localhost:3000/hist/burst', 'BURST')}
+                data={{
                 Coin: 'BURST',
                 Price: this.state.BURST.price,
                 Volume: this.state.BURST.volume,
                 Change: this.state.BURST.cap24hrChange,
                 Name: this.state.BURST.long
-            }} /><Tr data={{
+            }} /><Tr onClick={() => this.displayChart('http://localhost:3000/hist/clam', 'CLAM')}
+                data={{
                 Coin: 'CLAM',
                 Price: this.state.CLAM.price,
                 Volume: this.state.CLAM.volume,
                 Change: this.state.CLAM.cap24hrChange,
                 Name: this.state.CLAM.long
-            }} /><Tr data={{
+            }} /><Tr onClick={() => this.displayChart('http://localhost:3000/hist/dash', 'DASH')}
+                data={{
                 Coin: 'DASH',
                 Price: this.state.DASH.price,
                 Volume: this.state.DASH.volume,
                 Change: this.state.DASH.cap24hrChange,
                 Name: this.state.DASH.long
-            }} /><Tr data={{
+            }} /><Tr onClick={() => this.displayChart('http://localhost:3000/hist/dcr', 'DCR')}
+                data={{
                 Coin: 'DCR',
                 Price: this.state.DCR.price,
                 Volume: this.state.DCR.volume,
                 Change: this.state.DCR.cap24hrChange,
                 Name: this.state.DCR.long
-            }} /><Tr data={{
+            }} /><Tr onClick={() => this.displayChart('http://localhost:3000/hist/dgb', 'DGB')}
+                data={{
                 Coin: 'DGB',
                 Price: this.state.DGB.price,
                 Volume: this.state.DGB.volume,
                 Change: this.state.DGB.cap24hrChange,
                 Name: this.state.DGB.long
-            }} /><Tr data={{
+            }} /><Tr onClick={() => this.displayChart('http://localhost:3000/hist/doge', 'DOGE')}
+                data={{
                 Coin: 'DOGE',
                 Price: this.state.DOGE.price,
                 Volume: this.state.DOGE.volume,
                 Change: this.state.DOGE.cap24hrChange,
                 Name: this.state.DOGE.long
-            }} /><Tr data={{
+            }} /><Tr onClick={() => this.displayChart('http://localhost:3000/hist/emc2', 'EMC2')}
+                data={{
                 Coin: 'EMC2',
                 Price: this.state.EMC2.price,
                 Volume: this.state.EMC2.volume,
                 Change: this.state.EMC2.cap24hrChange,
                 Name: this.state.EMC2.long
-            }} /><Tr data={{
+            }} /><Tr onClick={() => this.displayChart('http://localhost:3000/hist/etc', 'ETC')}
+                data={{
                 Coin: 'ETC',
                 Price: this.state.ETC.price,
                 Volume: this.state.ETC.volume,
                 Change: this.state.ETC.cap24hrChange,
                 Name: this.state.ETC.long
-            }} /><Tr data={{
+            }} /><Tr onClick={() => this.displayChart('http://localhost:3000/hist/eth', 'ETH')}
+                data={{
                 Coin: 'ETH',
                 Price: this.state.ETH.price,
                 Volume: this.state.ETH.volume,
                 Change: this.state.ETH.cap24hrChange,
                 Name: this.state.ETH.long
-            }} /><Tr data={{
+            }} /><Tr onClick={() => this.displayChart('http://localhost:3000/hist/exp', 'EXP')}
+                data={{
                 Coin: 'EXP',
                 Price: this.state.EXP.price,
                 Volume: this.state.EXP.volume,
                 Change: this.state.EXP.cap24hrChange,
                 Name: this.state.EXP.long
-            }} /><Tr data={{
+            }} /><Tr onClick={() => this.displayChart('http://localhost:3000/hist/fct', 'FCT')}
+                data={{
                 Coin: 'FCT',
                 Price: this.state.FCT.price,
                 Volume: this.state.FCT.volume,
                 Change: this.state.FCT.cap24hrChange,
                 Name: this.state.FCT.long
-            }} /><Tr data={{
+            }} /><Tr onClick={() => this.displayChart('http://localhost:3000/hist/fldc', 'FLDC')}
+                data={{
                 Coin: 'FLDC',
                 Price: this.state.FLDC.price,
                 Volume: this.state.FLDC.volume,
                 Change: this.state.FLDC.cap24hrChange,
                 Name: this.state.FLDC.long
-            }} /><Tr data={{
+            }} /><Tr onClick={() => this.displayChart('http://localhost:3000/hist/flo', 'FLO')}
+                data={{
                 Coin: 'FLO',
                 Price: this.state.FLO.price,
                 Volume: this.state.FLO.volume,
                 Change: this.state.FLO.cap24hrChange,
                 Name: this.state.FLO.long
-            }} /><Tr data={{
+            }} /><Tr onClick={() => this.displayChart('http://localhost:3000/hist/game', 'GAME')}
+                data={{
                 Coin: 'GAME',
                 Price: this.state.GAME.price,
                 Volume: this.state.GAME.volume,
                 Change: this.state.GAME.cap24hrChange,
                 Name: this.state.GAME.long
-            }} /><Tr data={{
+            }} /><Tr onClick={() => this.displayChart('http://localhost:3000/hist/gno', 'GNO')}
+                data={{
                 Coin: 'GNO',
                 Price: this.state.GNO.price,
                 Volume: this.state.GNO.volume,
                 Change: this.state.GNO.cap24hrChange,
                 Name: this.state.GNO.long
-            }} /><Tr data={{
+            }} /><Tr onClick={() => this.displayChart('http://localhost:3000/hist/gnt', 'GNT')}
+                data={{
                 Coin: 'GNT',
                 Price: this.state.GNT.price,
                 Volume: this.state.GNT.volume,
                 Change: this.state.GNT.cap24hrChange,
                 Name: this.state.GNT.long
-            }} /><Tr data={{
+            }} /><Tr onClick={() => this.displayChart('http://localhost:3000/hist/grc', 'GRC')}
+                data={{
                 Coin: 'GRC',
                 Price: this.state.GRC.price,
                 Volume: this.state.GRC.volume,
                 Change: this.state.GRC.cap24hrChange,
                 Name: this.state.GRC.long
-            }} /><Tr data={{
+            }} /><Tr onClick={() => this.displayChart('http://localhost:3000/hist/huc', 'HUC')}
+                data={{
                 Coin: 'HUC',
                 Price: this.state.HUC.price,
                 Volume: this.state.HUC.volume,
                 Change: this.state.HUC.cap24hrChange,
                 Name: this.state.HUC.long
-            }} /><Tr data={{
+            }} /><Tr onClick={() => this.displayChart('http://localhost:3000/hist/lbc', 'LBC')}
+                data={{
                 Coin: 'LBC',
                 Price: this.state.LBC.price,
                 Volume: this.state.LBC.volume,
                 Change: this.state.LBC.cap24hrChange,
                 Name: this.state.LBC.long
-            }} /><Tr data={{
+            }} /><Tr onClick={() => this.displayChart('http://localhost:3000/hist/lsk', 'LSK')}
+                data={{
                 Coin: 'LSK',
                 Price: this.state.LSK.price,
                 Volume: this.state.LSK.volume,
                 Change: this.state.LSK.cap24hrChange,
                 Name: this.state.LSK.long
-            }} /><Tr data={{
+            }} /><Tr onClick={() => this.displayChart('http://localhost:3000/hist/ltc', 'LTC')}
+                data={{
                 Coin: 'LTC',
                 Price: this.state.LTC.price,
                 Volume: this.state.LTC.volume,
                 Change: this.state.LTC.cap24hrChange,
                 Name: this.state.LTC.long
-            }} /><Tr data={{
+            }} /><Tr onClick={() => this.displayChart('http://localhost:3000/hist/maid', 'MAID')}
+                data={{
                 Coin: 'MAID',
                 Price: this.state.MAID.price,
                 Volume: this.state.MAID.volume,
                 Change: this.state.MAID.cap24hrChange,
                 Name: this.state.MAID.long
-            }} /><Tr data={{
+            }} /><Tr onClick={() => this.displayChart('http://localhost:3000/hist/naut', 'NAUT')}
+                data={{
                 Coin: 'NAUT',
                 Price: this.state.NAUT.price,
                 Volume: this.state.NAUT.volume,
                 Change: this.state.NAUT.cap24hrChange,
                 Name: this.state.NAUT.long
-            }} /><Tr data={{
+            }} /><Tr onClick={() => this.displayChart('http://localhost:3000/hist/neos', 'NEOS')}
+                data={{
                 Coin: 'NEOS',
                 Price: this.state.NEOS.price,
                 Volume: this.state.NEOS.volume,
                 Change: this.state.NEOS.cap24hrChange,
                 Name: this.state.NEOS.long
-            }} /><Tr data={{
+            }} /><Tr onClick={() => this.displayChart('http://localhost:3000/hist/nmc', 'NMC')}
+                data={{
                 Coin: 'NMC',
                 Price: this.state.NMC.price,
                 Volume: this.state.NMC.volume,
                 Change: this.state.NMC.cap24hrChange,
                 Name: this.state.NMC.long
-            }} /><Tr data={{
+            }} /><Tr onClick={() => this.displayChart('http://localhost:3000/hist/note', 'NOTE')}
+                data={{
                 Coin: 'NOTE',
                 Price: this.state.NOTE.price,
                 Volume: this.state.NOTE.volume,
                 Change: this.state.NOTE.cap24hrChange,
                 Name: this.state.NOTE.long
-            }} /><Tr data={{
+            }} /><Tr onClick={() => this.displayChart('http://localhost:3000/hist/nxc', 'NXC')}
+                data={{
                 Coin: 'NXC',
                 Price: this.state.NXC.price,
                 Volume: this.state.NXC.volume,
                 Change: this.state.NXC.cap24hrChange,
                 Name: this.state.NXC.long
-            }} /><Tr data={{
+            }} /><Tr onClick={() => this.displayChart('http://localhost:3000/hist/nxt', 'NXT')}
+                data={{
                 Coin: 'NXT',
                 Price: this.state.NXT.price,
                 Volume: this.state.NXT.volume,
                 Change: this.state.NXT.cap24hrChange,
                 Name: this.state.NXT.long
-            }} /><Tr data={{
+            }} /><Tr onClick={() => this.displayChart('http://localhost:3000/hist/omni', 'OMNI')}
+                data={{
                 Coin: 'OMNI',
                 Price: this.state.OMNI.price,
                 Volume: this.state.OMNI.volume,
                 Change: this.state.OMNI.cap24hrChange,
                 Name: this.state.OMNI.long
-            }} /><Tr data={{
+            }} /><Tr onClick={() => this.displayChart('http://localhost:3000/hist/pasc', 'PASC')}
+                data={{
                 Coin: 'PASC',
                 Price: this.state.PASC.price,
                 Volume: this.state.PASC.volume,
                 Change: this.state.PASC.cap24hrChange,
                 Name: this.state.PASC.long
-            }} /><Tr data={{
+            }} /><Tr onClick={() => this.displayChart('http://localhost:3000/hist/pink', 'PINK')}
+                data={{
                 Coin: 'PINK',
                 Price: this.state.PINK.price,
                 Volume: this.state.PINK.volume,
                 Change: this.state.PINK.cap24hrChange,
                 Name: this.state.PINK.long
-            }} /><Tr data={{
+            }} /><Tr onClick={() => this.displayChart('http://localhost:3000/hist/pot', 'POT')}
+                     data={{
                 Coin: 'POT',
                 Price: this.state.POT.price,
                 Volume: this.state.POT.volume,
                 Change: this.state.POT.cap24hrChange,
                 Name: this.state.POT.long
-            }} /><Tr data={{
+            }} /><Tr onClick={() => this.displayChart('http://localhost:3000/hist/ppc', 'PPC')}
+                data={{
                 Coin: 'PPC',
                 Price: this.state.PPC.price,
                 Volume: this.state.PPC.volume,
                 Change: this.state.PPC.cap24hrChange,
                 Name: this.state.PPC.long
-            }} /><Tr data={{
+            }} /><Tr onClick={() => this.displayChart('http://localhost:3000/hist/rads', 'RADS')}
+                data={{
                 Coin: 'RADS',
                 Price: this.state.RADS.price,
                 Volume: this.state.RADS.volume,
                 Change: this.state.RADS.cap24hrChange,
                 Name: this.state.RADS.long
-            }} /><Tr data={{
+            }} /><Tr onClick={() => this.displayChart('http://localhost:3000/hist/rep', 'REP')}
+                data={{
                 Coin: 'REP',
                 Price: this.state.REP.price,
                 Volume: this.state.REP.volume,
                 Change: this.state.REP.cap24hrChange,
                 Name: this.state.REP.long
-            }} /><Tr data={{
+            }} /><Tr onClick={() => this.displayChart('http://localhost:3000/hist/ric', 'RIC')}
+                data={{
                 Coin: 'RIC',
                 Price: this.state.RIC.price,
                 Volume: this.state.RIC.volume,
                 Change: this.state.RIC.cap24hrChange,
                 Name: this.state.RIC.long
-            }} /><Tr data={{
+            }} /><Tr onClick={() => this.displayChart('http://localhost:3000/hist/sbd', 'SBD')}
+                data={{
                 Coin: 'SBD',
                 Price: this.state.SBD.price,
                 Volume: this.state.SBD.volume,
                 Change: this.state.SBD.cap24hrChange,
                 Name: this.state.SBD.long
-            }} /><Tr data={{
+            }} /><Tr onClick={() => this.displayChart('http://localhost:3000/hist/sc', 'SC')}
+                data={{
                 Coin: 'SC',
                 Price: this.state.SC.price,
                 Volume: this.state.SC.volume,
                 Change: this.state.SC.cap24hrChange,
                 Name: this.state.SC.long
-            }} /><Tr data={{
+            }} /><Tr onClick={() => this.displayChart('http://localhost:3000/hist/sjcx', 'SJCX')}
+                data={{
                 Coin: 'SJCX',
                 Price: this.state.SJCX.price,
                 Volume: this.state.SJCX.volume,
                 Change: this.state.SJCX.cap24hrChange,
                 Name: this.state.SJCX.long
-            }} /><Tr data={{
+            }} /><Tr onClick={() => this.displayChart('http://localhost:3000/hist/steem', 'STEEM')}
+                data={{
                 Coin: 'STEEM',
                 Price: this.state.STEEM.price,
                 Volume: this.state.STEEM.volume,
                 Change: this.state.STEEM.cap24hrChange,
                 Name: this.state.STEEM.long
-            }} /><Tr data={{
+            }} /><Tr onClick={() => this.displayChart('http://localhost:3000/hist/xlm', 'XLM')}
+                data={{
                 Coin: 'XLM',
                 Price: this.state.XLM.price,
                 Volume: this.state.XLM.volume,
                 Change: this.state.XLM.cap24hrChange,
                 Name: this.state.XLM.long
-            }} /><Tr data={{
+            }} /><Tr onClick={() => this.displayChart('http://localhost:3000/hist/strat', 'STRAT')}
+                data={{
                 Coin: 'STRAT',
                 Price: this.state.STRAT.price,
                 Volume: this.state.STRAT.volume,
                 Change: this.state.STRAT.cap24hrChange,
                 Name: this.state.STRAT.long
-            }} /><Tr data={{
+            }} /><Tr onClick={() => this.displayChart('http://localhost:3000/hist/sys', 'SYS')}
+                data={{
                 Coin: 'SYS',
                 Price: this.state.SYS.price,
                 Volume: this.state.SYS.volume,
                 Change: this.state.SYS.cap24hrChange,
                 Name: this.state.SYS.long
-            }} /><Tr data={{
+            }} /><Tr onClick={() => this.displayChart('http://localhost:3000/hist/VIA', 'VIA')}
+                data={{
                 Coin: 'VIA',
                 Price: this.state.VIA.price,
                 Volume: this.state.VIA.volume,
                 Change: this.state.VIA.cap24hrChange,
                 Name: this.state.VIA.long
-            }} /><Tr data={{
+            }} /><Tr onClick={() => this.displayChart('http://localhost:3000/hist/vrc', 'VRC')}
+                data={{
                 Coin: 'VRC',
                 Price: this.state.VRC.price,
                 Volume: this.state.VRC.volume,
                 Change: this.state.VRC.cap24hrChange,
                 Name: this.state.VRC.long
-            }} /><Tr data={{
+            }} /><Tr onClick={() => this.displayChart('http://localhost:3000/hist/vtc', 'VTC')}
+                data={{
                 Coin: 'VTC',
                 Price: this.state.VTC.price,
                 Volume: this.state.VTC.volume,
                 Change: this.state.VTC.cap24hrChange,
                 Name: this.state.VTC.long
-            }} /><Tr data={{
+            }} /><Tr onClick={() => this.displayChart('http://localhost:3000/hist/xbc', 'XBC')}
+                data={{
                 Coin: 'XBC',
                 Price: this.state.XBC.price,
                 Volume: this.state.XBC.volume,
                 Change: this.state.XBC.cap24hrChange,
                 Name: this.state.XBC.long
-            }} /><Tr data={{
+            }} /><Tr onClick={() => this.displayChart('http://localhost:3000/hist/xcp', 'XCP')}
+                data={{
                 Coin: 'XCP',
                 Price: this.state.XCP.price,
                 Volume: this.state.XCP.volume,
                 Change: this.state.XCP.cap24hrChange,
                 Name: this.state.XCP.long
-            }} /><Tr data={{
+            }} /><Tr onClick={() => this.displayChart('http://localhost:3000/hist/xem', 'XEM')}
+                data={{
                 Coin: 'XEM',
                 Price: this.state.XEM.price,
                 Volume: this.state.XEM.volume,
                 Change: this.state.XEM.cap24hrChange,
                 Name: this.state.XEM.long
-            }} /><Tr data={{
+            }} /><Tr onClick={() => this.displayChart('http://localhost:3000/hist/xpm', 'XPM')}
+                data={{
                 Coin: 'XPM',
                 Price: this.state.XPM.price,
                 Volume: this.state.XPM.volume,
                 Change: this.state.XPM.cap24hrChange,
                 Name: this.state.XPM.long
-            }} /><Tr data={{
+            }} /><Tr onClick={() => this.displayChart('http://localhost:3000/hist/xvc', 'XVC')}
+                data={{
                 Coin: 'XVC',
                 Price: this.state.XVC.price,
                 Volume: this.state.XVC.volume,
                 Change: this.state.XVC.cap24hrChange,
                 Name: this.state.XVC.long
-            }} /><Tr data={{
+            }} /><Tr onClick={() => this.displayChart('http://localhost:3000/hist/xrp', 'XRP')}
+                data={{
                 Coin: 'XRP',
                 Price: this.state.XRP.price,
                 Volume: this.state.XRP.volume,
                 Change: this.state.XRP.cap24hrChange,
                 Name: this.state.XRP.long
-            }} /><Tr data={{
+            }} /><Tr onClick={() => this.displayChart('http://localhost:3000/hist/zec', 'ZEC')}
+                data={{
                 Coin: 'ZEC',
                 Price: this.state.ZEC.price,
                 Volume: this.state.ZEC.volume,

@@ -13,7 +13,9 @@ export default class GraphPreload extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            data: null
+            data: null,
+            // key is used as a prop to notify child of update
+            key: null
             }
         }
 
@@ -27,9 +29,9 @@ export default class GraphPreload extends Component {
                 // axios is used to make HTTP GET call to server
                 axios
                     .get(path)
-                    // received data is then passed to state
+                    // received data is then passed to state, key state is changed to trigger child re-render
                     .then(function (data) {
-                        _this.setState(Object.assign({}, _this.state, {data: data}))
+                        _this.setState(Object.assign({}, _this.state, {data: data, key: Math.random() }))
                     });
         }
     }
@@ -43,7 +45,7 @@ export default class GraphPreload extends Component {
         // when a change of state is detected ('null' by default) a Graph component is rendered
         if (this.state.data) {
             // data from parent state is passed as props
-            return <Graph data={this.state.data.data} name={this.props.chosenCoinName} />;
+            return <Graph key={this.state.key} data={this.state.data.data} name={this.props.chosenCoinName} />;
             // otherwise placeholder component is rendered
         } else {
             return <GraphPlaceHolder  />;
@@ -52,8 +54,8 @@ export default class GraphPreload extends Component {
 }
 
 class Graph extends Component {
-    render() {
 
+     render() {
         //define chart options according to HighCharts documentation
         let chartOptions = {
             rangeSelector: {
