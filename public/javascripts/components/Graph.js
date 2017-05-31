@@ -2,10 +2,12 @@ import React, {Component} from "react";
 import axios from 'axios';
 import Chart from './Highcharts.react';
 
-/* The GraphPreload component sends HTTP GET request to Node.js server which in turn sends request to external API to and redirects
- response (historical data on coin) back to client. While data is being fetched from external API this component
- renders a placeholder component (GraphPlaceHolder), and when it detects a change in state it renders a chart component
- (Graph). Graph component receives data as props and then uses it to render chart powered by HighCharts. */
+/* The GraphPreload component is rendered by Ticker component from which it receives props on coin user chose to display
+   chart of.  It then sends HTTP GET request to Node.js server to route specified in received props which in turn sends
+   request to external API to and redirects response (historical data on coin) back to client. While data is being fetched
+   from external API this component renders a placeholder component (GraphPlaceHolder), and when it detects a change in
+   state it renders a chart component (Graph). Graph component receives data as props and then uses it to render chart
+   powered by HighCharts. */
 
 export default class GraphPreload extends Component {
     constructor(props) {
@@ -15,16 +17,21 @@ export default class GraphPreload extends Component {
             }
         }
 
-    componentDidMount () {
-        let _this = this;
-        this.serverRequest =
-            // axios is used to make HTTP GET call to server
-            axios
-                .get("http://localhost:3000/hist/xmr")
-                // received data is then passed to state
-                .then(function(data){
-                    _this.setState(Object.assign({}, _this.state, { data: data }))
-                });
+    componentWillReceiveProps (nextProps) {
+        // check if received props are in fact new to prevent endless re-render and API requests
+        if (this.props.chosenCoinData !== nextProps.chosenCoinData) {
+            let _this = this;
+            // set route path from props
+            let path = nextProps.chosenCoinData;
+            this.serverRequest =
+                // axios is used to make HTTP GET call to server
+                axios
+                    .get(path)
+                    // received data is then passed to state
+                    .then(function (data) {
+                        _this.setState(Object.assign({}, _this.state, {data: data}))
+                    });
+        }
     }
 
     componentWillUnmount () {
@@ -32,10 +39,11 @@ export default class GraphPreload extends Component {
     }
 
     render() {
+
         // when a change of state is detected ('null' by default) a Graph component is rendered
         if (this.state.data) {
             // data from parent state is passed as props
-            return <Graph data={this.state.data.data} />;
+            return <Graph data={this.state.data.data} name={this.props.chosenCoinName} />;
             // otherwise placeholder component is rendered
         } else {
             return <GraphPlaceHolder  />;
@@ -52,7 +60,7 @@ class Graph extends Component {
                 selected: 0
             },
             title: {
-                text: 'XMR to USD exchange rate'
+                text: this.props.name + ' to USD exchange rate'
             },
             tooltip: {
                 style: {
@@ -67,7 +75,7 @@ class Graph extends Component {
                 }
             },
             series: [{
-                name: 'XMR to USD',
+                name: this.props.name + ' to USD',
                 // data is fed directly from props
                 data: this.props.data.price,
                 id: 'dataseries'

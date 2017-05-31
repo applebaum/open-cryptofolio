@@ -1,19 +1,29 @@
 import React, {Component} from "react";
-import io from 'socket.io-client';
+
+/* This component connects to Node.js using socket.io to receive trading data stream, which is then passed to state.
+ *  It then compares coin name from received data to corresponding coin name and if it matches,
+ *  sets received data as an individual state of that coin. Table then accesses this data from state
+ *  and displays it to user. A table is sortable by columns. This component also renders Graph component
+ * to which it send props on chosen coin */
+
+//import Graph component in order to pass props to it
+import Graph from './Graph'
+
+//setup Reactable table
 import Reactable from 'reactable';
 let Table = Reactable.Table;
 let Tr = Reactable.Tr;
-let socket = io.connect('http://localhost:3000');
 
-/* This component connects to Node.js using socket.io to receive trading data stream, which is then passed to state.
-*  It then compares coin name from received data to corresponding coin name and if it matches,
-*  sets received data as an individual state of that coin. Table then accesses this data from state
-*  and displays it to user. A table is sortable by columns. */
+//connect to Node.js server via socket.io
+import io from 'socket.io-client';
+let socket = io.connect('http://localhost:3000');
 
 export default class Ticker extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            chosenCoinData: null,
+            chosenCoinName: null,
             //set empty data to initial state so it would render before actual data is loaded
             data: {
             message: {
@@ -909,11 +919,22 @@ export default class Ticker extends Component {
         }
     }
 
+    displayChart(link, coin) {
+        this.setState({
+            chosenCoinData: link,
+            chosenCoinName: coin
+        });
+    }
+
     /* setup table according to Reactable documentation */
     /* table rows display data from state */
 
     render() {
+
         return (
+
+            <div>
+
             <div className="ticker-container">
 
             <Table  width="100%" height="100%" id="table"
@@ -928,7 +949,8 @@ export default class Ticker extends Component {
                     Change: this.state.XMR.cap24hrChange,
                     Name: this.state.XMR.long
                 }} />
-                <Tr data={{
+                <Tr onClick={() => this.displayChart('http://localhost:3000/hist/amp', 'AMP')}
+                    data={{
                     Coin: 'AMP',
                     Price: this.state.AMP.price,
                     Volume: this.state.AMP.volume,
@@ -1296,6 +1318,8 @@ export default class Ticker extends Component {
                 Name: this.state.ZEC.long
             }} />
             </Table>
+            </div>
+                <Graph className="graph" chosenCoinData={this.state.chosenCoinData} chosenCoinName={this.state.chosenCoinName} />
             </div>
         )
 

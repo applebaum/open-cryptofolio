@@ -198,12 +198,12 @@ app.use(function(err, req, res, next) {
 });
 
 /*Socket.io connects to external CoinCap socket API and fetches historical data on all available coins,
-* it then emits the data to client as soon as it recieves it*/
+* it then emits the data to client as soon as it receives it*/
 
 //connect to external socket
 let socket = ioClient.connect('http://socket.coincap.io');
 
-//when received data, emit it ot client
+//when received data, emit it to client
 socket.on('trades', function (tradeMsg) {
     io.emit('trades', tradeMsg);
 });

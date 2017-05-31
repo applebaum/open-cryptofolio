@@ -37,18 +37,8 @@ a {
     position: fixed;
     overflow-y: scroll;
     overflow-x: hidden;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Open Sans', sans-serif;
     color: whitesmoke;
-}
-
-.price-up {
-    color: #00C853;
-    font-family: 'Roboto', sans-serif;
-}
-
-.price-down {
-    color: #BF360C;
-    font-family: 'Roboto', sans-serif;
 }
 
 .graph-container {
@@ -79,7 +69,7 @@ a {
     color: #1d1d1d;
     box-sizing: border-box;
     /*padding: 49% 47% 49% 47%;*/
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Open Sans', sans-serif;
     font-size: 24px;
     z-index: 1;
 }
