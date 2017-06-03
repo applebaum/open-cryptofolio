@@ -1,10 +1,11 @@
 import React, {Component} from "react";
 
+/*This will be the app header*/
+
 export default class Header extends Component {
     render() {
         return (
-            <div className="header-container">
-                {/*<img className="logo" src="../../favicon.ico" />*/}
+            <div >
             </div>
         );
     }

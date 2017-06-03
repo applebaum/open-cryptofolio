@@ -1,4 +1,6 @@
 import React, {Component} from "react";
+import { Well } from 'react-bootstrap';
+
 
 /* This component connects to Node.js using socket.io to receive trading data stream, which is then passed to state.
  *  It then compares coin name from received data to corresponding coin name and if it matches,
@@ -930,13 +932,10 @@ export default class Ticker extends Component {
     /* table rows display data from state */
 
     render() {
-
+// console.log(this.state.data);
         return (
-
             <div>
-
-            <div className="ticker-container">
-
+                <Well>
             <Table  width="100%" height="100%" id="table"
                     noDataText="Loading"
                     sortable={true}
@@ -1287,14 +1286,16 @@ export default class Ticker extends Component {
                 Volume: this.state.STEEM.volume,
                 Change: this.state.STEEM.cap24hrChange,
                 Name: this.state.STEEM.long
-            }} /><Tr onClick={() => this.displayChart('http://localhost:3000/hist/xlm', 'XLM')}
-                data={{
-                Coin: 'XLM',
-                Price: this.state.XLM.price,
-                Volume: this.state.XLM.volume,
-                Change: this.state.XLM.cap24hrChange,
-                Name: this.state.XLM.long
-            }} /><Tr onClick={() => this.displayChart('http://localhost:3000/hist/strat', 'STRAT')}
+            }} />
+                {/*<Tr onClick={() => this.displayChart('http://localhost:3000/hist/xlm', 'XLM')}*/}
+                {/*data={{*/}
+                {/*Coin: 'XLM',*/}
+                {/*Price: this.state.XLM.price,*/}
+                {/*Volume: this.state.XLM.volume,*/}
+                {/*Change: this.state.XLM.cap24hrChange,*/}
+                {/*Name: this.state.XLM.long*/}
+            {/*}} />*/}
+                <Tr onClick={() => this.displayChart('http://localhost:3000/hist/strat', 'STRAT')}
                 data={{
                 Coin: 'STRAT',
                 Price: this.state.STRAT.price,
@@ -1380,10 +1381,10 @@ export default class Ticker extends Component {
                 Name: this.state.ZEC.long
             }} />
             </Table>
+                </Well>
+                {/*pass props on coin that user would like to see chart on*/}
+                <Graph chosenCoinData={this.state.chosenCoinData} chosenCoinName={this.state.chosenCoinName} />
             </div>
-                <Graph className="graph" chosenCoinData={this.state.chosenCoinData} chosenCoinName={this.state.chosenCoinName} />
-            </div>
-        )
-
+                )
     };
 }

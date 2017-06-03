@@ -48,7 +48,7 @@ export default class GraphPreload extends Component {
             return <Graph key={this.state.key} data={this.state.data.data} name={this.props.chosenCoinName} />;
             // otherwise placeholder component is rendered
         } else {
-            return <GraphPlaceHolder  />;
+            return <GraphPlaceHolder />;
         }
     }
 }
@@ -95,12 +95,34 @@ class Graph extends Component {
     }
 }
 
-// placeholder element returns text
+// placeholder element dummy chart with text
+
 class GraphPlaceHolder extends Component {
-    render(){
+
+    render() {
+
+        //define chart options according to HighCharts documentation
+        let chartOptions = {
+            chart: {
+                backgroundColor: null,
+                style: {
+                    fontFamily: 'Helvetica Neue, sans-serif'
+                }
+            },
+            title: {
+                text: 'To see chart please chose coin on the right',
+                style: {
+                    fontSize: '32px'
+                }
+            }
+        };
+
         return (
-            <div className="graph-placeholder">
-                To see chart please select coin on the right
-            </div>)
+            React.createElement(Chart, {
+                container: 'graph',
+                options: chartOptions,
+                type: 'stockChart'
+            })
+        )
     }
 }
