@@ -935,8 +935,9 @@ export default class Ticker extends Component {
 // console.log(this.state.data);
         return (
             <div>
-                <Well>
-            <Table  width="100%" height="100%" id="table"
+                <Well style={{overflowY: 'scroll', overflowX: 'hidden', maxHeight: '850'}}>
+            <Table
+                width="100%" height="100%" id="table"
                     noDataText="Loading"
                     sortable={true}
                     defaultSort={{column: 'Coin', direction: 'asc'}}>

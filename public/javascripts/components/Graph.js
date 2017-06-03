@@ -58,6 +58,12 @@ class Graph extends Component {
      render() {
         //define chart options according to HighCharts documentation
         let chartOptions = {
+            chart: {
+                // backgroundColor: null,
+                style: {
+                    fontFamily: 'Helvetica Neue, sans-serif'
+                }
+            },
             rangeSelector: {
                 selected: 0
             },
@@ -66,7 +72,7 @@ class Graph extends Component {
             },
             tooltip: {
                 style: {
-                    width: '200px'
+                    width: '50px'
                 },
                 valueDecimals: 4,
                 shared: true
