@@ -30,15 +30,14 @@ run `npm install` which will automatically install all of the project dependenci
 ## Building scripts
 To run the app you will need to execute following scripts:
 
-In project directory run:
+In project directory you may run:
 
-* `npm run build` - to build static version of client
-or
+* `npm run build` - to build app for production into `bundle.js`
 * `npm run build:watch` - to build development version of client which watches for changes and automatically updates DOM
-* `npm run start` - to serve app
+* `npm run start` - to serve app in the development mode
 
 For development purposes you should simultaneously run `npm run build:watch` and `npm run start` (for example, in two terminal windows).
-After each code edit you will need to restart server (`npm run start`) and refresh browser window, but not rebuild client (no need to rerun `npm run build:watch`).
+After each change you will need to restart server (`npm run start`) and refresh browser window, but not rebuild client (no need to rerun `npm run build:watch`).
 Note, that entry point of the app is `bin/www` and not `server.js`.
 
 ## Run the App
