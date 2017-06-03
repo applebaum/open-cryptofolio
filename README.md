@@ -1,5 +1,5 @@
 ## Coin Till
-Open-source cryptocurrency portfolio manager written in React.JS capable
+Open-source cryptocurrency portfolio manager written using React.js. Capable
 of handling multiple portfolios, showing chart data on portfolio performance
 and live value in BTC and major fiats, exporting/importing portfolio data,
 as well as displaying all major cryptocurrencies live trading
@@ -8,7 +8,7 @@ data and historical performance chart.
 The project is currently under development.
 
 ## Build Instructions
-The project is based on Node.JS Express server with React.JS front-end.
+The project is based on Node.js Express server with React.js front-end.
 
 ## Download Dependencies
 To build this project you will need
@@ -25,7 +25,7 @@ and extract it using archive manager of your choice.
 
 ## Install Dependencies
 After downloading project repository navigate to `coin-till` directory and in terminal
-run `npm install` which will automatically install all of the project dependencies.
+run `npm install` which will automatically install all of the project dependencies (including `react` and `react-dom`).
 
 ## Building scripts
 To run the app you will need to execute following scripts:
