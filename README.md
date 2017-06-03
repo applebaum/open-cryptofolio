@@ -32,9 +32,9 @@ To run the app you will need to execute following scripts:
 
 In project directory run
 
-*`npm build` - to build static version of client
-*`npm build:watch` - to build development version of client which watches for changes and automatically updates DOM
-*`npm start` - to serve app
+* `npm build` - to build static version of client
+* `npm build:watch` - to build development version of client which watches for changes and automatically updates DOM
+* `npm start` - to serve app
 
 For development purposes you should simultaneously run `npm build:watch` and `npm start` (for example, in two terminal windows).
 After each code edit you will need to restart server (`npm run start`), but not client (no need to rerun `npm build:watch`).
