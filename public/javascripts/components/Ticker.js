@@ -935,7 +935,7 @@ export default class Ticker extends Component {
 // console.log(this.state.data);
         return (
             <div>
-                <Well style={{overflowY: 'scroll', overflowX: 'hidden', maxHeight: '850'}}>
+                <Well style={{overflowY: 'scroll', overflowX: 'hidden', maxHeight: '845'}}>
             <Table
                 width="100%" height="100%" id="table"
                     noDataText="Loading"

@@ -10,8 +10,8 @@ export default class PortfolioContainer extends Component {
         return (
             <Grid fluid={true}>
                 <Row className="showGrid">
-                    <Col md={8}>
-                        <PortfolioInputForm/>
+                    <Col md={8} >
+                        <PortfolioInputForm />
                     </Col>
                     <Col md={4} >
                         <PortfolioPerformance/>

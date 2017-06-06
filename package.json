@@ -26,6 +26,7 @@
     "react-bootstrap": "^0.31.0",
     "react-dom": "^15.5.4",
     "react-flip-move": "^2.9.13",
+    "react-select": "^1.0.0-rc.5",
     "react-spinkit": "^3.0.0",
     "reactable": "^0.14.1",
     "serve-favicon": "^2.1.7",

@@ -1,3 +1,32 @@
+
+.coinName {
+    display: inline-block;
+    font-weight: bolder !important;
+}
+
+.coinQ {
+    display: inline-block;
+}
+
+.usdName {
+    display: inline-block;
+    font-weight: bolder !important;
+}
+
+.usdValue {
+    display: inline-block;
+}
+
+.coinEntryChangeDown {
+    display: inline-block;
+    color: darkred !important;
+}
+
+.coinEntryChangeUp {
+    display: inline-block;
+    color: green !important;
+}
+
 /*body {*/
   /*padding: 50px;*/
   /*font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;*/

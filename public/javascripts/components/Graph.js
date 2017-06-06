@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import axios from 'axios';
 import Chart from './Highcharts.react';
 
-/* The GraphPreload component is rendered by Ticker component from which it receives props on coin user chose to display
+/** The GraphPreload component is rendered by Ticker component from which it receives props on coin user chose to display
    chart of.  It then sends HTTP GET request to Node.js server to route specified in received props which in turn sends
    request to external API to and redirects response (historical data on coin) back to client. While data is being fetched
    from external API this component renders a placeholder component (GraphPlaceHolder), and when it detects a change in

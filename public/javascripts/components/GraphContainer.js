@@ -8,8 +8,8 @@ export default class GraphContainer extends Component {
     render() {
         return (
                 <Row className="showGrid">
-                <Col md={12}>
-                    <Well id="graph"> </Well>
+                <Col md={12} >
+                    <Well style={{height: '400'}} id="graph"> </Well>
                 </Col>
                 </Row>
         );
