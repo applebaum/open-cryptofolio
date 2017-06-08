@@ -1262,7 +1262,7 @@ export default class CoinInputApp extends Component {
         this.state.data.push(coin);
         // update state
         this.setState({data: this.state.data});
-        cookie.save("data", this.state.data, {path: "/"})
+        cookie.save("data", this.state.data, {path: "/", maxAge: 631138520})
     }
     // handle remove
     handleRemove(id){
