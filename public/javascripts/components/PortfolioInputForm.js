@@ -48,9 +48,63 @@ class CoinForm extends Component {
         this.setState({
             name: '',
             quantity: 0});
+    }
 
+    // first the function loops through the keys on one of the objects to create a header row, followed by a newline.
+    // then we loop through each object and write out the values of each property.
+    convertArrayOfObjectsToCSV(args) {
+    let result, ctr, keys, columnDelimiter, lineDelimiter, data;
+
+    data = args.data || null;
+    if (data === null || !data.length) {
+        return null;
+    }
+
+    columnDelimiter = args.columnDelimiter || ',';
+    lineDelimiter = args.lineDelimiter || '\n';
+
+    keys = Object.keys(data[0]);
+
+    result = '';
+    result += keys.join(columnDelimiter);
+    result += lineDelimiter;
+
+    data.forEach(function(item) {
+        ctr = 0;
+        keys.forEach(function(key) {
+            if (ctr > 0) result += columnDelimiter;
+
+            result += item[key];
+            ctr++;
+        });
+        result += lineDelimiter;
+    });
+
+    return result;
 }
 
+    // this function takes the CSV we created and prepends a special string that tells the browser
+    // that our content is CSV and it needs to be downloaded
+    downloadCSV(args) {
+    let data, filename, link;
+
+    let csv = this.convertArrayOfObjectsToCSV({
+        data: this.props.data
+    });
+    if (csv === null) return;
+
+    filename = args.filename || 'export.csv';
+
+    if (!csv.match(/^data:text\/csv/i)) {
+        csv = 'data:text/csv;charset=utf-8,' + csv;
+    }
+    data = encodeURI(csv);
+
+    link = document.createElement('a');
+    link.setAttribute('href', data);
+    link.setAttribute('download', filename);
+    link.click();
+}
 
     render () {
 
@@ -59,6 +113,10 @@ class CoinForm extends Component {
             <div>
                 <Button onClick={ ()=> this.setState({ open: !this.state.open })}>
                     <Glyphicon glyph="plus"/>
+                </Button>
+                {' '}
+                <Button onClick={ () => this.downloadCSV({ filename: "portfolio-data.csv" }) }>
+                    <Glyphicon glyph='download'/>
                 </Button>
                 {' '}
                 <Collapse in={this.state.open}>
@@ -1280,7 +1338,7 @@ export default class CoinInputApp extends Component {
         // render JSX, pass props
         return (
             <Jumbotron style={{height: '425', overflowY: 'scroll', overflowX: 'contain'}}>
-                <CoinForm addCoin={this.addCoin.bind(this)}/>
+                <CoinForm addCoin={this.addCoin.bind(this)} data={this.state.data}/>
                 <CoinList
                     coins={this.state.data}
                     remove={this.handleRemove.bind(this)}
