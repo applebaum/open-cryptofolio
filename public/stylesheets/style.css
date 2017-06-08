@@ -1,7 +1,42 @@
 
+.coinEntryHeader{
+    width: 100% !important;
+    height: 100% !important;
+    margin: auto;
+}
+
+.coinEntry {
+    /*display: inline-block;*/
+    align-content: center;
+}
+
 .coinName {
     display: inline-block;
     font-weight: bolder !important;
+}
+
+.coinNameLong {
+    display: inline-block;
+    font-weight: bolder !important;
+}
+
+.toBTCRatioName {
+    display: inline-block;
+    font-weight: bolder !important;
+}
+.toBTCRatioValue {
+    display: inline-block;
+}
+.toUSDRatioName {
+    display: inline-block;
+    font-weight: bolder !important;
+}
+.toUSDRatioValue {
+    display: inline-block;
+}
+.remove-button {
+   justify-self: right !important;
+    align-self: right !important;
 }
 
 .coinQ {
@@ -13,8 +48,21 @@
     font-weight: bolder !important;
 }
 
+.btcValue {
+    display: inline-block;
+}
+
+.btcName {
+    display: inline-block;
+    font-weight: bolder !important;
+}
+
 .usdValue {
     display: inline-block;
+}
+
+p:hover {
+    text-decoration: none !important;
 }
 
 .coinEntryChangeDown {

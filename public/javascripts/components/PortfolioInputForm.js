@@ -1,8 +1,6 @@
 import React, {Component} from "react";
-// import Select from 'react-select';
-// import 'react-select/dist/react-select.css';
-
-import { Panel, Collapse, ControlLabel, ListGroupItem, ListGroup, FormGroup, FormControl, Form, Button, Jumbotron, Well, Table } from 'react-bootstrap';
+import cookie from "react-cookies";
+import { Accordion, Glyphicon, Panel, PanelGroup, Collapse, ControlLabel, ListGroupItem, ListGroup, FormGroup, FormControl, Form, Button, Jumbotron, Well, Table } from 'react-bootstrap';
 //connect to Node.js server via socket.io
 import io from 'socket.io-client';
 let socket = io.connect('http://localhost:3000');
@@ -12,7 +10,6 @@ let socket = io.connect('http://localhost:3000');
 
 // TODO: add 8 decimal digits validation
     // TODO: mousewheel
-    // TODO: add form to overlay
 // this class handles form for user data input
 class CoinForm extends Component {
 
@@ -57,16 +54,11 @@ class CoinForm extends Component {
 
     render () {
 
-        let selectOptions = [
-            { value: 'XMR', label: 'XMR' },
-            { value: 'BTC', label: 'BTC' }
-        ];
-
         return (
         // form rendering JSX
             <div>
                 <Button onClick={ ()=> this.setState({ open: !this.state.open })}>
-                    Add coin
+                    <Glyphicon glyph="plus"/>
                 </Button>
                 {' '}
                 <Collapse in={this.state.open}>
@@ -85,12 +77,6 @@ class CoinForm extends Component {
                         >
                             <ControlLabel>Coin name</ControlLabel>
                             {' '}
-                            {/*<Select*/}
-                                {/*name="form-field-name"*/}
-                                {/*value={this.state.name}*/}
-                                {/*options={selectOptions}*/}
-                                {/*onInputChange={this.handleNameChange.bind(this)}*/}
-                            {/*/>*/}
                             <FormControl
                                 bsSize="sm"
                                 type="text"
@@ -100,8 +86,70 @@ class CoinForm extends Component {
                                 componentClass="select"
                             >
                                 <option value=''>Select coin</option>
-                                <option value="BTC">BTC</option>
-                                <option value="XMR">XMR</option>
+                                <option value="AMP">AMP Synereo</option>
+                                <option value="ARDR">ARDR Ardor</option>
+                                <option value="BCN">BCN Bytecoin</option>
+                                <option value="BCY">BCY	BitCrystals</option>
+                                <option value="BELA">BELA Belacoin</option>
+                                <option value="BLK">BLK BlackCoin</option>
+                                <option value="BTC">BTC Bitcoin</option>
+                                <option value="BTCD">BTCD BitcoinDark</option>
+                                <option value="BTM">BTM Bitmark</option>
+                                <option value="BTS">BTS BitShare</option>
+                                <option value="BURST">BURST Burst</option>
+                                <option value="CLAM">CLAM CLAMS</option>
+                                <option value="DASH">DASH Dash</option>
+                                <option value="DCR">DCR Decred</option>
+                                <option value="DGB">DGB DigiByte</option>
+                                <option value="DOGE">DOGE Dogecoin</option>
+                                <option value="EMC2">EMC2 Einsteinium</option>
+                                <option value="ETC">ETC Ethereum Classic</option>
+                                <option value="ETH">ETH Ethereum</option>
+                                <option value="EXP">EXP Expanse</option>
+                                <option value="FCT">FCT Factom</option>
+                                <option value="FLDC">FLDC FoldingCoin</option>
+                                <option value="FLO">FLO Florincoin</option>
+                                <option value="GAME">GAME GameCredits</option>
+                                <option value="GNO">GNO Gnosis</option>
+                                <option value="GNT">GNT Golem</option>
+                                <option value="GRC">GRC Gridcoin Research</option>
+                                <option value="HUC">HUC Huntercoin</option>
+                                <option value="LBC">LBC LBRY Credits </option>
+                                <option value="LSK">LSK Lisk</option>
+                                <option value="LTC">LTC Litecoin</option>
+                                <option value="MAID">MAID MaidSafeCoin</option>
+                                <option value="NAUT">NAUT Nautiluscoin</option>
+                                <option value="NAV">NAV NAVCoin</option>
+                                <option value="NEOS">NEOS Neoscoin</option>
+                                <option value="NMC">NMC Namecoin</option>
+                                <option value="NOTE">NOTE DNotes</option>
+                                <option value="NXC">NXC Nexium</option>
+                                <option value="NXT">NXT NXT</option>
+                                <option value="OMNI">OMNI Omni</option>
+                                <option value="PASC">PASC PascalCoin</option>
+                                <option value="PINK">PINK Pinkcoin</option>
+                                <option value="POT">POT PotCoin</option>
+                                <option value="PPC">PPC Peercoin</option>
+                                <option value="REP">REP Augur</option>
+                                <option value="RIC">RIC Riecoin</option>
+                                <option value="SBD">SBD Steem Dollars</option>
+                                <option value="SC">SC Siacoin</option>
+                                <option value="SJCX">SJCX Storjcoin X</option>
+                                <option value="STEEM">STEEM STEEM</option>
+                                <option value="STR">STR Stellar</option>
+                                <option value="STRAT">STRAT Stratis</option>
+                                <option value="SYS">SYS Syscoin</option>
+                                <option value="VIA">VIA Viacoin</option>
+                                <option value="VRC">VRC VeriCoin</option>
+                                <option value="VTC">VTC Vertcoin</option>
+                                <option value="XBC">XBC BitcoinPlus</option>
+                                <option value="XCP">XCP Counterparty</option>
+                                <option value="XEM">XEM NEM</option>
+                                <option value="XMR">XMR Monero</option>
+                                <option value="XPM">XPM Primecoin</option>
+                                <option value="XRP">XRP Ripple</option>
+                                <option value="XVC">XVC Vcash</option>
+                                <option value="ZEC">ZEC Zcash</option>
                             </FormControl>
                             {' '}
                             <ControlLabel>Quantity</ControlLabel>
@@ -146,13 +194,13 @@ class Coin extends Component {
                 }
             },
             BTC: {
-                price: null,
+                price: 0,
                 volume: null,
                 long: null,
                 cap24hrChange: null
             },
             XMR: {
-                price: null,
+                price: 0,
                 volume: null,
                 long: null,
                 cap24hrChange: null
@@ -1106,35 +1154,81 @@ class Coin extends Component {
     }
 
 
-        getData(){
-        if (this.props.coin.id === 'XMR') {
+    showContent(){
+        if (this.props.coin.id === 'XMR' && this.state.XMR.price !== 0 && this.state.BTC.price !== 0) {
             return (
-                <div style={{display: 'inline-block'}}>
-            <p className="usdValue">{(this.state.XMR.price * this.props.coin.quantity).toFixed(2)}</p>
+                <div className="allContentData" style={{display: 'inline-block'}}>
+                    <div style={{display: 'inline-block'}} className="btcPriceFull">
+                    <p className="toBTCRatioName"> {this.props.coin.id}/BTC: </p>
+                    {' '}
+                    <p className="toBTCRatioValue"> {(this.state.XMR.price / this.state.BTC.price).toFixed(8)} </p>
+                    </div>
+                    {' '}
+                    <div style={{display: 'inline-block'}} className="usdPriceFull">
+                    <p className="toUSDRatioName"> {this.props.coin.id}/USD: </p>
+                    {' '}
+                    <p className="toBTCRatioValue">{(this.state.XMR.price).toFixed(2)} </p>
+                    </div>
+                </div>
+            )
+        } else {
+            return (<div style={{display: 'inline-block'}}> <p className="loading-entry"> Loading data... </p> </div>)
+        }
+    }
+
+    showHeader(){
+        if (this.props.coin.id === 'XMR' && this.state.XMR.price !== 0 && this.state.BTC.price !== 0) {
+            return (
+                <div className="coinEntryHeader" >
+                    <p className="coinNameLong"> {this.state.XMR.long} </p>
+                    {' '}
+                    <div className="allHeaderData" style={{display: 'inline-block'}} >
+                    <div style={{display: 'inline-block'}} className="coinQFull">
+                    <p className="coinName"> {this.props.coin.name}{':'} </p>
+                    {' '}
+                    <p className="coinQ"> {this.props.coin.quantity} </p>
+                    </div>
+                    {' '}
+                    <div style={{display: 'inline-block'}} className="BTCFull">
+                    <p className="btcName"> BTC: </p>
+                    {' '}
+                    <p className="btcValue"> {((this.state.XMR.price * this.props.coin.quantity) / this.state.BTC.price).toFixed(8)} </p>
+                    </div>
+                    {' '}
+                    <div style={{display: 'inline-block'}} className="USDFull">
+                    <p className="usdName">  {'  USD:'} </p>
+                    {' '}
+                    <p className="usdValue">{(this.state.XMR.price * this.props.coin.quantity).toFixed(2)}</p>
+                    </div>
                     {' '}
                     {this.state.XMR.cap24hrChange > 0 ?
                         <p className='coinEntryChangeUp'> {' ('}{this.state.XMR.cap24hrChange}{'%)'}</p> :
                         <p className='coinEntryChangeDown'> {' ('}{this.state.XMR.cap24hrChange}{'%)'}</p>}
-
+                    </div>
+                    {' '}
+                    <Button bsStyle="danger" className="remove-button"
+                        onClick={() => {
+                            this.props.remove(this.props.coin.id)}}>
+                        <Glyphicon glyph="remove"/>
+                    </Button>
                 </div>
             )
+        }  else {
+            return (<div style={{display: 'inline-block'}}> <p className="loading-entry"> Loading data... </p> </div>)
         }
     }
 
 render() {
     return (
-        <ListGroupItem
-            style={{maxHeight: "50"}} key={this.props.coin.id} onClick={() => {
-            this.props.remove(this.props.coin.id)
-        }}>
-            <p className="coinName"> {this.props.coin.name}{': '} </p>
-            <p className="coinQ"> {this.props.coin.quantity} </p>
-            {' '}
-            <p className="usdName">  {'  USD: '} </p>
-            {this.getData()}
+        <Panel
+            className="coinEntry"
+            collapsible
+            header={this.showHeader()}
+            key={this.props.coin.id} >
 
+            {this.showContent()}
 
-        </ListGroupItem>);
+        </Panel>);
 }}
 
 //list creating function
@@ -1144,7 +1238,7 @@ const CoinList = ({coins, remove}) => {
         return (<Coin coin={coins} remove={remove}/>)
     });
     // return list
-    return (<ListGroup>{coinNode}</ListGroup>);
+    return (<Accordion >{coinNode}</Accordion>);
 };
 
 
@@ -1156,7 +1250,7 @@ export default class CoinInputApp extends Component {
         super(props);
         // set initial empty state
         this.state = {
-            data: []
+            data: cookie.load("data") || []
         }
     }
 
@@ -1168,6 +1262,7 @@ export default class CoinInputApp extends Component {
         this.state.data.push(coin);
         // update state
         this.setState({data: this.state.data});
+        cookie.save("data", this.state.data, {path: "/"})
     }
     // handle remove
     handleRemove(id){
@@ -1183,7 +1278,7 @@ export default class CoinInputApp extends Component {
         // console.log(this.state.toUSD);
         // render JSX, pass props
         return (
-            <Jumbotron style={{height: '425'}}>
+            <Jumbotron style={{height: '425', overflowY: 'scroll', overflowX: 'contain'}}>
                 <CoinForm addCoin={this.addCoin.bind(this)}/>
                 <CoinList
                     coins={this.state.data}
