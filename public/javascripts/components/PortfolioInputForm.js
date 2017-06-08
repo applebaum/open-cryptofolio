@@ -1272,6 +1272,7 @@ export default class CoinInputApp extends Component {
         });
         // update state with filter
         this.setState({data: remainder});
+        cookie.save("data", remainder, {path: "/", maxAge: 631138520})
     }
 
     render(){
