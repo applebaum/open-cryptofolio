@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import cookie from "react-cookies";
-import { Accordion, Glyphicon, Panel, PanelGroup, Collapse, ControlLabel, ListGroupItem, ListGroup, FormGroup, FormControl, Form, Button, Jumbotron, Well, Table } from 'react-bootstrap';
+import { Tooltip, OverlayTrigger, Accordion, Glyphicon, Panel, PanelGroup, Collapse, ControlLabel, ListGroupItem, ListGroup, FormGroup, FormControl, Form, Button, Jumbotron, Well, Table } from 'react-bootstrap';
 //connect to Node.js server via socket.io
 import io from 'socket.io-client';
 let socket = io.connect('http://localhost:3000');
@@ -111,13 +111,17 @@ class CoinForm extends Component {
         return (
         // form rendering JSX
             <div>
+                <OverlayTrigger placement="top" overlay={<Tooltip id="tooltip">Add coin to portfolio</Tooltip>}>
                 <Button onClick={ ()=> this.setState({ open: !this.state.open })}>
                     <Glyphicon glyph="plus"/>
                 </Button>
+                </OverlayTrigger>
                 {' '}
+                <OverlayTrigger placement="top" overlay={<Tooltip id="tooltip">Download portfolio locally as CSV</Tooltip>}>
                 <Button onClick={ () => this.downloadCSV({ filename: "portfolio-data.csv" }) }>
-                    <Glyphicon glyph='download'/>
+                    <Glyphicon glyph='save'/>
                 </Button>
+                </OverlayTrigger>
                 {' '}
                 <Collapse in={this.state.open}>
                     <div>
@@ -1264,11 +1268,13 @@ class Coin extends Component {
                         <p className='coinEntryChangeDown'> {' ('}{this.state.XMR.cap24hrChange}{'%)'}</p>}
                     </div>
                     {' '}
+                    <OverlayTrigger delayShow={1000} placement="right" overlay={<Tooltip id="tooltip">Remove coin from portfolio</Tooltip>}>
                     <Button bsStyle="danger" className="remove-button"
                         onClick={() => {
                             this.props.remove(this.props.coin.id)}}>
                         <Glyphicon glyph="remove"/>
                     </Button>
+                    </OverlayTrigger>
                 </div>
             )
         }  else {
