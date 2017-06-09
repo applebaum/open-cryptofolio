@@ -1,12 +1,14 @@
 import React, {Component} from "react";
 import cookie from "react-cookies";
-import { Tooltip, OverlayTrigger, Accordion, Glyphicon, Panel, PanelGroup, Collapse, ControlLabel, ListGroupItem, ListGroup, FormGroup, FormControl, Form, Button, Jumbotron, Well, Table } from 'react-bootstrap';
+import csv from 'csv';
+import { HelpBlock, Popover, Tooltip, OverlayTrigger, Accordion, Glyphicon, Panel, PanelGroup, Collapse, ControlLabel, ListGroupItem, ListGroup, FormGroup, FormControl, Form, Button, Jumbotron, Well, Table } from 'react-bootstrap';
 //connect to Node.js server via socket.io
 import io from 'socket.io-client';
 let socket = io.connect('http://localhost:3000');
 
-/** This component renders input form for user to enter information on coins he/she'd like to track,
-*  passes data through handling functions (add and remove), maps through it and creates list displayed to user */
+/** This component renders input form for user to enter information on coins he/she'd like to track (also accepts previously
+ * exported CSV portfolio file), passes data through handling functions (add and remove),
+ * maps through it and creates list displayed to user. An option to export portfolio as CSV is also presented. */
 
 // TODO: add 8 decimal digits validation
     // TODO: mousewheel
@@ -23,20 +25,24 @@ class CoinForm extends Component {
         };
     }
 
+    // sets coin chosen by user as state to display and send to CoinInputApp for handling on submit
     handleNameChange(e) {
         this.setState({ name: e.target.value });
     }
 
+    //sets quantity specified by user as state to display and send to CoinInputApp for handling on submit
     handleQuantityChange(e) {
         this.setState({ quantity: e.target.value });
     }
 
+    //check if user input data is valid and color form green/red accordingly
     getValidationState() {
         if (this.state.quantity > 0.00000001 && this.state.name.length > 1) return 'success';
         else if (this.state.quantity < 0.00000001) return 'error';
         else if (this.state.name.length < 1) return 'error';
     }
 
+    //check if user input data is valid and enable/disable submit button accordingly
     disableButton() {
          if (this.state.quantity < 0.00000001) {
              return true
@@ -44,14 +50,19 @@ class CoinForm extends Component {
          else {return false}
          }
 
+         // reset form data on submit
     reset(){
         this.setState({
             name: '',
             quantity: 0});
     }
 
+
+
+    // CSV export functionality:
+    //
     // first the function loops through the keys on one of the objects to create a header row, followed by a newline.
-    // then we loop through each object and write out the values of each property.
+    // then it loops through each object and writes out the values of each property.
     convertArrayOfObjectsToCSV(args) {
     let result, ctr, keys, columnDelimiter, lineDelimiter, data;
 
@@ -84,7 +95,7 @@ class CoinForm extends Component {
 }
 
     // this function takes the CSV we created and prepends a special string that tells the browser
-    // that our content is CSV and it needs to be downloaded
+    // that  content is CSV and it needs to be downloaded
     downloadCSV(args) {
     let data, filename, link;
 
@@ -106,21 +117,47 @@ class CoinForm extends Component {
     link.click();
 }
 
+
+// render JSX
     render () {
+        const uploadPopover = (
+            <Popover id="popover-trigger-click">
+                <FormControl
+                    id="formControlsFile"
+                    type="file"
+                    accept=".csv"
+                    onChange={this.props.uploadCSV}/>
+                <HelpBlock>Select portfolio CSV file</HelpBlock>
+            </Popover>
+        );
 
         return (
         // form rendering JSX
             <div>
-                <OverlayTrigger placement="top" overlay={<Tooltip id="tooltip">Add coin to portfolio</Tooltip>}>
+                <OverlayTrigger placement="top"
+                                overlay={<Tooltip id="tooltip">Add coin to portfolio</Tooltip>}>
                 <Button onClick={ ()=> this.setState({ open: !this.state.open })}>
                     <Glyphicon glyph="plus"/>
                 </Button>
                 </OverlayTrigger>
                 {' '}
-                <OverlayTrigger placement="top" overlay={<Tooltip id="tooltip">Download portfolio locally as CSV</Tooltip>}>
+                <OverlayTrigger placement="top"
+                                overlay={<Tooltip id="tooltip">Download portfolio locally as CSV</Tooltip>}>
                 <Button onClick={ () => this.downloadCSV({ filename: "portfolio-data.csv" }) }>
                     <Glyphicon glyph='save'/>
                 </Button>
+                </OverlayTrigger>
+                {' '}
+                <OverlayTrigger rootClose
+                    placement="top"
+                    trigger="click"
+                    overlay={uploadPopover}>
+                    <OverlayTrigger placement="top"
+                                    overlay={<Tooltip id="tooltip">Upload portfolio CSV</Tooltip>}>
+                        <Button>
+                            <Glyphicon glyph="open"/>
+                        </Button>
+                    </OverlayTrigger>
                 </OverlayTrigger>
                 {' '}
                 <Collapse in={this.state.open}>
@@ -242,7 +279,7 @@ class Coin extends Component {
     constructor(props) {
         // pass props to parent class
         super(props);
-        // set initial empty state
+        // set initial empty state for each coin available for tracking
         this.state = {
             data: {
                 message: {
@@ -643,6 +680,7 @@ class Coin extends Component {
         socket.on('trades', (data) => this.setData(data));
     }
 
+    //handler function passes received data to component state and fires update functions on all of the coins
     setData(data) {
         this.setState({
             data: data
@@ -1215,37 +1253,64 @@ class Coin extends Component {
         }
     }
 
-
+    // shows content hidden under cat (coin/BTC and coin/USD ratio)
     showContent(){
+        //check for coin name and if data on coin was already received to avoid displaying uncalculated data,
+        //otherwise return string placeholder
         if (this.props.coin.id === 'XMR' && this.state.XMR.price !== 0 && this.state.BTC.price !== 0) {
             return (
                 <div className="allContentData" style={{display: 'inline-block'}}>
                     <div style={{display: 'inline-block'}} className="btcPriceFull">
                     <p className="toBTCRatioName"> {this.props.coin.id}/BTC: </p>
                     {' '}
+                    {/*divide coin/USD price by BTC/USD price to calculate coin/BTC price and display 8 digits after decimal*/}
                     <p className="toBTCRatioValue"> {(this.state.XMR.price / this.state.BTC.price).toFixed(8)} </p>
                     </div>
                     {' '}
                     <div style={{display: 'inline-block'}} className="usdPriceFull">
                     <p className="toUSDRatioName"> {this.props.coin.id}/USD: </p>
                     {' '}
+                    {/*show coin/USD price and display 2 digits after decimal*/}
                     <p className="toBTCRatioValue">{(this.state.XMR.price).toFixed(2)} </p>
                     </div>
                 </div>
             )
+        //    repeat for other coins
+        } else if (this.props.coin.id === 'XRP' && this.state.XRP.price !== 0 && this.state.BTC.price !== 0) {
+            return (
+                <div className="allContentData" style={{display: 'inline-block'}}>
+                    <div style={{display: 'inline-block'}} className="btcPriceFull">
+                        <p className="toBTCRatioName"> {this.props.coin.id}/BTC: </p>
+                        {' '}
+                        <p className="toBTCRatioValue"> {(this.state.XRP.price / this.state.BTC.price).toFixed(8)} </p>
+                    </div>
+                    {' '}
+                    <div style={{display: 'inline-block'}} className="usdPriceFull">
+                        <p className="toUSDRatioName"> {this.props.coin.id}/USD: </p>
+                        {' '}
+                        <p className="toBTCRatioValue">{(this.state.XRP.price).toFixed(2)} </p>
+                    </div>
+                </div>
+            )
         } else {
+            // return string placeholder if data wasnt loaded
             return (<div style={{display: 'inline-block'}}> <p className="loading-entry"> Loading data... </p> </div>)
         }
     }
 
+    //shows content displayed in coin entry header
     showHeader(){
+        //check for coin name and if data on coin was already received to avoid displaying uncalculated data,
+        //otherwise return string placeholder
         if (this.props.coin.id === 'XMR' && this.state.XMR.price !== 0 && this.state.BTC.price !== 0) {
             return (
                 <div className="coinEntryHeader" >
+                    {/*display full coin name received from API*/}
                     <p className="coinNameLong"> {this.state.XMR.long} </p>
                     {' '}
                     <div className="allHeaderData" style={{display: 'inline-block'}} >
                     <div style={{display: 'inline-block'}} className="coinQFull">
+                        {/*show coin symbol and quantity received from input props*/}
                     <p className="coinName"> {this.props.coin.name}{':'} </p>
                     {' '}
                     <p className="coinQ"> {this.props.coin.quantity} </p>
@@ -1254,21 +1319,26 @@ class Coin extends Component {
                     <div style={{display: 'inline-block'}} className="BTCFull">
                     <p className="btcName"> BTC: </p>
                     {' '}
+                    {/*display coin entry value in BTC by first calculating value in USD (coin USD price multiplied by quantitiy),
+                    and then dividing result by BTC price, 8 digits after decimal displayed*/}
                     <p className="btcValue"> {((this.state.XMR.price * this.props.coin.quantity) / this.state.BTC.price).toFixed(8)} </p>
                     </div>
                     {' '}
                     <div style={{display: 'inline-block'}} className="USDFull">
                     <p className="usdName">  {'  USD:'} </p>
                     {' '}
+                    {/*display coin entry value in USD by multiplying coin price in USD by quantity*/}
                     <p className="usdValue">{(this.state.XMR.price * this.props.coin.quantity).toFixed(2)}</p>
                     </div>
                     {' '}
+                    {/*check if coin change percentage is positive or negative and apply className (red or green) accordingly*/}
                     {this.state.XMR.cap24hrChange > 0 ?
                         <p className='coinEntryChangeUp'> {' ('}{this.state.XMR.cap24hrChange}{'%)'}</p> :
                         <p className='coinEntryChangeDown'> {' ('}{this.state.XMR.cap24hrChange}{'%)'}</p>}
                     </div>
                     {' '}
-                    <OverlayTrigger delayShow={1000} placement="right" overlay={<Tooltip id="tooltip">Remove coin from portfolio</Tooltip>}>
+                    {/*render remove coin entry from portfolio button*/}
+                    <OverlayTrigger delayShow={500} placement="right" overlay={<Tooltip id="tooltip">Remove coin from portfolio</Tooltip>}>
                     <Button bsStyle="danger" className="remove-button"
                         onClick={() => {
                             this.props.remove(this.props.coin.id)}}>
@@ -1277,6 +1347,46 @@ class Coin extends Component {
                     </OverlayTrigger>
                 </div>
             )
+        //    repeat for other coins
+        } else if (this.props.coin.id === 'XRP' && this.state.XRP.price !== 0 && this.state.BTC.price !== 0) {
+            return (
+                <div className="coinEntryHeader" >
+                    <p className="coinNameLong"> {this.state.XRP.long} </p>
+                    {' '}
+                    <div className="allHeaderData" style={{display: 'inline-block'}} >
+                        <div style={{display: 'inline-block'}} className="coinQFull">
+                            <p className="coinName"> {this.props.coin.name}{':'} </p>
+                            {' '}
+                            <p className="coinQ"> {this.props.coin.quantity} </p>
+                        </div>
+                        {' '}
+                        <div style={{display: 'inline-block'}} className="BTCFull">
+                            <p className="btcName"> BTC: </p>
+                            {' '}
+                            <p className="btcValue"> {((this.state.XRP.price * this.props.coin.quantity) / this.state.BTC.price).toFixed(8)} </p>
+                        </div>
+                        {' '}
+                        <div style={{display: 'inline-block'}} className="USDFull">
+                            <p className="usdName">  {'  USD:'} </p>
+                            {' '}
+                            <p className="usdValue">{(this.state.XRP.price * this.props.coin.quantity).toFixed(2)}</p>
+                        </div>
+                        {' '}
+                        {this.state.XRP.cap24hrChange > 0 ?
+                            <p className='coinEntryChangeUp'> {' ('}{this.state.XRP.cap24hrChange}{'%)'}</p> :
+                            <p className='coinEntryChangeDown'> {' ('}{this.state.XRP.cap24hrChange}{'%)'}</p>}
+                    </div>
+                    {' '}
+                    <OverlayTrigger delayShow={500} placement="right" overlay={<Tooltip id="tooltip">Remove coin from portfolio</Tooltip>}>
+                        <Button bsStyle="danger" className="remove-button"
+                                onClick={() => {
+                                    this.props.remove(this.props.coin.id)}}>
+                            <Glyphicon glyph="remove"/>
+                        </Button>
+                    </OverlayTrigger>
+                </div>
+            )
+            //return string placeholder if data hasnt been loaded yet
         }  else {
             return (<div style={{display: 'inline-block'}}> <p className="loading-entry"> Loading data... </p> </div>)
         }
@@ -1287,11 +1397,11 @@ render() {
         <Panel
             className="coinEntry"
             collapsible
+            // data displayed in header
             header={this.showHeader()}
             key={this.props.coin.id} >
-
+            {/*data displayed under cat*/}
             {this.showContent()}
-
         </Panel>);
 }}
 
@@ -1312,7 +1422,7 @@ export default class CoinInputApp extends Component {
     constructor(props){
         // pass props to parent class
         super(props);
-        // set initial empty state
+        // load data from cookies or set initial empty state (array) if no cookies are provided
         this.state = {
             data: cookie.load("data") || []
         }
@@ -1326,6 +1436,7 @@ export default class CoinInputApp extends Component {
         this.state.data.push(coin);
         // update state
         this.setState({data: this.state.data});
+        // save data to cookies
         cookie.save("data", this.state.data, {path: "/", maxAge: 631138520})
     }
     // handle remove
@@ -1336,15 +1447,48 @@ export default class CoinInputApp extends Component {
         });
         // update state with filter
         this.setState({data: remainder});
+        // update cookies
         cookie.save("data", remainder, {path: "/", maxAge: 631138520})
+    }
+
+    // this function handles CSV upload, it utilises File Reader to read content of file without downloading it,
+    // and parses CSV to JSON using csv package
+    uploadCSV(e) {
+        //define File Reader instance
+        const reader = new FileReader();
+        //define file uploaded by user
+        const file = e.target.files[0];
+        // define this to use in nested function
+        let _this = this;
+
+        //read file content and output a string
+        reader.readAsBinaryString(file);
+
+        //when file was read pass it to CSV parser
+        reader.onload = () => {
+            //parse CSV to JSON using csv package
+            csv.parse(reader.result, {columns: true}, function (err, data) {
+                //set parsed data as state
+                _this.setState({data: data});
+                //update cookies
+                cookie.save("data", data, {path: "/", maxAge: 631138520})
+
+            })
+        };
     }
 
     render(){
         // console.log(this.state.toUSD);
         // render JSX, pass props
+        console.log(this.state.data);
+
         return (
             <Jumbotron style={{height: '425', overflowY: 'scroll', overflowX: 'contain'}}>
-                <CoinForm addCoin={this.addCoin.bind(this)} data={this.state.data}/>
+                <CoinForm
+                    addCoin={this.addCoin.bind(this)}
+                    data={this.state.data}
+                    uploadCSV={this.uploadCSV.bind(this)}
+                />
                 <CoinList
                     coins={this.state.data}
                     remove={this.handleRemove.bind(this)}

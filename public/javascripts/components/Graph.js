@@ -116,7 +116,7 @@ class GraphPlaceHolder extends Component {
                 }
             },
             title: {
-                text: 'To see chart please chose coin on the right',
+                text: 'To see chart please choose coin on the right',
                 style: {
                     fontSize: '32px'
                 }
