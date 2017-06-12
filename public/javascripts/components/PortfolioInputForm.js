@@ -1,7 +1,8 @@
 import React, {Component} from "react";
 import cookie from "react-cookies";
 import csv from 'csv';
-import { HelpBlock, Popover, Tooltip, OverlayTrigger, Accordion, Glyphicon, Panel, PanelGroup, Collapse, ControlLabel, ListGroupItem, ListGroup, FormGroup, FormControl, Form, Button, Jumbotron, Well, Table } from 'react-bootstrap';
+import { Modal, HelpBlock, Popover, Tooltip, OverlayTrigger, Accordion, Glyphicon, Panel, PanelGroup, Collapse, ControlLabel, ListGroupItem, ListGroup, FormGroup, FormControl, Form, Button, Jumbotron, Well, Table } from 'react-bootstrap';
+import PortfolioPerformance from './PortfolioPerformance';
 //connect to Node.js server via socket.io
 import io from 'socket.io-client';
 let socket = io.connect('http://localhost:3000');
@@ -56,8 +57,6 @@ class CoinForm extends Component {
             name: '',
             quantity: 0});
     }
-
-
 
     // CSV export functionality:
     //
@@ -281,6 +280,7 @@ class Coin extends Component {
         super(props);
         // set initial empty state for each coin available for tracking
         this.state = {
+            removeWarning: false,
             data: {
                 message: {
                     coin: null,
@@ -648,7 +648,7 @@ class Coin extends Component {
                 cap24hrChange: null
             },
             XRP: {
-                price: null,
+                price: 0,
                 volume: null,
                 long: null,
                 cap24hrChange: null
@@ -1273,6 +1273,39 @@ class Coin extends Component {
                     {/*show coin/USD price and display 2 digits after decimal*/}
                     <p className="toBTCRatioValue">{(this.state.XMR.price).toFixed(2)} </p>
                     </div>
+                    {' '}
+                    {/*render remove coin entry from portfolio button*/}
+                    <OverlayTrigger delayShow={500} placement="right" overlay={<Tooltip id="tooltip">Remove coin from portfolio</Tooltip>}>
+                        <Button bsStyle="danger" className="remove-button"
+                                onClick={()=>this.setState({ removeWarning: true })}>
+                            <Glyphicon glyph="remove"/>
+                        </Button>
+                    </OverlayTrigger>
+                    {/*render delete coin confirmation controlled by this.state.removeWarning boolean*/}
+                    <Modal className="modal" keyboard show={this.state.removeWarning} bsSize="small">
+                        <Modal.Header className="modal-header">
+                            <Modal.Title className="modal-title" id="contained-modal-title-sm"><strong>Delete entry</strong></Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body className="modal-body">
+                            <h4>Are you sure you want to delete {' ' + this.props.coin.id + ' '} from your portfolio?</h4>
+                        </Modal.Body>
+                        <Modal.Footer className="modal-footer">
+                            <Button className="modal-close-button" bsSize="large" onClick={() => {
+                                this.closeWarning()}}>
+                                <Glyphicon glyph="menu-left"/>
+                                {' '}
+                                Return
+                            </Button>
+                            {' '}
+                            <Button classNAme="modal-remove-button" bsSize="large" bsStyle="danger"
+                                    onClick={() => {
+                                        this.props.remove(this.props.coin.id)}}>
+                                Delete
+                                {' '}
+                                <Glyphicon glyph="trash"/>
+                            </Button>
+                        </Modal.Footer>
+                    </Modal>
                 </div>
             )
         //    repeat for other coins
@@ -1290,6 +1323,38 @@ class Coin extends Component {
                         {' '}
                         <p className="toBTCRatioValue">{(this.state.XRP.price).toFixed(2)} </p>
                     </div>
+                    {' '}
+                    {/*render remove coin entry from portfolio button*/}
+                    <OverlayTrigger delayShow={500} placement="right" overlay={<Tooltip id="tooltip">Remove coin from portfolio</Tooltip>}>
+                        <Button bsStyle="danger" className="remove-button"
+                                onClick={()=>this.setState({ removeWarning: true })}>
+                            <Glyphicon glyph="remove"/>
+                        </Button>
+                    </OverlayTrigger>
+                    <Modal className="modal" keyboard show={this.state.removeWarning} bsSize="small">
+                        <Modal.Header className="modal-header">
+                            <Modal.Title className="modal-title" id="contained-modal-title-sm"><strong>Delete entry</strong></Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body className="modal-body">
+                            <h4>Are you sure you want to delete {' ' + this.props.coin.id + ' '} from your portfolio?</h4>
+                        </Modal.Body>
+                        <Modal.Footer className="modal-footer">
+                            <Button className="modal-close-button" bsSize="large" onClick={() => {
+                                this.closeWarning()}}>
+                                <Glyphicon glyph="menu-left"/>
+                                {' '}
+                                Return
+                            </Button>
+                            {' '}
+                            <Button classNAme="modal-remove-button" bsSize="large" bsStyle="danger"
+                                    onClick={() => {
+                                        this.props.remove(this.props.coin.id)}}>
+                                Delete
+                                {' '}
+                                <Glyphicon glyph="trash"/>
+                            </Button>
+                        </Modal.Footer>
+                    </Modal>
                 </div>
             )
         } else {
@@ -1306,7 +1371,7 @@ class Coin extends Component {
             return (
                 <div className="coinEntryHeader" >
                     {/*display full coin name received from API*/}
-                    <p className="coinNameLong"> {this.state.XMR.long} </p>
+                    <p className="coinNameLong"> {this.state.XMR.long}</p>
                     {' '}
                     <div className="allHeaderData" style={{display: 'inline-block'}} >
                     <div style={{display: 'inline-block'}} className="coinQFull">
@@ -1337,14 +1402,12 @@ class Coin extends Component {
                         <p className='coinEntryChangeDown'> {' ('}{this.state.XMR.cap24hrChange}{'%)'}</p>}
                     </div>
                     {' '}
-                    {/*render remove coin entry from portfolio button*/}
-                    <OverlayTrigger delayShow={500} placement="right" overlay={<Tooltip id="tooltip">Remove coin from portfolio</Tooltip>}>
-                    <Button bsStyle="danger" className="remove-button"
-                        onClick={() => {
-                            this.props.remove(this.props.coin.id)}}>
-                        <Glyphicon glyph="remove"/>
-                    </Button>
+                    <OverlayTrigger placement="right" overlay={<Tooltip id="tooltip">Show more</Tooltip>}>
+                        <Button>
+                            <Glyphicon glyph="menu-down"/>
+                        </Button>
                     </OverlayTrigger>
+
                 </div>
             )
         //    repeat for other coins
@@ -1377,11 +1440,9 @@ class Coin extends Component {
                             <p className='coinEntryChangeDown'> {' ('}{this.state.XRP.cap24hrChange}{'%)'}</p>}
                     </div>
                     {' '}
-                    <OverlayTrigger delayShow={500} placement="right" overlay={<Tooltip id="tooltip">Remove coin from portfolio</Tooltip>}>
-                        <Button bsStyle="danger" className="remove-button"
-                                onClick={() => {
-                                    this.props.remove(this.props.coin.id)}}>
-                            <Glyphicon glyph="remove"/>
+                    <OverlayTrigger placement="right" overlay={<Tooltip id="tooltip">Show more</Tooltip>}>
+                        <Button>
+                            <Glyphicon glyph="menu-down"/>
                         </Button>
                     </OverlayTrigger>
                 </div>
@@ -1392,8 +1453,12 @@ class Coin extends Component {
         }
     }
 
-render() {
+    closeWarning() {this.setState({ removeWarning: false })};
+
+
+    render() {
     return (
+        <div>
         <Panel
             className="coinEntry"
             collapsible
@@ -1402,7 +1467,9 @@ render() {
             key={this.props.coin.id} >
             {/*data displayed under cat*/}
             {this.showContent()}
-        </Panel>);
+        </Panel>
+
+        </div>);
 }}
 
 //list creating function
@@ -1483,6 +1550,7 @@ export default class CoinInputApp extends Component {
         console.log(this.state.data);
 
         return (
+            <div>
             <Jumbotron style={{height: '425', overflowY: 'scroll', overflowX: 'contain'}}>
                 <CoinForm
                     addCoin={this.addCoin.bind(this)}
@@ -1494,6 +1562,8 @@ export default class CoinInputApp extends Component {
                     remove={this.handleRemove.bind(this)}
                 />
             </Jumbotron>
+            {/*<PortfolioPerformance coins={this.state.data}/>*/}
+            </div>
         );
     }
 }
