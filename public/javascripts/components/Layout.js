@@ -1,11 +1,12 @@
 import React, {Component} from "react";
+import cookie from "react-cookies";
 import GraphContainer from './GraphContainer';
 import Ticker from './Ticker';
 import PortfolioContainer from './PortfolioContainer';
-import { Button, Glyphicon, Grid, Col, Row,  Navbar } from 'react-bootstrap';
+import { Button, OverlayTrigger, Tooltip, Glyphicon, Grid, Col, Row,  Navbar } from 'react-bootstrap';
 
 /**This is a layout component utilising bootstrap grid system*/
-
+//TODO: cookies
 export default class Layout extends Component {
     constructor(props) {
         super(props);
@@ -25,6 +26,8 @@ export default class Layout extends Component {
             showTicker: !this.state.showTicker,
             columnSize: this.state.columnSize === 12 ? 9 : 12
         });
+        // cookie.save("showTicker", this.state.showTicker, {path: "/", maxAge: 631138520});
+        // cookie.save("columnSize", this.state.columnSize, {path: "/", maxAge: 631138520});
     }
 
     render() {
@@ -40,9 +43,16 @@ export default class Layout extends Component {
 
                     <Row className="show-grid">
                         <Col md={this.state.columnSize}>
-                            <Button  className="ticker-button" onClick={ () => this.showTicker() }>
-                                <Glyphicon glyph="stats"/>
-                            </Button>
+
+                            <OverlayTrigger placement="left"
+                                            overlay={this.state.showTicker ?
+                                                <Tooltip id="tooltip">Hide ticker</Tooltip> :
+                                                <Tooltip id="tooltip">Show ticker for all available coins (consumes bandwidth)</Tooltip>}>
+                                <Button  className="ticker-button" onClick={ () => this.showTicker() }>
+                                    <Glyphicon glyph="stats"/>
+                                </Button>
+                            </OverlayTrigger>
+
                             <GraphContainer />
                             <PortfolioContainer />
                         </Col>
@@ -50,8 +60,7 @@ export default class Layout extends Component {
                         { this.state.showTicker ?
                             <Col md={3}>
                                 <Ticker />
-                            </Col> : null
-                             }
+                            </Col> : null }
                     </Row>
 
                 </Grid>

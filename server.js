@@ -208,7 +208,9 @@ let socket = ioClient.connect('http://socket.coincap.io');
 //when received data, emit it to client
 socket.on('trades', function (tradeMsg) {
     io.emit('trades', tradeMsg);
-    // console.log(tradeMsg);
+    if (tradeMsg.message.coin === 'XMR') {
+        io.emit('XMR', tradeMsg);
+    }
 });
 
 module.exports = app;

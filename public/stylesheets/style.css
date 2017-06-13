@@ -3,7 +3,8 @@
     width: 100% !important;
     height: 100% !important;
     margin: auto;
-    display: inline-block;
+    display: inline-flex;
+    justify-content: space-between;
 
 }
 

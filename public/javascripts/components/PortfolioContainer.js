@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import PortfolioInputForm from './PortfolioInputForm';
+import CoinInputApp from './CoinInputApp';
 import PortfolioPerformance from './PortfolioPerformance';
 import { Grid, Col, Row } from 'react-bootstrap';
 
@@ -11,7 +11,7 @@ export default class PortfolioContainer extends Component {
             <Grid fluid={true}>
                 <Row className="showGrid">
                     <Col md={8} >
-                        <PortfolioInputForm />
+                        <CoinInputApp />
                     </Col>
                     <Col md={4} >
                         <PortfolioPerformance/>
