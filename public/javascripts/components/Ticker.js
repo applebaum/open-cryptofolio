@@ -23,6 +23,7 @@ let socket = io.connect('http://localhost:3000');
 export default class Ticker extends Component {
     constructor(props) {
         super(props);
+        this.setData = this.setData.bind(this);
         this.state = {
             chosenCoinData: null,
             chosenCoinName: null,
@@ -355,6 +356,13 @@ export default class Ticker extends Component {
     //connect to Node.js via socket.io and pass received data to handler function
     componentDidMount(){
         socket.on('trades', (data) => this.setData(data));
+        console.log('ticker mounted!');
+    }
+
+    // disconnect from socket.io when component unmounts
+    componentWillUnmount() {
+        socket.removeListener('trades');
+        console.log('ticker unmounted!');
     }
 
     //handler function passes received data to component state and fires update functions on all of the coins

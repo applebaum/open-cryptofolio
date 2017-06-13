@@ -77,6 +77,17 @@ p:hover {
     color: green !important;
 }
 
+.ticker-button {
+    height: 845px !important;
+    right: 0 !important;
+    position: fixed;
+    z-index: 1;
+}
+
+.ticker-container {
+    display: inline-flex;
+}
+
 /*body {*/
   /*padding: 50px;*/
   /*font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;*/

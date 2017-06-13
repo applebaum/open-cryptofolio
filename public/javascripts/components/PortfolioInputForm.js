@@ -1297,7 +1297,7 @@ class Coin extends Component {
                                 Return
                             </Button>
                             {' '}
-                            <Button classNAme="modal-remove-button" bsSize="large" bsStyle="danger"
+                            <Button className="modal-remove-button" bsSize="large" bsStyle="danger"
                                     onClick={() => {
                                         this.props.remove(this.props.coin.id)}}>
                                 Delete
@@ -1346,7 +1346,7 @@ class Coin extends Component {
                                 Return
                             </Button>
                             {' '}
-                            <Button classNAme="modal-remove-button" bsSize="large" bsStyle="danger"
+                            <Button className="modal-remove-button" bsSize="large" bsStyle="danger"
                                     onClick={() => {
                                         this.props.remove(this.props.coin.id)}}>
                                 Delete

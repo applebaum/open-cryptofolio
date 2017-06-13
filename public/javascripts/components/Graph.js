@@ -36,9 +36,9 @@ export default class GraphPreload extends Component {
         }
     }
 
-    componentWillUnmount () {
-        this.serverRequest.abort();
-    }
+    // componentWillUnmount () {
+    //     this.serverRequest.abort();
+    // }
 
     render() {
 
