@@ -199,18 +199,156 @@ app.use(function(err, req, res, next) {
     });
 });
 
-/*Socket.io connects to external CoinCap socket API and fetches historical data on all available coins,
-* it then emits the data to client as soon as it receives it*/
+/**Socket.io connects to external CoinCap socket API and fetches historical data on all available coins,
+ * splits stream by coins and stores data on each individual coin in server-side storage,
+ * then emits the data from storage to client */
+
+//create storage for caching received trade messages
+let Storage = require('node-storage');
+let store = new Storage('./store');
 
 //connect to external socket
 let socket = ioClient.connect('http://socket.coincap.io');
 
-//when received data, emit it to client
+//when received data, split it by coin name and store separately
 socket.on('trades', function (tradeMsg) {
-    io.emit('trades', tradeMsg);
-    if (tradeMsg.message.coin === 'XMR') {
-        io.emit('XMR', tradeMsg);
+    store.put('trades', tradeMsg);
+
+    switch (tradeMsg.message.coin) {
+        case 'BTC': store.put('BTC', tradeMsg); break;
+        case 'XMR': store.put('XMR', tradeMsg); break;
+        case 'XRP': store.put('XRP', tradeMsg); break;
+        case 'AMP': store.put('AMP', tradeMsg); break;
+        case 'ARDR': store.put('ARDR', tradeMsg); break;
+        case 'BCN': store.put('BCN', tradeMsg); break;
+        case 'BCY': store.put('BCY', tradeMsg); break;
+        case 'BELA': store.put('BELA', tradeMsg); break;
+        case 'BLK': store.put('BLK', tradeMsg); break;
+        case 'BTCD': store.put('BTCD', tradeMsg); break;
+        case 'BTM': store.put('BTM', tradeMsg); break;
+        case 'BTS': store.put('BTS', tradeMsg); break;
+        case 'BURST': store.put('BURST', tradeMsg); break;
+        case 'CLAM': store.put('CLAM', tradeMsg); break;
+        case 'DASH': store.put('DASH', tradeMsg); break;
+        case 'DCR': store.put('DCR', tradeMsg); break;
+        case 'DGB': store.put('DGB', tradeMsg); break;
+        case 'DOGE': store.put('DOGE', tradeMsg); break;
+        case 'EMC2': store.put('EMC2', tradeMsg); break;
+        case 'ETC': store.put('ETC', tradeMsg); break;
+        case 'ETH': store.put('ETH', tradeMsg); break;
+        case 'EXP': store.put('EXP', tradeMsg); break;
+        case 'FCT': store.put('FCT', tradeMsg); break;
+        case 'FLDC': store.put('FLDC', tradeMsg); break;
+        case 'FLO': store.put('FLO', tradeMsg); break;
+        case 'GAME': store.put('GAME', tradeMsg); break;
+        case 'GNO': store.put('GNO', tradeMsg); break;
+        case 'GNT': store.put('GNT', tradeMsg); break;
+        case 'GRC': store.put('GRC', tradeMsg); break;
+        case 'HUC': store.put('HUC', tradeMsg); break;
+        case 'LBC': store.put('LBC', tradeMsg); break;
+        case 'LSK': store.put('LSK', tradeMsg); break;
+        case 'LTC': store.put('LTC', tradeMsg); break;
+        case 'MAID': store.put('MAID', tradeMsg); break;
+        case 'NAUT': store.put('NAUT', tradeMsg); break;
+        case 'NAV': store.put('NAV', tradeMsg); break;
+        case 'NEOS': store.put('NEOS', tradeMsg); break;
+        case 'NMC': store.put('NMC', tradeMsg); break;
+        case 'NOTE': store.put('NOTE', tradeMsg); break;
+        case 'NXC': store.put('NXC', tradeMsg); break;
+        case 'NXT': store.put('NXT', tradeMsg); break;
+        case 'OMNI': store.put('OMNI', tradeMsg); break;
+        case 'PASC': store.put('PASC', tradeMsg); break;
+        case 'PINK': store.put('PINK', tradeMsg); break;
+        case 'POT': store.put('POT', tradeMsg); break;
+        case 'PPC': store.put('PPC', tradeMsg); break;
+        case 'RADS': store.put('RADS', tradeMsg); break;
+        case 'REP': store.put('REP', tradeMsg); break;
+        case 'RIC': store.put('RIC', tradeMsg); break;
+        case 'SBD': store.put('SBD', tradeMsg); break;
+        case 'SC': store.put('SC', tradeMsg); break;
+        case 'SJCX': store.put('SJCX', tradeMsg); break;
+        case 'STEEM': store.put('STEEM', tradeMsg); break;
+        case 'STR': store.put('STR', tradeMsg); break;
+        case 'STRAT': store.put('STRAT', tradeMsg); break;
+        case 'SYS': store.put('SYS', tradeMsg); break;
+        case 'VIA': store.put('VIA', tradeMsg); break;
+        case 'VRC': store.put('VRC', tradeMsg); break;
+        case 'VTC': store.put('VTC', tradeMsg); break;
+        case 'XBC': store.put('XBC', tradeMsg); break;
+        case 'XCP': store.put('XCP', tradeMsg); break;
+        case 'XEM': store.put('XEM', tradeMsg); break;
+        case 'XPM': store.put('XPM', tradeMsg); break;
+        case 'XVC': store.put('XVC', tradeMsg); break;
+        case 'ZEC': store.put('ZEC', tradeMsg); break;
     }
+
+
+    // emit data to client on each individual coin from store
+    io.emit('BTC', store.get('BTC'));
+    io.emit('XMR', store.get('XMR'));
+    io.emit('XRP', store.get('XRP'));
+    io.emit('AMP', store.get('AMP'));
+    io.emit('ARDR', store.get('ARDR'));
+    io.emit('BCN', store.get('BCN'));
+    io.emit('BCY', store.get('BCY'));
+    io.emit('BELA', store.get('BELA'));
+    io.emit('BLK', store.get('BLK'));
+    io.emit('BTCD', store.get('BTCD'));
+    io.emit('BTM', store.get('BTM'));
+    io.emit('BTS', store.get('BTS'));
+    io.emit('BURST', store.get('BURST'));
+    io.emit('CLAM', store.get('CLAM'));
+    io.emit('DASH', store.get('DASH'));
+    io.emit('DCR', store.get('DCR'));
+    io.emit('DGB', store.get('DGB'));
+    io.emit('DOGE', store.get('DOGE'));
+    io.emit('EMC2', store.get('EMC2'));
+    io.emit('ETC', store.get('ETC'));
+    io.emit('ETH', store.get('ETH'));
+    io.emit('EXP', store.get('EXP'));
+    io.emit('FCT', store.get('FCT'));
+    io.emit('FLDC', store.get('FLDC'));
+    io.emit('FLO', store.get('FLO'));
+    io.emit('GAME', store.get('GAME'));
+    io.emit('GNO', store.get('GNO'));
+    io.emit('GNT', store.get('GNT'));
+    io.emit('GRC', store.get('GRC'));
+    io.emit('HUC', store.get('HUC'));
+    io.emit('LBC', store.get('LBC'));
+    io.emit('LSK', store.get('LSK'));
+    io.emit('LTC', store.get('LTC'));
+    io.emit('MAID', store.get('MAID'));
+    io.emit('NAUT', store.get('NAUT'));
+    io.emit('NAV', store.get('NAV'));
+    io.emit('NEOS', store.get('NEOS'));
+    io.emit('NMC', store.get('NMC'));
+    io.emit('NOTE', store.get('NOTE'));
+    io.emit('NXC', store.get('NXC'));
+    io.emit('NXT', store.get('NXT'));
+    io.emit('OMNI', store.get('OMNI'));
+    io.emit('PASC', store.get('PASC'));
+    io.emit('PINK', store.get('PINK'));
+    io.emit('POT', store.get('POT'));
+    io.emit('PPC', store.get('PPC'));
+    io.emit('RADS', store.get('RADS'));
+    io.emit('REP', store.get('REP'));
+    io.emit('RIC', store.get('RIC'));
+    io.emit('SBD', store.get('SBD'));
+    io.emit('SC', store.get('SC'));
+    io.emit('SJCX', store.get('SJCX'));
+    io.emit('STEEM', store.get('STEEM'));
+    io.emit('STR', store.get('STR'));
+    io.emit('STRAT', store.get('STRAT'));
+    io.emit('SYS', store.get('SYS'));
+    io.emit('VIA', store.get('VIA'));
+    io.emit('VRC', store.get('VRC'));
+    io.emit('VTC', store.get('VTC'));
+    io.emit('XBC', store.get('XBC'));
+    io.emit('XCP', store.get('XCP'));
+    io.emit('XEM', store.get('XEM'));
+    io.emit('XPM', store.get('XPM'));
+    io.emit('XVC', store.get('XVC'));
+    io.emit('ZEC', store.get('ZEC'));
 });
 
 module.exports = app;

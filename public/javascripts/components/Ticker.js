@@ -355,7 +355,73 @@ export default class Ticker extends Component {
 
     //connect to Node.js via socket.io and pass received data to handler function
     componentDidMount(){
-        socket.on('trades', (data) => this.setData(data));
+        // socket.on('trades', (data) => this.setData(data));
+        socket.on('AMP', (data) => this.setState({AMP: data.message.msg}));
+        socket.on('ARDR', (data) => this.setState({ARDR: data.message.msg}));
+        socket.on('BCN', (data) => this.setState({BCN: data.message.msg}));
+        socket.on('BCY', (data) => this.setState({BCY: data.message.msg}));
+        socket.on('BELA', (data) => this.setState({BELA: data.message.msg}));
+        socket.on('BLK', (data) => this.setState({BLK: data.message.msg}));
+        socket.on('BTC', (data) => this.setState({BTC: data.message.msg}));
+        socket.on('BTCD', (data) => this.setState({BTCD: data.message.msg}));
+        socket.on('BTM', (data) => this.setState({BTM: data.message.msg}));
+        socket.on('BTS', (data) => this.setState({BTS: data.message.msg}));
+        socket.on('BURST', (data) => this.setState({BURST: data.message.msg}));
+        socket.on('CLAM', (data) => this.setState({CLAM: data.message.msg}));
+        socket.on('DASH', (data) => this.setState({DASH: data.message.msg}));
+        socket.on('DCR', (data) => this.setState({DCR: data.message.msg}));
+        socket.on('DGB', (data) => this.setState({DGB: data.message.msg}));
+        socket.on('DOGE', (data) => this.setState({DOGE: data.message.msg}));
+        socket.on('EMC2', (data) => this.setState({EMC2: data.message.msg}));
+        socket.on('ETC', (data) => this.setState({ETC: data.message.msg}));
+        socket.on('ETH', (data) => this.setState({ETH: data.message.msg}));
+        socket.on('EXP', (data) => this.setState({EXP: data.message.msg}));
+        socket.on('FCT', (data) => this.setState({FCT: data.message.msg}));
+        socket.on('FLDC', (data) => this.setState({FLDC: data.message.msg}));
+        socket.on('FLO', (data) => this.setState({FLO: data.message.msg}));
+        socket.on('GAME', (data) => this.setState({GAME: data.message.msg}));
+        socket.on('GNO', (data) => this.setState({GNO: data.message.msg}));
+        socket.on('GNT', (data) => this.setState({GNT: data.message.msg}));
+        socket.on('GRC', (data) => this.setState({GRC: data.message.msg}));
+        socket.on('HUC', (data) => this.setState({HUC: data.message.msg}));
+        socket.on('LBC', (data) => this.setState({LBC: data.message.msg}));
+        socket.on('LSK', (data) => this.setState({LSK: data.message.msg}));
+        socket.on('LTC', (data) => this.setState({LTC: data.message.msg}));
+        socket.on('MAID', (data) => this.setState({MAID: data.message.msg}));
+        socket.on('NAUT', (data) => this.setState({NAUT: data.message.msg}));
+        socket.on('NAV', (data) => this.setState({NAV: data.message.msg}));
+        socket.on('NEOS', (data) => this.setState({NEOS: data.message.msg}));
+        socket.on('NMC', (data) => this.setState({NMC: data.message.msg}));
+        socket.on('NOTE', (data) => this.setState({NOTE: data.message.msg}));
+        socket.on('NXC', (data) => this.setState({NXC: data.message.msg}));
+        socket.on('NXT', (data) => this.setState({NXT: data.message.msg}));
+        socket.on('OMNI', (data) => this.setState({OMNI: data.message.msg}));
+        socket.on('PASC', (data) => this.setState({PASC: data.message.msg}));
+        socket.on('PINK', (data) => this.setState({PINK: data.message.msg}));
+        socket.on('POT', (data) => this.setState({POT: data.message.msg}));
+        socket.on('PPC', (data) => this.setState({PPC: data.message.msg}));
+        socket.on('RADS', (data) => this.setState({RADS: data.message.msg}));
+        socket.on('REP', (data) => this.setState({REP: data.message.msg}));
+        socket.on('RIC', (data) => this.setState({RIC: data.message.msg}));
+        socket.on('SBD', (data) => this.setState({SBD: data.message.msg}));
+        socket.on('SC', (data) => this.setState({SC: data.message.msg}));
+        socket.on('SJCX', (data) => this.setState({SJCX: data.message.msg}));
+        socket.on('STEEM', (data) => this.setState({STEEM: data.message.msg}));
+        socket.on('STR', (data) => this.setState({STR: data.message.msg}));
+        socket.on('STRAT', (data) => this.setState({STRAT: data.message.msg}));
+        socket.on('SYS', (data) => this.setState({SYS: data.message.msg}));
+        socket.on('VIA', (data) => this.setState({VIA: data.message.msg}));
+        socket.on('VRC', (data) => this.setState({VRC: data.message.msg}));
+        socket.on('VTC', (data) => this.setState({VTC: data.message.msg}));
+        socket.on('XBC', (data) => this.setState({XBC: data.message.msg}));
+        socket.on('XCP', (data) => this.setState({XCP: data.message.msg}));
+        socket.on('XEM', (data) => this.setState({XEM: data.message.msg}));
+        socket.on('XMR', (data) => this.setState({XMR: data.message.msg}));
+        socket.on('XPM', (data) => this.setState({XPM: data.message.msg}));
+        socket.on('XRP', (data) => this.setState({XRP: data.message.msg}));
+        socket.on('XVC', (data) => this.setState({XVC: data.message.msg}));
+        socket.on('ZEC', (data) => this.setState({ZEC: data.message.msg}));
+
         console.log('ticker mounted!');
     }
 
@@ -370,7 +436,7 @@ export default class Ticker extends Component {
         this.setState({
             data: data
         });
-        this.updateXMR();
+        // this.updateXMR();
         this.updateBCN();
         this.updateAMP();
         this.updateARDR();
@@ -436,13 +502,13 @@ export default class Ticker extends Component {
 
            // update functions compare coin name from component state to specified coin name,
            // and if it matches sets components state as specified coin state
-    updateXMR() {
-        if (this.state.data.message.coin === 'XMR') {
-            this.setState({
-                XMR: this.state.data.message.msg
-            })
-        }
-    }
+    // updateXMR() {
+    //     if (this.state.data.message.coin === 'XMR') {
+    //         this.setState({
+    //             XMR: this.state.data.message.msg
+    //         })
+    //     }
+    // }
 
     updateBCN() {
         if (this.state.data.message.coin === 'BCN') {
