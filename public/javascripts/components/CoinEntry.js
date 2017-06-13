@@ -17,15 +17,10 @@ export default class Coin extends Component {
         this.state = {
             removeWarning: false,
             data: {
-                message: {
-                    coin: null,
-                    msg: {
-                        price: 0,
-                        volume: null,
-                        long: null,
-                        cap24hrChange: null
-                    }
-                }
+                price: 0,
+                volume: null,
+                long: null,
+                cap24hrChange: null
             },
             BTC: {
                 price: 0,
@@ -36,11 +31,15 @@ export default class Coin extends Component {
         };
     }
 
-
     //receive socket data on BTC and selected coin, pass that data to state
     componentDidMount(){
         socket.on('BTC', (data) => this.setState({BTC: data.message.msg}));
         socket.on(this.props.coin.id, (data) => this.setState({data: data.message.msg}));
+    }
+
+    componentWillUnmount() {
+        socket.removeListener('BTC');
+        socket.removeListener(this.props.coin.id);
     }
 
     // shows content hidden under cat (coin/BTC and coin/USD ratio)
