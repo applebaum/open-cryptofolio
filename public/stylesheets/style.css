@@ -86,7 +86,22 @@ p:hover {
 }
 
 .ticker-container {
-    display: inline-flex;
+    height: 845px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+/*.ticker-head {*/
+    /*!*position: fixed;*!*/
+    /*background-color: whitesmoke;*/
+/*}*/
+
+.ticker-change-up {
+    color: green;
+}
+
+.ticker-change-down {
+    color: darkred;
 }
 
 /*body {*/

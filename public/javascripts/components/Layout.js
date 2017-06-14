@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import cookie from "react-cookies";
 import GraphContainer from './GraphContainer';
-import Ticker from './Ticker';
+import Ticker from './TickerTable';
 import PortfolioContainer from './PortfolioContainer';
 import { Button, OverlayTrigger, Tooltip, Glyphicon, Grid, Col, Row,  Navbar } from 'react-bootstrap';
 
