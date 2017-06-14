@@ -7,9 +7,8 @@ let socket = io.connect('http://localhost:3000');
 export default class TickerEntry extends Component {
     constructor(props) {
         super(props);
+        this.displayChart = this.displayChart.bind(this);
         this.state = {
-            chosenCoinData: null,
-            chosenCoinName: null,
             //set empty data to initial state so it would render before actual data is loaded
             data: {
                 price: 0,
@@ -35,15 +34,23 @@ export default class TickerEntry extends Component {
     componentWillUnmount() {
         socket.removeListener('BTC');
         socket.removeListener(this.props.coin);
+        this.displayChart(null, null)
+    }
+
+    displayChart(link, coin) {
+        this.props.chosenCoin(link, coin)
     }
 
     render() {
+
 
         if(this.state.data.price === 0 && this.state.BTC.price === 0) {
             return null
         } else {
             return (
-                <tr>
+                <tr
+                    onClick={() => this.displayChart('http://localhost:3000/hist/' + this.props.coin, this.props.coin)}
+                >
                     <td><strong>{this.props.coin}</strong></td>
                     <td>{(this.state.data.price / this.state.BTC.price).toFixed(8)}</td>
                     <td>{this.state.data.volume}</td>

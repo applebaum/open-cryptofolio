@@ -19,12 +19,13 @@ export default class GraphPreload extends Component {
             }
         }
 
-    componentWillReceiveProps (nextProps) {
+    componentDidMount() {
         // check if received props are in fact new to prevent endless re-render and API requests
-        if (this.props.chosenCoinData !== nextProps.chosenCoinData) {
+        // if (this.props.chosenCoinData !== nextProps.chosenCoinData) {
             let _this = this;
             // set route path from props
-            let path = nextProps.chosenCoinData;
+            let path = this.props.chosenCoinData;
+            console.log('path '+path);
             this.serverRequest =
                 // axios is used to make HTTP GET call to server
                 axios
@@ -33,15 +34,12 @@ export default class GraphPreload extends Component {
                     .then(function (data) {
                         _this.setState(Object.assign({}, _this.state, {data: data, key: Math.random() }))
                     });
-        }
+        // }
     }
-
-    // componentWillUnmount () {
-    //     this.serverRequest.abort();
-    // }
 
     render() {
 
+        console.log(this.state);
         // when a change of state is detected ('null' by default) a Graph component is rendered
         if (this.state.data) {
             // data from parent state is passed as props

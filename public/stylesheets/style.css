@@ -104,6 +104,15 @@ p:hover {
     color: darkred;
 }
 
+.chart-container-big {
+    height: 400px;
+}
+
+.chart-container-small {
+    height: 400px;
+    width: 1350px;
+}
+
 /*body {*/
   /*padding: 50px;*/
   /*font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;*/

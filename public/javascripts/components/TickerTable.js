@@ -1,37 +1,48 @@
-import React from 'react';
+import React, {Component} from 'react';
 import { Table, Well } from 'react-bootstrap';
 import allCoins from './allCoins';
 import TickerRow from './TickerRow';
 
-export default function TickerTable () {
+export default class TickerTable extends Component {
+    constructor(props) {
+        super(props);
+        this.chosenCoin = this.chosenCoin.bind(this);
+    }
 
-    // map through the coins
-    const coinNode = allCoins.map((coins) => {
-        return <TickerRow coin={coins} />
-    });
+    chosenCoin(link, coin){
+        this.props.chosenCoin(link, coin);
+    }
 
-    // return list
-    return (<Well className="ticker-container">
+    render() {
 
-        <Table striped condensed hover >
+        // map through the coins
+        const coinNode = allCoins.map((coins) => {
+            return <TickerRow chosenCoin={this.chosenCoin} coin={coins}/>
+        });
 
-        <thead>
-        <tr  className="ticker-head">
-            <th>Coin</th>
-            <th>Price</th>
-            <th>Volume</th>
-            <th>Change</th>
-            <th>Name</th>
-        </tr>
-        </thead>
+        // return list
+        return (<Well className="ticker-container">
 
-        <tbody>
-        <tr className="ticker-head">{' '}</tr>
-            {coinNode}
-        </tbody>
+            <Table striped condensed hover>
 
-    </Table>
+                <thead>
+                <tr
+                    // className="ticker-head"
+                >
+                    <th>Coin</th>
+                    <th>Price</th>
+                    <th>Volume</th>
+                    <th>Change</th>
+                    <th>Name</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                {coinNode}
+                </tbody>
+
+            </Table>
 
         </Well>);
-
+    }
 }

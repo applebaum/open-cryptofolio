@@ -11,11 +11,14 @@ export default class Layout extends Component {
     constructor(props) {
         super(props);
         this.showTicker = this.showTicker.bind(this);
+        this.showChart = this.showChart.bind(this);
         this.state = {
             //Ticker visibility controlled by state
             showTicker: false,
             //size of columns controlled by state
-            columnSize: 12
+            columnSize: 12,
+            chosenCoinData: null,
+            chosenCoinName: null
         }
     }
 
@@ -28,6 +31,13 @@ export default class Layout extends Component {
         });
         // cookie.save("showTicker", this.state.showTicker, {path: "/", maxAge: 631138520});
         // cookie.save("columnSize", this.state.columnSize, {path: "/", maxAge: 631138520});
+    }
+
+    showChart(link, coin) {
+        this.setState({
+            chosenCoinData: link,
+            chosenCoinName: coin
+        })
     }
 
     render() {
@@ -51,15 +61,17 @@ export default class Layout extends Component {
                                 <Button  className="ticker-button" onClick={ () => this.showTicker() }>
                                     <Glyphicon glyph="stats"/>
                                 </Button>
+
                             </OverlayTrigger>
 
-                            <GraphContainer />
+                            <GraphContainer chosenCoinData={this.state.chosenCoinData} chosenCoinName={this.state.chosenCoinName} />
+
                             <PortfolioContainer />
                         </Col>
                         {/*if showTicker=true, then render column with Ticker, otherwise render null*/}
                         { this.state.showTicker ?
                             <Col md={3}>
-                                <Ticker />
+                                <Ticker chosenCoin={this.showChart} />
                             </Col> : null }
                     </Row>
 
