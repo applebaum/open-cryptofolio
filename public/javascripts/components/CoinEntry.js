@@ -1,5 +1,4 @@
 import React, {Component} from "react";
-import freshPrice from './freshPrice';
 
 import { Modal, Tooltip, OverlayTrigger, Glyphicon, Panel, Button } from 'react-bootstrap';
 
