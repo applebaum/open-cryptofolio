@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import freshPrice from './freshPrice';
 
 import { Modal, Tooltip, OverlayTrigger, Glyphicon, Panel, Button } from 'react-bootstrap';
 
@@ -35,22 +36,90 @@ export default class Coin extends Component {
     //receive socket data on BTC and selected coin, pass that data to state
     componentDidMount(){
         socket.on('BTC', (data) => this.setState({BTC: data.message.msg}));
-        socket.on(this.props.coin.id, (data) => this.setState({data: data.message.msg}));
+        socket.on(this.props.coin.id, (data) => {
+            //set new data as state
+            this.setState({data: data.message.msg});
+            //call updatePrice function to update window values on each socket update
+            this.updatePrice();
+            //notify parent that data was updated
+            this.props.returnData();
+        });
     }
 
+    //close connection on component unmount
     componentWillUnmount() {
         socket.removeListener('BTC');
         socket.removeListener(this.props.coin.id);
     }
 
-    componentWillUpdate(){
-        this.updatePrice();
-    }
-
+    //function sets global window.coin value equal to price of current coin
     updatePrice(){
-        let data = this.props.coin;
-        data.price = this.state.data.price;
-        this.props.returnData(data);
+        switch (this.props.coin.id) {
+            case 'AMP': window.AMP = this.state.data.price; break;
+            case 'ARDR': window.ARDR = this.state.data.price; break;
+            case 'BCN': window.BCN = this.state.data.price; break;
+            case 'BCY': window.BCY = this.state.data.price; break;
+            case 'BELA': window.BELA = this.state.data.price; break;
+            case 'BLK': window.BLK = this.state.data.price; break;
+            case 'BTC': window.BTC = this.state.data.price; break;
+            case 'BTCD': window.BTCD = this.state.data.price; break;
+            case 'BTM': window.BTM = this.state.data.price; break;
+            case 'BTS': window.BTS = this.state.data.price; break;
+            case 'BURST': window.BURST = this.state.data.price; break;
+            case 'CLAM': window.CLAM = this.state.data.price; break;
+            case 'DASH': window.DASH = this.state.data.price; break;
+            case 'DCR': window.DCR = this.state.data.price; break;
+            case 'DGB': window.DGB = this.state.data.price; break;
+            case 'DOGE': window.DOGE = this.state.data.price; break;
+            case 'EMC2': window.EMC2 = this.state.data.price; break;
+            case 'ETC': window.ETC = this.state.data.price; break;
+            case 'ETH': window.ETH = this.state.data.price; break;
+            case 'EXP': window.EXP = this.state.data.price; break;
+            case 'FCT': window.FCT = this.state.data.price; break;
+            case 'FLDC': window.FLDC = this.state.data.price; break;
+            case 'FLO': window.FLO = this.state.data.price; break;
+            case 'GAME': window.GAME = this.state.data.price; break;
+            case 'GNO': window.GNO = this.state.data.price; break;
+            case 'GNT': window.GNT = this.state.data.price; break;
+            case 'GRC': window.GRC = this.state.data.price; break;
+            case 'HUC': window.HUC = this.state.data.price; break;
+            case 'LBC': window.LBC = this.state.data.price; break;
+            case 'LSK': window.LSK = this.state.data.price; break;
+            case 'LTC': window.LTC = this.state.data.price; break;
+            case 'MAID': window.MAID = this.state.data.price; break;
+            case 'NAUT': window.NAUT = this.state.data.price; break;
+            case 'NAV': window.NAV = this.state.data.price; break;
+            case 'NEOS': window.NEOS = this.state.data.price; break;
+            case 'NMC': window.NMC = this.state.data.price; break;
+            case 'NOTE': window.NOTE = this.state.data.price; break;
+            case 'NXC': window.NXC = this.state.data.price; break;
+            case 'NXT': window.NXT = this.state.data.price; break;
+            case 'OMNI': window.OMNI = this.state.data.price; break;
+            case 'PASC': window.PASC = this.state.data.price; break;
+            case 'PINK': window.PINK = this.state.data.price; break;
+            case 'POT': window.POT = this.state.data.price; break;
+            case 'PPC': window.PPC = this.state.data.price; break;
+            case 'RADS': window.RADS = this.state.data.price; break;
+            case 'REP': window.REP = this.state.data.price; break;
+            case 'RIC': window.RIC = this.state.data.price; break;
+            case 'SBD': window.SBD = this.state.data.price; break;
+            case 'SC': window.SC = this.state.data.price; break;
+            case 'SJCX': window.SJCX = this.state.data.price; break;
+            case 'STR': window.STR = this.state.data.price; break;
+            case 'STRAT': window.STRAT = this.state.data.price; break;
+            case 'SYS': window.SYS = this.state.data.price; break;
+            case 'VIA': window.VIA = this.state.data.price; break;
+            case 'VRC': window.VRC = this.state.data.price; break;
+            case 'VTC': window.VTC = this.state.data.price; break;
+            case 'XBC': window.XBC = this.state.data.price; break;
+            case 'XCP': window.XCP = this.state.data.price; break;
+            case 'XEM': window.XEM = this.state.data.price; break;
+            case 'XMR': window.XMR = this.state.data.price; break;
+            case 'XPM': window.XPM = this.state.data.price; break;
+            case 'XRP': window.XRP = this.state.data.price; break;
+            case 'XVC': window.XVC = this.state.data.price; break;
+            case 'ZEC': window.ZEC = this.state.data.price; break;
+        }
     }
 
     // shows content hidden under cat (coin/BTC and coin/USD ratio)

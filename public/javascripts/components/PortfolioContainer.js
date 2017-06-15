@@ -17,6 +17,8 @@ export default class PortfolioContainer extends Component {
         }
     }
 
+    //receive portfolio metadata from one child (CoinInputApp),
+    //set it as state, pass state to another child (PortfolioPerformance)
     setData(data){
         this.setState({data: data})
     }

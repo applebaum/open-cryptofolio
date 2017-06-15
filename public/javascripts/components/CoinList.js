@@ -8,8 +8,9 @@ export default class CoinList extends Component {
         super(props);
     }
 
-    returnData(data){
-        this.props.returnData(data);
+    //triggered by child (CoinEntry) to trigger parent's (CoinInputApp) update
+    returnData(){
+        this.props.returnData();
     }
 
     render () {

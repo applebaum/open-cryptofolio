@@ -27,6 +27,8 @@ export default class CoinInputApp extends Component {
         }
     }
 
+    // send portfolio metadata to parent (PortfolioContainer),
+    // which passes it to sibling (PortfolioPerformance)
     componentWillMount(){
         this.sendToParent(this.state.data);
     }
@@ -54,6 +56,7 @@ export default class CoinInputApp extends Component {
         this.setState({data: remainder});
         // update cookies
         cookie.save("data", remainder, {path: "/", maxAge: 631138520});
+        //send updated data to parent
         this.sendToParent(remainder);
     }
 
@@ -78,19 +81,22 @@ export default class CoinInputApp extends Component {
                 _this.setState({data: data});
                 //update cookies
                 cookie.save("data", data, {path: "/", maxAge: 631138520});
+                //send updated data to parent
                 _this.sendToParent(data);
             })
         };
     }
 
+    // send portfolio metadata to parent (PortfolioContainer),
+    // which passes it to sibling (PortfolioPerformance)
     sendToParent(data){
         this.props.data(data)
     }
 
-    getReturnedData(newData){
-
-        //LOOK AT ME
-
+    //triggered each time child (CoinEntry) receives socket update (which sets new window value),
+    //sends portfolio metadata to PortfolioPerformance to prompt its re-render
+    getReturnedData(){
+        this.sendToParent(this.state.data);
     }
 
     render(){
