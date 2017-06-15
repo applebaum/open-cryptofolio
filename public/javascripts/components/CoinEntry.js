@@ -13,6 +13,7 @@ export default class Coin extends Component {
     constructor(props) {
         // pass props to parent class
         super(props);
+        this.updatePrice = this.updatePrice.bind(this);
         // set initial empty state for each coin available for tracking
         this.state = {
             removeWarning: false,
@@ -40,6 +41,16 @@ export default class Coin extends Component {
     componentWillUnmount() {
         socket.removeListener('BTC');
         socket.removeListener(this.props.coin.id);
+    }
+
+    componentWillUpdate(){
+        this.updatePrice();
+    }
+
+    updatePrice(){
+        let data = this.props.coin;
+        data.price = this.state.data.price;
+        this.props.returnData(data);
     }
 
     // shows content hidden under cat (coin/BTC and coin/USD ratio)

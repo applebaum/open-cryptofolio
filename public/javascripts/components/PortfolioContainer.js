@@ -6,15 +6,33 @@ import { Grid, Col, Row } from 'react-bootstrap';
 /* This is a container component for portfolio-related components */
 
 export default class PortfolioContainer extends Component {
+
+    constructor(props){
+        // pass props to parent class
+        super(props);
+        this.setData = this.setData.bind(this);
+        // load data from cookies or set initial empty state (array) if no cookies are provided
+        this.state = {
+            data: []
+        }
+    }
+
+    setData(data){
+        this.setState({data: data})
+    }
+
     render() {
+
+        console.log('me '+ this.state.data);
+
         return (
             <Grid fluid={true}>
                 <Row className="showGrid">
                     <Col md={8} >
-                        <CoinInputApp />
+                        <CoinInputApp data={this.setData} />
                     </Col>
                     <Col md={4} >
-                        <PortfolioPerformance/>
+                        <PortfolioPerformance data={this.state.data}/>
                     </Col>
                 </Row>
             </Grid>

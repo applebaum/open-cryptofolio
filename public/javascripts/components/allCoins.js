@@ -50,7 +50,7 @@ const allCoins = [
     'SC',
     'SJCX',
     'STEEM',
-    // 'STR',
+    'STR',
     'STRAT',
     'SYS',
     'VIA',
