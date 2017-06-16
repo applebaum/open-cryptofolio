@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import { HelpBlock, Popover, Tooltip, OverlayTrigger, Glyphicon, Collapse, ControlLabel, FormGroup, FormControl, Form, Button } from 'react-bootstrap';
+import DayPickerInput from 'react-day-picker/DayPickerInput';
 
 // TODO: add 8 decimal digits validation
     // TODO: mousewheel
@@ -9,9 +10,11 @@ export default class CoinForm extends Component {
     constructor(props) {
         //it receives coin handling functions as props from CoinInputApp
         super(props);
+        this.handleDayClick = this.handleDayClick.bind(this);
         this.state = {
             name: '',
             quantity: 0,
+            selectedDay: this.props.date ? this.props.date : 'Select date',
             disabledButton: false
         };
     }
@@ -25,6 +28,18 @@ export default class CoinForm extends Component {
     handleQuantityChange(e) {
         this.setState({ quantity: e.target.value });
     }
+
+    //send selected date to parent and set it as state to display as placeholder
+    handleDayClick (day) {
+        //parse moment.js object to JS date object
+        let parsedDate = day.toDate();
+        //parse JS date object to string (in order to store it in cookies)
+        let stringifiedDate = parsedDate.toDateString();
+        //send parsed string to parent (CoinInputApp)
+        this.props.setDate(stringifiedDate);
+        //set string as state to display as placeholder
+        this.setState({selectedDay: stringifiedDate});
+    };
 
     //check if user input data is valid and color form green/red accordingly
     getValidationState() {
@@ -148,6 +163,21 @@ export default class CoinForm extends Component {
                         </Button>
                     </OverlayTrigger>
                 </OverlayTrigger>
+                {' '}
+                <OverlayTrigger placement="top"
+                                overlay={<Tooltip id="tooltip">Show portfolio performance chart</Tooltip>}>
+                    <Button>
+                        <Glyphicon glyph="signal"/>
+                    </Button>
+                </OverlayTrigger>
+                {' '}
+                <p style={{display: 'inline-block'}}>Tracking portfolio from:</p>
+                {' '}
+                <DayPickerInput
+                    style={{display: 'inline-block'}}
+                    placeholder={this.state.selectedDay}
+                    onDayChange={day => this.handleDayClick(day)}
+                />
                 {' '}
                 <Collapse in={this.state.open}>
                     <div>

@@ -59,7 +59,7 @@ export default class Layout extends Component {
                                                 <Tooltip id="tooltip">Hide ticker</Tooltip> :
                                                 <Tooltip id="tooltip">Show ticker for all available coins (consumes bandwidth)</Tooltip>}>
                                 <Button  className="ticker-button" onClick={ () => this.showTicker() }>
-                                    <Glyphicon glyph="stats"/>
+                                    <Glyphicon glyph="list"/>
                                 </Button>
 
                             </OverlayTrigger>

@@ -23,7 +23,8 @@ export default class CoinInputApp extends Component {
         this.sendToParent = this.sendToParent.bind(this);
         // load data from cookies or set initial empty state (array) if no cookies are provided
         this.state = {
-            data: cookie.load("data") || []
+            data: cookie.load("data") || [],
+            date: cookie.load("tracking-date") || null
         }
     }
 
@@ -59,6 +60,14 @@ export default class CoinInputApp extends Component {
         //send updated data to parent
         this.sendToParent(remainder);
     }
+
+
+    //receives date string from child (CoinForm), saves it to state and cookies
+    setDate(date){
+        this.setState({date: date});
+        cookie.save("tracking-date", date, {path: "/", maxAge: 631138520});
+    }
+
 
     // this function handles CSV upload, it utilises File Reader to read content of file without downloading it,
     // and parses CSV to JSON using csv package
@@ -100,17 +109,17 @@ export default class CoinInputApp extends Component {
     }
 
     render(){
-        // console.log(this.state.toUSD);
         // render JSX, pass props
-        console.log(this.state.data);
-
+console.log(this.state.date);
         return (
             <div>
                 <Jumbotron style={{height: '425', overflowY: 'scroll', overflowX: 'contain'}}>
                     <CoinForm
                         addCoin={this.addCoin.bind(this)}
                         data={this.state.data}
+                        date={this.state.date}
                         uploadCSV={this.uploadCSV.bind(this)}
+                        setDate={this.setDate.bind(this)}
                     />
                     <CoinList
                         coins={this.state.data}
@@ -118,7 +127,6 @@ export default class CoinInputApp extends Component {
                         returnData={this.getReturnedData.bind(this)}
                     />
                 </Jumbotron>
-                {/*<PortfolioPerformance coins={this.state.data}/>*/}
             </div>
         );
     }

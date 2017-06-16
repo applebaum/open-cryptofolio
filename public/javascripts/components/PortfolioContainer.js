@@ -25,8 +25,6 @@ export default class PortfolioContainer extends Component {
 
     render() {
 
-        console.log('me '+ this.state.data);
-
         return (
             <Grid fluid={true}>
                 <Row className="showGrid">

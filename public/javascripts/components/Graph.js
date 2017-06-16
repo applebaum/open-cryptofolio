@@ -25,7 +25,6 @@ export default class GraphPreload extends Component {
             let _this = this;
             // set route path from props
             let path = this.props.chosenCoinData;
-            console.log('path '+path);
             this.serverRequest =
                 // axios is used to make HTTP GET call to server
                 axios
@@ -39,7 +38,6 @@ export default class GraphPreload extends Component {
 
     render() {
 
-        console.log(this.state);
         // when a change of state is detected ('null' by default) a Graph component is rendered
         if (this.state.data) {
             // data from parent state is passed as props

@@ -9,12 +9,12 @@ module.exports = [{
   },
   module: {
     loaders: [
-      { test: /\.jsx?$/, loader: "babel-loader"}
-    ]
+        { test: /\.jsx?$/, loader: "babel-loader"},
+        { test: /\.css$/, loader: "style-loader!css-loader" }    ]
   },
   resolve: {
     // you can now require('file') instead of require('file.coffee')
-    extensions: ["", ".js", ".jsx"],
+    extensions: ["", ".js", ".jsx", '.css'],
     root: [path.join(__dirname, "public", "javascripts")],
     modulesDirectories: ["node_modules"]
   }
