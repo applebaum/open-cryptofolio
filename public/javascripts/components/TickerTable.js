@@ -9,8 +9,8 @@ export default class TickerTable extends Component {
         this.chosenCoin = this.chosenCoin.bind(this);
     }
 
-    chosenCoin(link, coin){
-        this.props.chosenCoin(link, coin);
+    chosenCoin(link, coin, showPortfolioChart){
+        this.props.chosenCoin(link, coin, showPortfolioChart);
     }
 
     render() {

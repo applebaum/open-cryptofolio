@@ -24,14 +24,21 @@ export default class CoinInputApp extends Component {
         // load data from cookies or set initial empty state (array) if no cookies are provided
         this.state = {
             data: cookie.load("data") || [],
-            date: cookie.load("tracking-date") || null
+            date: cookie.load("tracking-date") || null,
+            showPortfolioChart: true
         }
     }
 
     // send portfolio metadata to parent (PortfolioContainer),
     // which passes it to sibling (PortfolioPerformance)
     componentWillMount(){
-        this.sendToParent(this.state.data, this.state.date);
+        this.sendToParent(this.state.data, this.state.date, this.state.showPortfolioChart);
+    }
+
+    componentWillReceiveProps(nextProps){
+        if (nextProps.showPortfolioChart === false){
+            this.setState({showPortfolioChart: false})
+        }
     }
 
     // add coin handler
@@ -44,7 +51,7 @@ export default class CoinInputApp extends Component {
         this.setState({data: this.state.data});
         // save data to cookies
         cookie.save("data", this.state.data, {path: "/", maxAge: 631138520});
-        this.sendToParent(this.state.data, this.state.date);
+        this.sendToParent(this.state.data, this.state.date, this.state.showPortfolioChart);
     }
 
     // handle remove
@@ -58,7 +65,7 @@ export default class CoinInputApp extends Component {
         // update cookies
         cookie.save("data", remainder, {path: "/", maxAge: 631138520});
         //send updated data to parent
-        this.sendToParent(remainder, this.state.date);
+        this.sendToParent(remainder, this.state.date, this.state.showPortfolioChart);
     }
 
 
@@ -66,7 +73,7 @@ export default class CoinInputApp extends Component {
     setDate(date){
         this.setState({date: date});
         cookie.save("tracking-date", date, {path: "/", maxAge: 631138520});
-        this.sendToParent(this.state.data, this.state.date);
+        this.sendToParent(this.state.data, this.state.date, this.state.showPortfolioChart);
     }
 
 
@@ -92,21 +99,26 @@ export default class CoinInputApp extends Component {
                 //update cookies
                 cookie.save("data", data, {path: "/", maxAge: 631138520});
                 //send updated data to parent
-                _this.sendToParent(data, this.state.date);
+                _this.sendToParent(data, this.state.date, this.state.showPortfolioChart);
             })
         };
     }
 
     // send portfolio metadata to parent (PortfolioContainer),
     // which passes it to sibling (PortfolioPerformance)
-    sendToParent(data, date){
-        this.props.getPortfolioMetadata(data, date)
+    sendToParent(data, date, showChart){
+        this.props.getPortfolioMetadata(data, date, showChart)
     }
 
     //triggered each time child (CoinEntry) receives socket update (which sets new window value),
     //sends portfolio metadata to PortfolioPerformance to prompt its re-render
     getReturnedData(){
-        this.sendToParent(this.state.data, this.state.date);
+        this.sendToParent(this.state.data, this.state.date, this.state.showPortfolioChart);
+    }
+
+    showPortfolioChart(showChart){
+        this.setState({showPortfolioChart: showChart});
+        this.sendToParent(this.state.data, this.state.date, showChart)
     }
 
     render(){
@@ -120,6 +132,7 @@ export default class CoinInputApp extends Component {
                         date={this.state.date}
                         uploadCSV={this.uploadCSV.bind(this)}
                         setDate={this.setDate.bind(this)}
+                        showPortfolioChart={this.showPortfolioChart.bind(this)}
                     />
                     <CoinList
                         coins={this.state.data}

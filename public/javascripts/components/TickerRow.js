@@ -37,8 +37,8 @@ export default class TickerEntry extends Component {
         this.displayChart(null, null)
     }
 
-    displayChart(link, coin) {
-        this.props.chosenCoin(link, coin)
+    displayChart(link, coin, showPortfolioChart) {
+        this.props.chosenCoin(link, coin, showPortfolioChart)
     }
 
     render() {
@@ -49,7 +49,7 @@ export default class TickerEntry extends Component {
         } else {
             return (
                 <tr
-                    onClick={() => this.displayChart('http://localhost:3000/hist/' + this.props.coin, this.props.coin)}
+                    onClick={() => this.displayChart('http://localhost:3000/hist/' + this.props.coin, this.props.coin, false)}
                 >
                     <td><strong>{this.props.coin}</strong></td>
                     <td>{(this.state.data.price / this.state.BTC.price).toFixed(8)}</td>

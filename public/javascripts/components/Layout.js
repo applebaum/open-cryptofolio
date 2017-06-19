@@ -20,7 +20,8 @@ export default class Layout extends Component {
             chosenCoinData: null,
             chosenCoinName: null,
             portfolio: null,
-            date: null
+            date: null,
+            showPortfolioChart: true
         }
     }
 
@@ -35,16 +36,22 @@ export default class Layout extends Component {
         // cookie.save("columnSize", this.state.columnSize, {path: "/", maxAge: 631138520});
     }
 
-    showChart(link, coin) {
+    showChart(link, coin, showPortfolioChart) {
         this.setState({
             chosenCoinData: link,
-            chosenCoinName: coin
+            chosenCoinName: coin,
+            showPortfolioChart: showPortfolioChart
         })
     }
 
-    passPortfolioToChart(data, date){
-        this.setState({portfolio: data, date: date})
+    //receive from child (portfolio) pass to another (graph)
+    passPortfolioToChart(data, date, showChart){
+        this.setState({portfolio: data, date: date, showPortfolioChart: showChart})
     }
+
+    // showPortfolioChart(boolean){
+    //
+    // }
 
     render() {
             return (
@@ -75,10 +82,15 @@ export default class Layout extends Component {
                                 chosenCoinData={this.state.chosenCoinData}
                                 chosenCoinName={this.state.chosenCoinName}
                                 showTicker={this.state.showTicker}
+                                showPortfolioChart={this.state.showPortfolioChart}
+                                // shouldShowPortfolioChart={this.showPortfolioChart.bind(this)}
 
                             />
 
-                            <PortfolioContainer passPortfolioMetadata={this.passPortfolioToChart.bind(this)} />
+                            <PortfolioContainer
+                                passPortfolioMetadata={this.passPortfolioToChart.bind(this)}
+                                showPortfolioChart={this.state.showPortfolioChart}
+                            />
                         </Col>
                         {/*if showTicker=true, then render column with Ticker, otherwise render null*/}
                         { this.state.showTicker ?

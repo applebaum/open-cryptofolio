@@ -14,15 +14,16 @@ export default class PortfolioContainer extends Component {
         // load data from cookies or set initial empty state (array) if no cookies are provided
         this.state = {
             portfolio: [],
-            date: null
+            date: null,
+            showPortfolioChart: true
         }
     }
 
     //receive portfolio metadata from one child (CoinInputApp),
     //set it as state, pass state to another child (PortfolioPerformance)
-    passPortfolioMetadata(data, date){
-        this.props.passPortfolioMetadata(data, date);
-        this.setState({portfolio: data, date: date})
+    passPortfolioMetadata(data, date, showChart){
+        this.props.passPortfolioMetadata(data, date, showChart);
+        this.setState({portfolio: data, date: date, showPortfolioChart: showChart})
     }
 
     render() {
@@ -31,7 +32,9 @@ export default class PortfolioContainer extends Component {
             <Grid fluid={true}>
                 <Row className="showGrid">
                     <Col md={8} >
-                        <CoinInputApp getPortfolioMetadata={this.passPortfolioMetadata} />
+                        <CoinInputApp getPortfolioMetadata={this.passPortfolioMetadata}
+                                      showPortfolioChart={this.props.showPortfolioChart}
+                        />
                     </Col>
                     <Col md={4} >
                         <PortfolioPerformance data={this.state.portfolio}/>

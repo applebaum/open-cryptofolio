@@ -19,27 +19,22 @@ export default class GraphPreload extends Component {
             }
         }
 
-        // shouldComponentUpdate(nextProps){
-        // if (this.props.chosenCoinName !== nextProps.chosenCoinName) {
-        //     return true
-        // }
-        // }
-
     componentDidMount() {
-        // check if received props are in fact new to prevent endless re-render and API requests
-        // if (this.props.chosenCoinData !== prevProps.chosenCoinData) {
+        // if chosenCoinData is a string, then render individual coin chart, if else render portfolio chart
+        if (typeof this.props.chosenCoinData === 'string') {
             let _this = this;
             // set route path from props
             let path = this.props.chosenCoinData;
-            this.serverRequest =
                 // axios is used to make HTTP GET call to server
                 axios
                     .get(path)
                     // received data is then passed to state, key state is changed to trigger child re-render
                     .then(function (data) {
-                        _this.setState(Object.assign({}, _this.state, {data: data, key: Math.random() }))
+                        _this.setState(Object.assign({}, _this.state, {data: data.data.price, key: Math.random() }))
                     });
-        // }
+        } else {
+            this.setState({data: this.props.chosenCoinData})
+        }
     }
 
     render() {
@@ -47,7 +42,7 @@ export default class GraphPreload extends Component {
         // when a change of state is detected ('null' by default) a Graph component is rendered
         if (this.state.data) {
             // data from parent state is passed as props
-            return <Graph key={this.state.key} data={this.state.data.data} name={this.props.chosenCoinName} />;
+            return <Graph key={this.state.key} data={this.state.data} name={this.props.chosenCoinName} />;
             // otherwise placeholder component is rendered
         } else {
             return <GraphPlaceHolder />;
@@ -70,11 +65,11 @@ class Graph extends Component {
                 selected: 0
             },
             title: {
-                text: this.props.name + ' to USD exchange rate'
+                text: this.props.name === 'Portfolio' ? 'Portfolio performance' : this.props.name + ' to USD exchange rate'
             },
             tooltip: {
                 style: {
-                    width: '50px'
+                    width: '130px'
                 },
                 valueDecimals: 4,
                 shared: true
@@ -85,9 +80,9 @@ class Graph extends Component {
                 }
             },
             series: [{
-                name: this.props.name + ' to USD',
+                name: this.props.name === 'Portfolio' ? 'Portfolio value in USD' : this.props.name + ' to USD',
                 // data is fed directly from props
-                data: this.props.data.price,
+                data: this.props.data,
                 id: 'dataseries'
                 // the event marker flags
             }]

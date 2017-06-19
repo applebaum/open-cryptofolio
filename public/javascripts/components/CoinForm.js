@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import { HelpBlock, Popover, Tooltip, OverlayTrigger, Glyphicon, Collapse, ControlLabel, FormGroup, FormControl, Form, Button } from 'react-bootstrap';
+import { Modal, HelpBlock, Popover, Tooltip, OverlayTrigger, Glyphicon, Collapse, ControlLabel, FormGroup, FormControl, Form, Button } from 'react-bootstrap';
 import DayPickerInput from 'react-day-picker/DayPickerInput';
 
 // TODO: add 8 decimal digits validation
@@ -15,7 +15,8 @@ export default class CoinForm extends Component {
             name: '',
             quantity: 0,
             selectedDay: this.props.date ? this.props.date : 'Select date',
-            disabledButton: false
+            disabledButton: false,
+            noDateWarning: false
         };
     }
 
@@ -121,6 +122,14 @@ export default class CoinForm extends Component {
         link.click();
     }
 
+    showPortfolioChart(){
+        if (this.state.selectedDay === 'Select date') {
+            this.setState({noDateWarning: true})
+        } else {
+            this.props.showPortfolioChart(true)
+        }
+    }
+
 
 // render JSX
     render () {
@@ -164,12 +173,62 @@ export default class CoinForm extends Component {
                     </OverlayTrigger>
                 </OverlayTrigger>
                 {' '}
+
                 <OverlayTrigger placement="top"
                                 overlay={<Tooltip id="tooltip">Show portfolio performance chart</Tooltip>}>
-                    <Button>
+                    <Button onClick={this.showPortfolioChart.bind(this)}>
                         <Glyphicon glyph="signal"/>
                     </Button>
                 </OverlayTrigger>
+
+
+                <Modal className="modal" keyboard show={this.state.noDateWarning} bsSize="small">
+                    <Modal.Header className="modal-header">
+                        <Modal.Title className="modal-title" id="contained-modal-title-sm"><strong>Date is not specified</strong></Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body className="modal-body">
+                        <h4>Please select portfolio tracking date</h4>
+                    <DayPickerInput
+                    style={{display: 'inline-block'}}
+                    placeholder={this.state.selectedDay}
+                    onDayChange={day => this.handleDayClick(day)}
+                    />
+                    </Modal.Body>
+
+                    {this.state.selectedDay !== 'Select date' ?
+
+                    <Modal.Footer className="modal-footer">
+                        <Button className="modal-close-button" bsSize="large" onClick={() => {
+                            this.setState({noDateWarning: false, selectedDay: 'Select date'})}}>
+                            <Glyphicon glyph="menu-left"/>
+                            {' '}
+                            Return
+                        </Button>
+                        {' '}
+                        <Button bsSize="large" bsStyle="success"
+                                onClick={() => {
+                        this.setState({noDateWarning: false})}}>
+                        Confirm
+                            {' '}
+                            <Glyphicon glyph="ok"/>
+                        </Button>
+                    </Modal.Footer>
+
+                        :
+
+                        <Modal.Footer className="modal-footer">
+                        <Button className="modal-close-button" bsSize="large" onClick={() => {
+                        this.setState({noDateWarning: false, selectedDay: 'Select date'})}}>
+                        <Glyphicon glyph="menu-left"/>
+                        {' '}
+                        Return
+                        </Button>
+                        </Modal.Footer> }
+
+
+                </Modal>
+
+
                 {' '}
                 <p style={{display: 'inline-block'}}>Tracking portfolio from:</p>
                 {' '}
