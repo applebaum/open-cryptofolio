@@ -34,10 +34,10 @@ export default class Coin extends Component {
 
     //receive socket data on BTC and selected coin, pass that data to state
     componentDidMount(){
-        socket.on('BTC', (data) => this.setState({BTC: data.message.msg}));
+        socket.on('BTC', (data) => this.setState({BTC: data ? data.message.msg : 0}));
         socket.on(this.props.coin.id, (data) => {
             //set new data as state
-            this.setState({data: data.message.msg});
+            this.setState({data: data ? data.message.msg : 0});
             //call updatePrice function to update window values on each socket update
             this.updatePrice();
             //notify parent that data was updated

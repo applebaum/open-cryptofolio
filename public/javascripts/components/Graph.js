@@ -19,9 +19,15 @@ export default class GraphPreload extends Component {
             }
         }
 
+        // shouldComponentUpdate(nextProps){
+        // if (this.props.chosenCoinName !== nextProps.chosenCoinName) {
+        //     return true
+        // }
+        // }
+
     componentDidMount() {
         // check if received props are in fact new to prevent endless re-render and API requests
-        // if (this.props.chosenCoinData !== nextProps.chosenCoinData) {
+        // if (this.props.chosenCoinData !== prevProps.chosenCoinData) {
             let _this = this;
             // set route path from props
             let path = this.props.chosenCoinData;

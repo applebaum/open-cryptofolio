@@ -18,7 +18,9 @@ export default class Layout extends Component {
             //size of columns controlled by state
             columnSize: 12,
             chosenCoinData: null,
-            chosenCoinName: null
+            chosenCoinName: null,
+            portfolio: null,
+            date: null
         }
     }
 
@@ -40,8 +42,11 @@ export default class Layout extends Component {
         })
     }
 
+    passPortfolioToChart(data, date){
+        this.setState({portfolio: data, date: date})
+    }
+
     render() {
-        console.log(this.state);
             return (
                 <Grid fluid={true}>
 
@@ -64,9 +69,16 @@ export default class Layout extends Component {
 
                             </OverlayTrigger>
 
-                            <GraphContainer chosenCoinData={this.state.chosenCoinData} chosenCoinName={this.state.chosenCoinName} />
+                            <GraphContainer
+                                portfolio={this.state.portfolio}
+                                date={this.state.date}
+                                chosenCoinData={this.state.chosenCoinData}
+                                chosenCoinName={this.state.chosenCoinName}
+                                showTicker={this.state.showTicker}
 
-                            <PortfolioContainer />
+                            />
+
+                            <PortfolioContainer passPortfolioMetadata={this.passPortfolioToChart.bind(this)} />
                         </Col>
                         {/*if showTicker=true, then render column with Ticker, otherwise render null*/}
                         { this.state.showTicker ?

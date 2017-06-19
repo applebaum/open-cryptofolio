@@ -91,6 +91,23 @@ p:hover {
     overflow-x: hidden;
 }
 
+.ticker-change-up {
+    color: green;
+}
+
+.ticker-change-down {
+    color: darkred;
+}
+
+.chart-container-big {
+    height: 400px;
+}
+
+.chart-container-small {
+    height: 400px;
+    width: 1350px;
+}
+
 /*.ticker-head {*/
     /*!*position: fixed;*!*/
     /*background-color: whitesmoke;*/

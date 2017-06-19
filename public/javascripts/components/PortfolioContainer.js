@@ -10,17 +10,19 @@ export default class PortfolioContainer extends Component {
     constructor(props){
         // pass props to parent class
         super(props);
-        this.setData = this.setData.bind(this);
+        this.passPortfolioMetadata = this.passPortfolioMetadata.bind(this);
         // load data from cookies or set initial empty state (array) if no cookies are provided
         this.state = {
-            data: []
+            portfolio: [],
+            date: null
         }
     }
 
     //receive portfolio metadata from one child (CoinInputApp),
     //set it as state, pass state to another child (PortfolioPerformance)
-    setData(data){
-        this.setState({data: data})
+    passPortfolioMetadata(data, date){
+        this.props.passPortfolioMetadata(data, date);
+        this.setState({portfolio: data, date: date})
     }
 
     render() {
@@ -29,10 +31,10 @@ export default class PortfolioContainer extends Component {
             <Grid fluid={true}>
                 <Row className="showGrid">
                     <Col md={8} >
-                        <CoinInputApp data={this.setData} />
+                        <CoinInputApp getPortfolioMetadata={this.passPortfolioMetadata} />
                     </Col>
                     <Col md={4} >
-                        <PortfolioPerformance data={this.state.data}/>
+                        <PortfolioPerformance data={this.state.portfolio}/>
                     </Col>
                 </Row>
             </Grid>

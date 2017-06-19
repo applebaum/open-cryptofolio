@@ -31,7 +31,7 @@ export default class CoinInputApp extends Component {
     // send portfolio metadata to parent (PortfolioContainer),
     // which passes it to sibling (PortfolioPerformance)
     componentWillMount(){
-        this.sendToParent(this.state.data);
+        this.sendToParent(this.state.data, this.state.date);
     }
 
     // add coin handler
@@ -44,7 +44,7 @@ export default class CoinInputApp extends Component {
         this.setState({data: this.state.data});
         // save data to cookies
         cookie.save("data", this.state.data, {path: "/", maxAge: 631138520});
-        this.sendToParent(this.state.data);
+        this.sendToParent(this.state.data, this.state.date);
     }
 
     // handle remove
@@ -58,7 +58,7 @@ export default class CoinInputApp extends Component {
         // update cookies
         cookie.save("data", remainder, {path: "/", maxAge: 631138520});
         //send updated data to parent
-        this.sendToParent(remainder);
+        this.sendToParent(remainder, this.state.date);
     }
 
 
@@ -66,6 +66,7 @@ export default class CoinInputApp extends Component {
     setDate(date){
         this.setState({date: date});
         cookie.save("tracking-date", date, {path: "/", maxAge: 631138520});
+        this.sendToParent(this.state.data, this.state.date);
     }
 
 
@@ -91,26 +92,25 @@ export default class CoinInputApp extends Component {
                 //update cookies
                 cookie.save("data", data, {path: "/", maxAge: 631138520});
                 //send updated data to parent
-                _this.sendToParent(data);
+                _this.sendToParent(data, this.state.date);
             })
         };
     }
 
     // send portfolio metadata to parent (PortfolioContainer),
     // which passes it to sibling (PortfolioPerformance)
-    sendToParent(data){
-        this.props.data(data)
+    sendToParent(data, date){
+        this.props.getPortfolioMetadata(data, date)
     }
 
     //triggered each time child (CoinEntry) receives socket update (which sets new window value),
     //sends portfolio metadata to PortfolioPerformance to prompt its re-render
     getReturnedData(){
-        this.sendToParent(this.state.data);
+        this.sendToParent(this.state.data, this.state.date);
     }
 
     render(){
         // render JSX, pass props
-console.log(this.state.date);
         return (
             <div>
                 <Jumbotron style={{height: '425', overflowY: 'scroll', overflowX: 'contain'}}>

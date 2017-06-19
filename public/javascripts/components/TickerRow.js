@@ -27,8 +27,8 @@ export default class TickerEntry extends Component {
 
     //connect to Node.js via socket.io and pass received data to handler function
     componentDidMount(){
-        socket.on('BTC', (data) => this.setState({BTC: data.message.msg}));
-        socket.on(this.props.coin, (data) => this.setState({data: data.message.msg}));
+        socket.on('BTC', (data) => this.setState({BTC: data ? data.message.msg : 0}));
+        socket.on(this.props.coin, (data) => this.setState({data: data ? data.message.msg: 0}));
     }
 
     componentWillUnmount() {
