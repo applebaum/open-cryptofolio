@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import { Col, Well } from 'react-bootstrap';
 import Graph from './Graph';
 import axios from 'axios';
+import eachOf from 'async/eachOf';
 
 /* This component is a container for Graph and Graph Placeholder (referenced by id from HighChart options)
    that renders to Layout*/
@@ -13,8 +14,7 @@ export default class GraphContainer extends Component {
         this.state = {
             chosenCoinName: null,
             chosenCoinData: null,
-            key: null,
-            showPortfolioChart: true
+            key: null
         }
     }
 
@@ -22,7 +22,7 @@ export default class GraphContainer extends Component {
         // (for portfolio chart) only update component if received props are in fact new (to prevent endless api calls)
         if (this.props.portfolio !== nextProps.portfolio && nextProps.showPortfolioChart ||
             this.props.date !== nextProps.date && nextProps.showPortfolioChart  ||
-            nextProps.showPortfolioChart !== this.props.showPortfolioChart) {
+            nextProps.showPortfolioChart !== this.props.showPortfolioChart && nextProps.showPortfolioChart !== false) {
             // alert('new prop!');
             //if props are new call calculating function
             this.calculatePortfolioSum(nextProps.portfolio, nextProps.date);
@@ -37,15 +37,8 @@ export default class GraphContainer extends Component {
             this.setState({key: Math.random()})
 
         }
-        // else if (this.state.chosenCoinName = 'Portfolio') {
-        //     this.setState({key: 'peele'})
-        // }
     }
 
-    // showPortfolioChart(boolean){
-    //     this.setState({showPortfolioChart: boolean});
-    //     this.props.shouldShowPortfolioChart(boolean)
-    // }
 
     calculatePortfolioSum(portfolio, date){
         let _this = this;
@@ -65,17 +58,33 @@ export default class GraphContainer extends Component {
             coinNames.push(entry.id);
         });
 
-        coinNames.forEach(function(name){
+        // using async library to perform api calls in a loop
+        eachOf(coinNames, function(name, i, callback) {
 
             //make API call for each coin based on coin name
             let path = 'http://localhost:3000/hist/' + name;
-            let __this = _this;
 
             axios
                 .get(path)
+                .catch(function (error) {
+                if (error.response) {
+                    // The request was made and the server responded with a status code
+                    // that falls out of the range of 2xx
+                    console.log(error.response.data);
+                    console.log(error.response.status);
+                    console.log(error.response.headers);
+                } else if (error.request) {
+                    // The request was made but no response was received
+                    // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+                    // http.ClientRequest in node.js
+                    console.log(error.request);
+                } else {
+                    // Something happened in setting up the request that triggered an Error
+                    console.log('Error', error.message);
+                }
+                console.log(error.config);
+            })
                 .then(function (data) {
-
-                    // let ___this = _this;
 
                     //array of all historical prices (each element is a timestamp and price
                     let historicalPrice = data.data.price;
@@ -110,19 +119,24 @@ export default class GraphContainer extends Component {
                         sumWithTimestamps[i][1] = valuesSum[i];
                     }
 
-                    if (__this.props.showPortfolioChart) {
-                    __this.setState({
-                        chosenCoinData: sumWithTimestamps,
-                        chosenCoinName: 'Portfolio',
-                        key: 'peele'});
-                        console.log('did it!')
-                    }
-
+                    // the next iteration doesn't start until callback is called
+                    callback();
                 });
+        },
+
+        // done looping here, add latest value and timestamp, set as state, update key to re-render
+        function () {
+            if (window.sum && _this.props.showPortfolioChart) {
+                sumWithTimestamps[valuesSum.length - 1][0] = +new Date;
+                sumWithTimestamps[valuesSum.length - 1][1] = window.sum;
+                console.log(sumWithTimestamps);
+                _this.setState({
+                    chosenCoinData: sumWithTimestamps,
+                    chosenCoinName: 'Portfolio',
+                    key: Math.random()
+                });
+            }
         });
-
-
-
     }
 
     render() {

@@ -114,7 +114,9 @@ export default class Ticker extends Component {
 
         //if sum returns valid value, set it as state
         if (sum) {
-            this.setState({sum: sum}) }
+            this.setState({sum: sum});
+            window.sum = sum;
+        }
     }
 
     render() {
