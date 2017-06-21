@@ -26,6 +26,10 @@ export default class PortfolioContainer extends Component {
         this.setState({portfolio: data, date: date, showPortfolioChart: showChart})
     }
 
+    showCoinChart(link, name, boolean){
+        this.props.showCoinChart(link, name, boolean)
+    }
+
     render() {
 
         return (
@@ -34,6 +38,7 @@ export default class PortfolioContainer extends Component {
                     <Col md={8} >
                         <CoinInputApp getPortfolioMetadata={this.passPortfolioMetadata}
                                       showPortfolioChart={this.props.showPortfolioChart}
+                                      showCoinChart={this.showCoinChart.bind(this)}
                         />
                     </Col>
                     <Col md={4} >

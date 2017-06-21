@@ -13,6 +13,7 @@ export default class Coin extends Component {
     constructor(props) {
         // pass props to parent class
         super(props);
+        this.displayChart = this.displayChart.bind(this);
         this.updatePrice = this.updatePrice.bind(this);
         // set initial empty state for each coin available for tracking
         this.state = {
@@ -121,6 +122,10 @@ export default class Coin extends Component {
         }
     }
 
+    displayChart(link, coin, showPortfolioChart) {
+        this.props.showCoinChart(link, coin, showPortfolioChart)
+    }
+
     // shows content hidden under cat (coin/BTC and coin/USD ratio)
     showContent(){
         //check  if data on coin was already received to avoid displaying uncalculated data,
@@ -141,6 +146,11 @@ export default class Coin extends Component {
                         {/*show coin/USD price and display 2 digits after decimal*/}
                         <p className="toBTCRatioValue">{(this.state.data.price).toFixed(2)} </p>
                     </div>
+                    {' '}
+                    <Button className="show-coin-chart-portfolio-button"
+                            onClick={() => this.displayChart('http://localhost:3000/hist/' + this.props.coin.id, this.props.coin.id, false)}>
+                        <Glyphicon glyph="signal" />
+                    </Button>
                     {' '}
                     {/*render remove coin entry from portfolio button*/}
                     <OverlayTrigger delayShow={500} placement="right" overlay={<Tooltip id="tooltip">Remove coin from portfolio</Tooltip>}>

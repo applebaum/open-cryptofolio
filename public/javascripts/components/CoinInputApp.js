@@ -121,11 +121,15 @@ export default class CoinInputApp extends Component {
         this.sendToParent(this.state.data, this.state.date, showChart)
     }
 
+    showCoinChart(link, name, boolean) {
+        this.props.showCoinChart(link, name, boolean)
+    }
+
     render(){
         // render JSX, pass props
         return (
             <div>
-                <Jumbotron style={{height: '425', overflowY: 'scroll', overflowX: 'contain'}}>
+                <Jumbotron style={{height: '425px', overflowY: 'scroll', overflowX: 'contain'}}>
                     <CoinForm
                         addCoin={this.addCoin.bind(this)}
                         data={this.state.data}
@@ -138,6 +142,7 @@ export default class CoinInputApp extends Component {
                         coins={this.state.data}
                         remove={this.handleRemove.bind(this)}
                         returnData={this.getReturnedData.bind(this)}
+                        showCoinChart={this.showCoinChart.bind(this)}
                     />
                 </Jumbotron>
             </div>

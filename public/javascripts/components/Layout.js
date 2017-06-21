@@ -49,10 +49,6 @@ export default class Layout extends Component {
         this.setState({portfolio: data, date: date, showPortfolioChart: showChart})
     }
 
-    // showPortfolioChart(boolean){
-    //
-    // }
-
     render() {
             return (
                 <Grid fluid={true}>
@@ -90,6 +86,7 @@ export default class Layout extends Component {
                             <PortfolioContainer
                                 passPortfolioMetadata={this.passPortfolioToChart.bind(this)}
                                 showPortfolioChart={this.state.showPortfolioChart}
+                                showCoinChart={this.showChart}
                             />
                         </Col>
                         {/*if showTicker=true, then render column with Ticker, otherwise render null*/}
