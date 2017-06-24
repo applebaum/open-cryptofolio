@@ -19,7 +19,7 @@ export default class Layout extends Component {
             columnSize: 12,
             chosenCoinData: null,
             chosenCoinName: null,
-            portfolio: null,
+            portfolio: [],
             date: null,
             showPortfolioChart: true
         }

@@ -379,7 +379,7 @@ p:hover {
     /*z-index: 1;*/
 /*}*/
 
-/*.portfolio-toolbar {*/
+/*.activePortfolio-toolbar {*/
     /*top: 44%;*/
     /*width: 80%;*/
     /*height: 5%;*/
@@ -388,7 +388,7 @@ p:hover {
     /*position: fixed;*/
 /*}*/
 
-/*.portfolio-performance {*/
+/*.activePortfolio-performance {*/
     /*top: 49%;*/
     /*right: 20%;*/
     /*width: 20%;*/
@@ -398,7 +398,7 @@ p:hover {
 
 /*}*/
 
-/*!*.portfolio-container {*!*/
+/*!*.activePortfolio-container {*!*/
     /*!*top: 49%;*!*/
     /*!*right: 40%;*!*/
     /*!*width: 100%;*!*/
@@ -408,7 +408,7 @@ p:hover {
 /*!*}*!*/
 
 
-/*.portfolio-input {*/
+/*.activePortfolio-input {*/
     /*top: 49%;*/
     /*height: 100%;*/
     /*right: 40%;*/
@@ -428,7 +428,7 @@ p:hover {
     /*!*z-index: 5;*!*/
 /*!*}*!*/
 
-/*!*.portfolio-entry {*!*/
+/*!*.activePortfolio-entry {*!*/
     /*!*position: fixed;*!*/
     /*!*top: 49%;*!*/
     /*!*left: 0;*!*/

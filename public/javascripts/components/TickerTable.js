@@ -17,7 +17,7 @@ export default class TickerTable extends Component {
 
         // map through the coins
         const coinNode = allCoins.map((coins) => {
-            return <TickerRow chosenCoin={this.chosenCoin} coin={coins}/>
+            return <TickerRow chosenCoin={this.chosenCoin} coin={coins} key={coins}/>
         });
 
         // return list

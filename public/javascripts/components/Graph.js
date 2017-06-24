@@ -20,7 +20,7 @@ export default class GraphPreload extends Component {
         }
 
     componentDidMount() {
-        // if chosenCoinData is a string, then render individual coin chart, if else render portfolio chart
+        // if chosenCoinData is a string, then render individual coin chart, if else render activePortfolio chart
         if (typeof this.props.chosenCoinData === 'string') {
             let _this = this;
             // set route path from props
@@ -65,7 +65,7 @@ class Graph extends Component {
                 selected: 0
             },
             title: {
-                text: this.props.name === 'Portfolio' ? 'Portfolio performance' : this.props.name + ' to USD exchange rate'
+                text: this.props.name + ' performance'
             },
             tooltip: {
                 style: {
@@ -80,7 +80,7 @@ class Graph extends Component {
                 }
             },
             series: [{
-                name: this.props.name === 'Portfolio' ? 'Portfolio value in USD' : this.props.name + ' to USD',
+                name: this.props.name + ' to USD',
                 // data is fed directly from props
                 data: this.props.data,
                 id: 'dataseries'

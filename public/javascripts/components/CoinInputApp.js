@@ -2,7 +2,7 @@ import React, {Component} from "react";
 
 import cookie from "react-cookies";
 import csv from 'csv';
-import { Jumbotron } from 'react-bootstrap';
+import { Tabs, Tab, TabContainer, TabContent, TabPane, Grid, Col, Row, Jumbotron } from 'react-bootstrap';
 
 import CoinForm from './CoinForm';
 import CoinList from './CoinList';
@@ -10,8 +10,8 @@ import CoinList from './CoinList';
 
 
 /** This component renders input form for user to enter information on coins he/she'd like to track (also accepts previously
- * exported CSV portfolio file), passes data through handling functions (add and remove),
- * maps through it and creates list displayed to user. An option to export portfolio as CSV is also presented. */
+ * exported CSV activePortfolio file), passes data through handling functions (add and remove),
+ * maps through it and creates list displayed to user. An option to export activePortfolio as CSV is also presented. */
 
 
 // container component that handles all other components
@@ -23,13 +23,15 @@ export default class CoinInputApp extends Component {
         this.sendToParent = this.sendToParent.bind(this);
         // load data from cookies or set initial empty state (array) if no cookies are provided
         this.state = {
-            data: cookie.load("data") || [],
-            date: cookie.load("tracking-date") || null,
+            // data: cookie.load("data") || [],
+            // date: cookie.load("tracking-date") || null,
+            data: this.props.portfolio.data,
+            date: this.props.portfolio.date,
             showPortfolioChart: true
         }
     }
 
-    // send portfolio metadata to parent (PortfolioContainer),
+    // send activePortfolio metadata to parent (PortfolioContainer),
     // which passes it to sibling (PortfolioPerformance)
     componentWillMount(){
         this.sendToParent(this.state.data, this.state.date, this.state.showPortfolioChart);
@@ -44,7 +46,7 @@ export default class CoinInputApp extends Component {
     // add coin handler
     addCoin(name, quantity){
         // assemble data, id is coin abbreviation taken from first three letters of input
-        let coin = {name: name, id: name, quantity: quantity, price: 0};
+        let coin = {name: name, id: name, quantity: quantity, portfolioId: this.props.portfolio.id};
         // update data - push JS object to state
         this.state.data.push(coin);
         // update state
@@ -104,14 +106,15 @@ export default class CoinInputApp extends Component {
         };
     }
 
-    // send portfolio metadata to parent (PortfolioContainer),
+    // send activePortfolio metadata to parent (PortfolioContainer),
     // which passes it to sibling (PortfolioPerformance)
     sendToParent(data, date, showChart){
-        this.props.getPortfolioMetadata(data, date, showChart)
+        let dataAndMeta = {id: this.props.portfolio.id, name: this.props.portfolio.name, date: date, data: data};
+        this.props.getPortfolioMetadata(dataAndMeta, date, showChart);
     }
 
     //triggered each time child (CoinEntry) receives socket update (which sets new window value),
-    //sends portfolio metadata to PortfolioPerformance to prompt its re-render
+    //sends activePortfolio metadata to PortfolioPerformance to prompt its re-render
     getReturnedData(){
         this.sendToParent(this.state.data, this.state.date, this.state.showPortfolioChart);
     }
@@ -125,10 +128,14 @@ export default class CoinInputApp extends Component {
         this.props.showCoinChart(link, name, boolean)
     }
 
+    handleRemovePortfolio(id){
+        this.props.handleRemovePortfolio(id)
+    }
+
     render(){
         // render JSX, pass props
         return (
-            <div>
+            <Tab.Pane eventKey={this.props.portfolio.id}>
                 <Jumbotron style={{height: '425px', overflowY: 'scroll', overflowX: 'contain'}}>
                     <CoinForm
                         addCoin={this.addCoin.bind(this)}
@@ -137,6 +144,8 @@ export default class CoinInputApp extends Component {
                         uploadCSV={this.uploadCSV.bind(this)}
                         setDate={this.setDate.bind(this)}
                         showPortfolioChart={this.showPortfolioChart.bind(this)}
+                        portfolio={this.props.portfolio}
+                        removePortfolio={this.handleRemovePortfolio.bind(this)}
                     />
                     <CoinList
                         coins={this.state.data}
@@ -145,7 +154,7 @@ export default class CoinInputApp extends Component {
                         showCoinChart={this.showCoinChart.bind(this)}
                     />
                 </Jumbotron>
-            </div>
+            </Tab.Pane>
         );
     }
 }

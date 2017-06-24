@@ -238,6 +238,14 @@ export default class CoinForm extends Component {
                     onDayChange={day => this.handleDayClick(day)}
                 />
                 {' '}
+                <Button>
+                    <Glyphicon glyph="pencil" />
+                </Button>
+                {' '}
+                <Button onClick={() => this.props.removePortfolio(this.props.portfolio.id)}>
+                    <Glyphicon glyph="trash"/>
+                </Button>
+                {' '}
                 <Collapse in={this.state.open}>
                     <div>
                         {' '}

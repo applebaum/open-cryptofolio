@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import { Jumbotron } from 'react-bootstrap';
 
-/*This will be a component for displaying overall value of user's portfolio*/
+/*This will be a component for displaying overall value of user's activePortfolio*/
 
 export default class Ticker extends Component {
 
@@ -19,12 +19,11 @@ export default class Ticker extends Component {
     }
 
     setData(data){
-
-        //array containing portfolio metadata (name, quantity)
+        //array containing activePortfolio metadata (name, quantity)
         let arr = data;
         //array for storing tracked coin names only
         let coinNames = [];
-        //array for storing value of each individual portfolio entry
+        //array for storing value of each individual activePortfolio entry
         let coinValues = [];
         //function returns coin price from window.coin (set in CoinEntry on each socket update)
         //depending on received name
@@ -97,12 +96,12 @@ export default class Ticker extends Component {
             }
         };
 
-        //take coin names from portfolio metadata and store them in new array
+        //take coin names from activePortfolio metadata and store them in new array
         arr.forEach(function(entry){
             coinNames.push(entry.id);
         });
 
-        //take coin quantity from portfolio metadata,
+        //take coin quantity from activePortfolio metadata,
         //multiply it by corresponding coin's price (retrieved from window.coin),
         //push result values to new array
         arr.forEach(function(entry){
@@ -123,7 +122,7 @@ export default class Ticker extends Component {
 
         //display data from state (2 decimals)
         return (
-            <Jumbotron style={{height: '425'}}>
+            <Jumbotron style={{height: '425px'}}>
                 <h1>${(this.state.sum).toFixed(2)}</h1>
             </Jumbotron>
         );

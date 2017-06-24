@@ -19,13 +19,13 @@ export default class GraphContainer extends Component {
     }
 
     componentWillReceiveProps(nextProps){
-        // (for portfolio chart) only update component if received props are in fact new (to prevent endless api calls)
-        if (this.props.portfolio !== nextProps.portfolio && nextProps.showPortfolioChart ||
+        // (for activePortfolio chart) only update component if received props are in fact new (to prevent endless api calls)
+        if (this.props.portfolio.data !== nextProps.portfolio.data && nextProps.showPortfolioChart ||
             this.props.date !== nextProps.date && nextProps.showPortfolioChart  ||
             nextProps.showPortfolioChart !== this.props.showPortfolioChart && nextProps.showPortfolioChart !== false) {
             // alert('new prop!');
             //if props are new call calculating function
-            this.calculatePortfolioSum(nextProps.portfolio, nextProps.date);
+            this.calculatePortfolioSum(nextProps.portfolio.data, nextProps.date);
             // this.showPortfolioChart(true);
 
             //(for coin chart) only update component if received props are in fact new (to prevent endless api calls)
@@ -42,18 +42,18 @@ export default class GraphContainer extends Component {
 
     calculatePortfolioSum(portfolio, date){
         let _this = this;
-        //array for storing portfolio coin names
+        //array for storing activePortfolio coin names
         let coinNames = [];
-        //array for storing calculated value of each portfolio coin after filtering out by date (each element is value for a day)
+        //array for storing calculated value of each activePortfolio coin after filtering out by date (each element is value for a day)
         let filteredValues = [];
-        //array for storing sum of filtered portfolio coin values (each element is sum value for a day)
+        //array for storing sum of filtered activePortfolio coin values (each element is sum value for a day)
         let valuesSum = [];
         let sumWithTimestamps = [];
 
         //parse date string to Date object
         let portfolioTimeStamp = Date.parse(date);
 
-        //create array of portfolio coin names
+        //create array of activePortfolio coin names
         portfolio.forEach(function(entry){
             coinNames.push(entry.id);
         });
@@ -88,12 +88,12 @@ export default class GraphContainer extends Component {
 
                     //array of all historical prices (each element is a timestamp and price
                     let historicalPrice = data.data.price;
-                    //filter out all elements that precede portfolio tracking date (create new array, no timestamps, only prices)
+                    //filter out all elements that precede activePortfolio tracking date (create new array, no timestamps, only prices)
                     let filteredArray = historicalPrice.filter(function( element ) {
                         return element[0] > portfolioTimeStamp;
                     });
 
-                    //multiply each price by portfolio quantity to get portfolio value for each coin
+                    //multiply each price by activePortfolio quantity to get activePortfolio value for each coin
                     portfolio.forEach(function(entry){
 
                         if (entry.id === name) {
@@ -129,10 +129,10 @@ export default class GraphContainer extends Component {
             if (window.sum && _this.props.showPortfolioChart) {
                 sumWithTimestamps[valuesSum.length - 1][0] = +new Date;
                 sumWithTimestamps[valuesSum.length - 1][1] = window.sum;
-                console.log(sumWithTimestamps);
+                console.log('calculated portfolio chart!');
                 _this.setState({
                     chosenCoinData: sumWithTimestamps,
-                    chosenCoinName: 'Portfolio',
+                    chosenCoinName: _this.props.portfolio.name,
                     key: Math.random()
                 });
             }
