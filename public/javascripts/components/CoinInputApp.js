@@ -2,7 +2,7 @@ import React, {Component} from "react";
 
 import cookie from "react-cookies";
 import csv from 'csv';
-import { Tabs, Tab, TabContainer, TabContent, TabPane, Grid, Col, Row, Jumbotron } from 'react-bootstrap';
+import { Tab, Jumbotron } from 'react-bootstrap';
 
 import CoinForm from './CoinForm';
 import CoinList from './CoinList';

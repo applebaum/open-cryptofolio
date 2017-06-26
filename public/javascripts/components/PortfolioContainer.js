@@ -5,12 +5,13 @@ import { Grid, Col, Row } from 'react-bootstrap';
 import cookie from "react-cookies";
 
 
-/* This is a container component for portfolio-related components */
+/** This is a container component for portfolio-related components, it handles user created portfolios as an array, which is passed to children,
+ * who map through it and create portfolio tabs. When user updates portfolio data its immediately saved to portfolios array through child-to-parent callback.
+ * */
 
 export default class PortfolioContainer extends Component {
 
     constructor(props){
-        // pass props to parent class
         super(props);
         this.passPortfolioMetadata = this.passPortfolioMetadata.bind(this);
         // load data from cookies or set initial empty state (array) if no cookies are provided
@@ -18,15 +19,26 @@ export default class PortfolioContainer extends Component {
             activePortfolio: [],
             date: null,
             showPortfolioChart: true,
-            key: 1,
             portfolios: cookie.load("portfolios") ||  [],
         }
     }
 
+    //if no portfolios saved in cookies create empty one
     componentDidMount(){
-        if (!this.state.portfolios[0])
-        this.createPortfolioMetadata(0, 'Portfolio', 'Select date', []);
+        if (!this.state.portfolios[0]) {
+            this.createEmptyPortfolio(); }
+    }
 
+    //when the last element from portfolios array removed, an empty portfolio is created
+    componentDidUpdate(){
+        if (this.state.portfolios.length === 0) {
+            this.createEmptyPortfolio(); }
+    }
+
+    //function for creating first portfolio
+    createEmptyPortfolio () {
+        console.log('make an empty pls');
+            this.createPortfolioMetadata(0, 'Portfolio', 'Select date', []);
     }
 
     //receive activePortfolio metadata from one child (CoinInputApp),
@@ -46,31 +58,44 @@ export default class PortfolioContainer extends Component {
 
     }
 
+    //pass coin data to chart component
     showCoinChart(link, name, boolean){
         this.props.showCoinChart(link, name, boolean)
     }
 
-    handleSelect(key) {
-        this.setState({key});
-    }
-
     //function used to create initial empty portfolio
     createPortfolioMetadata(id, name, date, data){
+        //create object from received props
         let portfolio = {id: id, name: name, date: date, data: data};
-        console.log('new portfolio!');
-        this.state.portfolios.push(portfolio);
-        this.setState({portfolios: this.state.portfolios});
-        cookie.save("portfolios", this.state.portfolios, {path: "/", maxAge: 631138520});
+        //push it into state portfolios array
+        let portfolios = this.state.portfolios.slice();
+        portfolios.push(portfolio);
+        //set it as state
+        this.setState({portfolios: portfolios});
+        console.log('ok, heres a new portfolio');
+        //save to cookies
+        cookie.save("portfolios", portfolios, {path: "/", maxAge: 631138520});
+        console.log(portfolios);
     }
 
     removePortfolio(id){
-        const remainder = this.state.portfolios.filter((portfolio) => {
-            if(portfolio.id !== id) return portfolio;
-        });
-        // update state with filter
-        this.setState({portfolios: remainder});
-        // update cookies
-        cookie.save("portfolios", remainder, {path: "/", maxAge: 631138520});
+        //filter portfolios, if only one left just reset portfolios array
+        if (this.state.portfolios.length > 1) {
+            const remainder = this.state.portfolios.filter((portfolio) => {
+                if (portfolio.id !== id) return portfolio;
+            });
+            // update state with remainder
+            console.log('removed ' + id);
+            console.log(remainder);
+            this.setState({portfolios: remainder});
+            // update cookies
+            cookie.save("portfolios", remainder, {path: "/", maxAge: 631138520});
+        }
+        else { this.setState({portfolios: []}) }
+    }
+
+    editName(edited){
+        console.log(edited);
     }
 
     render() {
@@ -84,6 +109,7 @@ export default class PortfolioContainer extends Component {
                                             showCoinChart={this.showCoinChart.bind(this)}
                                             createNewPortfolio={this.createPortfolioMetadata.bind(this)}
                                             removePortfolio={this.removePortfolio.bind(this)}
+                                            editName={this.editName.bind(this)}
                         />
 
                     </Col>
