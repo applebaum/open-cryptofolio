@@ -33,6 +33,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //setup routes for historical coin data
 var routes = require('./routes/index');
+var fiat = require('./routes/api/fiatrates');
 var AMP = require('./routes/hist/amp');
 var ARDR = require('./routes/hist/ardr');
 var BCN = require('./routes/hist/bcn');
@@ -100,6 +101,7 @@ var XVC = require('./routes/hist/xvc');
 var ZEC = require('./routes/hist/zec');
 
 app.use('/', routes);
+app.use('/api/fiatrates', fiat);
 app.use('/hist/amp', AMP);
 app.use('/hist/ardr', ARDR);
 app.use('/hist/bcn', BCN);

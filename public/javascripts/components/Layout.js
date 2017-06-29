@@ -51,11 +51,11 @@ export default class Layout extends Component {
 
     render() {
             return (
-                <Grid fluid={true}>
+                <Grid fluid={true} className="layout">
 
                     <Row className="show-grid">
                         <Col md={12}>
-                            <Navbar><h1>Coin till</h1></Navbar>
+                            <Navbar className="navbar"><h1 className="nav-name">Coin till</h1></Navbar>
                         </Col>
                     </Row>
 

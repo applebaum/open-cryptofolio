@@ -1,24 +1,41 @@
 import React, {Component} from "react";
-import { Jumbotron } from 'react-bootstrap';
+import { Table, Jumbotron, Button, Collapse } from 'react-bootstrap';
+import axios from 'axios';
 
 /*This will be a component for displaying overall value of user's activePortfolio*/
 
-export default class Ticker extends Component {
+export default class Performance extends Component {
 
     constructor(props){
         super(props);
-        this.setData = this.setData.bind(this);
+        this.calculateSum = this.calculateSum.bind(this);
         this.state = {
-            sum: 0
+            sum: 0,
+            fiat: 'USD',
+            converted: 0,
+            fiatPrices: null
         }
     }
+
+    componentDidMount(){
+        let path = 'http://localhost:3000/api/fiatrates',
+            _this = this;
+
+        axios
+            .get(path)
+            .then(function (data) {
+                console.log('asked api for fiat values');
+                _this.setState({fiatPrices: data.data.rates})
+            })
+    }
+
     //on each socket update of CoinEntry, receive new props,
     //each time new props are received call function to set new state
     componentWillReceiveProps(nextProps){
-        this.setData(nextProps.data);
+        this.calculateSum(nextProps.data);
     }
 
-    setData(data){
+    calculateSum(data){
         //array containing activePortfolio metadata (name, quantity)
         let arr = data;
         //array for storing tracked coin names only
@@ -115,15 +132,188 @@ export default class Ticker extends Component {
         if (sum) {
             this.setState({sum: sum});
             window.sum = sum;
+            if (this.state.fiat !== 'USD') {
+                this.convertFiat();
+            }
         }
     }
 
+    convertFiat(){
+        // if (fiatValues) {
+        let price = this.state.fiatPrices;
+        if (price) {
+            this.setState({ converted:  price[this.state.fiat] * this.state.sum })
+        }
+    // }
+    }
+
+
     render() {
 
-        //display data from state (2 decimals)
         return (
             <Jumbotron style={{height: '425px'}}>
-                <h1>${(this.state.sum).toFixed(2)}</h1>
+
+                <Button  onClick={() => this.setState({open: !this.state.open})}>
+                    <h4>{this.state.fiat}</h4>
+                </Button>
+
+                <h1 style={{display: 'inline-block'}}>
+                    {this.state.fiat === 'USD' ? (this.state.sum).toFixed(2) : (this.state.converted).toFixed(2)}
+                </h1>
+
+                <Collapse in={this.state.open}>
+                    <div>
+                        <Table condensed responsive>
+                            <tbody>
+                            <tr>
+                                <td onClick={() => this.setState({fiat: 'USD'})}
+                                    className={this.state.fiat === 'USD' ? 'chosen-fiat' : 'available-fiats'}>
+                                    USD
+                                </td>
+                                <td onClick={() => this.setState({fiat: 'EUR'})}
+                                    className={this.state.fiat === 'EUR' ? 'chosen-fiat' : 'available-fiats'}>
+                                    EUR
+                                </td>
+                                <td onClick={() => this.setState({fiat: 'GBP'})}
+                                    className={this.state.fiat === 'GBP' ? 'chosen-fiat' : 'available-fiats'}>
+                                    GBP
+                                </td>
+                                <td onClick={() => this.setState({fiat: 'CNY'})}
+                                    className={this.state.fiat === 'CNY' ? 'chosen-fiat' : 'available-fiats'}>
+                                    CNY
+                                </td>
+                            </tr>
+                            <tr>
+                                <td onClick={() => this.setState({fiat: 'AUD'})}
+                                    className={this.state.fiat === 'AUD' ? 'chosen-fiat' : 'available-fiats'}>
+                                    AUD
+                                </td>
+                                <td onClick={() => this.setState({fiat: 'BGN'})}
+                                    className={this.state.fiat === 'BGN' ? 'chosen-fiat' : 'available-fiats'}>
+                                    BGN
+                                </td>
+                                <td onClick={() => this.setState({fiat: 'BRL'})}
+                                    className={this.state.fiat === 'BRL' ? 'chosen-fiat' : 'available-fiats'}>
+                                    BRL
+                                </td>
+                                <td onClick={() => this.setState({fiat: 'CAD'})}
+                                    className={this.state.fiat === 'CAD' ? 'chosen-fiat' : 'available-fiats'}>
+                                    CAD
+                                </td>
+                            </tr>
+                            <tr>
+                                <td onClick={() => this.setState({fiat: 'CHF'})}
+                                    className={this.state.fiat === 'CHF' ? 'chosen-fiat' : 'available-fiats'}>
+                                    CHF
+                                </td>
+                                <td onClick={() => this.setState({fiat: 'CZK'})}
+                                    className={this.state.fiat === 'CZK' ? 'chosen-fiat' : 'available-fiats'}>
+                                    CZK
+                                </td>
+                                <td onClick={() => this.setState({fiat: 'DKK'})}
+                                    className={this.state.fiat === 'DKK' ? 'chosen-fiat' : 'available-fiats'}>
+                                    DKK
+                                </td>
+                                <td onClick={() => this.setState({fiat: 'HKD'})}
+                                    className={this.state.fiat === 'HKD' ? 'chosen-fiat' : 'available-fiats'}>
+                                    HKD
+                                </td>
+                            </tr>
+                            <tr>
+                                <td onClick={() => this.setState({fiat: 'HRK'})}
+                                    className={this.state.fiat === 'HRK' ? 'chosen-fiat' : 'available-fiats'}>
+                                    HRK
+                                </td>
+                                <td onClick={() => this.setState({fiat: 'HUF'})}
+                                    className={this.state.fiat === 'HUF' ? 'chosen-fiat' : 'available-fiats'}>
+                                    HUF
+                                </td>
+                                <td onClick={() => this.setState({fiat: 'IDR'})}
+                                    className={this.state.fiat === 'IDR' ? 'chosen-fiat' : 'available-fiats'}>
+                                    IDR
+                                </td>
+                                <td onClick={() => this.setState({fiat: 'ILS'})}
+                                    className={this.state.fiat === 'ILS' ? 'chosen-fiat' : 'available-fiats'}>
+                                    ILS
+                                </td>
+                            </tr>
+                            <tr>
+                                <td onClick={() => this.setState({fiat: 'INR'})}
+                                    className={this.state.fiat === 'INR' ? 'chosen-fiat' : 'available-fiats'}>
+                                    INR
+                                </td>
+                                <td onClick={() => this.setState({fiat: 'JPY'})}
+                                    className={this.state.fiat === 'JPY' ? 'chosen-fiat' : 'available-fiats'}>
+                                    JPY
+                                </td>
+                                <td onClick={() => this.setState({fiat: 'KRW'})}
+                                    className={this.state.fiat === 'KRW' ? 'chosen-fiat' : 'available-fiats'}>
+                                    KRW
+                                </td>
+                                <td onClick={() => this.setState({fiat: 'MXN'})}
+                                    className={this.state.fiat === 'MXN' ? 'chosen-fiat' : 'available-fiats'}>
+                                    MXN
+                                </td>
+                            </tr>
+                            <tr>
+                                <td onClick={() => this.setState({fiat: 'MYR'})}
+                                    className={this.state.fiat === 'MYR' ? 'chosen-fiat' : 'available-fiats'}>
+                                    MYR
+                                </td>
+                                <td onClick={() => this.setState({fiat: 'NOK'})}
+                                    className={this.state.fiat === 'NOK' ? 'chosen-fiat' : 'available-fiats'}>
+                                    NOK
+                                </td>
+                                <td onClick={() => this.setState({fiat: 'NZD'})}
+                                    className={this.state.fiat === 'NZD' ? 'chosen-fiat' : 'available-fiats'}>
+                                    NZD
+                                </td>
+                                <td onClick={() => this.setState({fiat: 'PHP'})}
+                                    className={this.state.fiat === 'PHP' ? 'chosen-fiat' : 'available-fiats'}>
+                                    PHP
+                                </td>
+                            </tr>
+                            <tr>
+                                <td onClick={() => this.setState({fiat: 'PLN'})}
+                                    className={this.state.fiat === 'PLN' ? 'chosen-fiat' : 'available-fiats'}>
+                                    PLN
+                                </td>
+                                <td onClick={() => this.setState({fiat: 'RON'})}
+                                    className={this.state.fiat === 'RON' ? 'chosen-fiat' : 'available-fiats'}>
+                                    RON
+                                </td>
+                                <td onClick={() => this.setState({fiat: 'RUB'})}
+                                    className={this.state.fiat === 'RUB' ? 'chosen-fiat' : 'available-fiats'}>
+                                    RUB
+                                </td>
+                                <td onClick={() => this.setState({fiat: 'SEK'})}
+                                    className={this.state.fiat === 'SEK' ? 'chosen-fiat' : 'available-fiats'}>
+                                    SEK
+                                </td>
+                            </tr>
+                            <tr>
+                                <td onClick={() => this.setState({fiat: 'SGD'})}
+                                    className={this.state.fiat === 'SGD' ? 'chosen-fiat' : 'available-fiats'}>
+                                    SGD
+                                </td>
+                                <td onClick={() => this.setState({fiat: 'THB'})}
+                                    className={this.state.fiat === 'THB' ? 'chosen-fiat' : 'available-fiats'}>
+                                    THB
+                                </td>
+                                <td onClick={() => this.setState({fiat: 'TRY'})}
+                                    className={this.state.fiat === 'TRY' ? 'chosen-fiat' : 'available-fiats'}>
+                                    TRY
+                                </td>
+                                <td onClick={() => this.setState({fiat: 'ZAR'})}
+                                    className={this.state.fiat === 'ZAR' ? 'chosen-fiat' : 'available-fiats'}>
+                                    ZAR
+                                </td>
+                            </tr>
+                            </tbody>
+                        </Table>
+                    </div>
+                </Collapse>
+
             </Jumbotron>
         );
     }

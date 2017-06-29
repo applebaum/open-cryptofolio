@@ -1,3 +1,6 @@
+.navbar {
+    background-color: #252830;
+}
 
 .coinEntryHeader{
     width: 100% !important;
@@ -106,6 +109,11 @@ p:hover {
 .chart-container-small {
     height: 400px;
     width: 1350px;
+}
+
+.chosen-fiat{
+    background-color: #4A90E2;
+    color: whitesmoke;
 }
 
 /*.ticker-head {*/

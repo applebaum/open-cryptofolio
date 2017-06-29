@@ -31,6 +31,7 @@
     "react": "^15.5.4",
     "react-bootstrap": "^0.31.0",
     "react-cookies": "0.0.1",
+    "react-currency-conversion": "^1.0.5",
     "react-day-picker": "^5.5.3",
     "react-dom": "^15.5.4",
     "serve-favicon": "^2.1.7",
@@ -41,6 +42,7 @@
     "babel-loader": "^6.2.4",
     "css-loader": "^0.28.4",
     "style-loader": "^0.18.2",
-    "webpack": "^1.13.1"
+    "webpack": "^1.13.1",
+    "why-did-you-update": "0.0.8"
   }
 }
