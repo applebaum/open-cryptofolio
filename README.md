@@ -23,11 +23,11 @@ which you can download from [Node.js website](https://nodejs.org/en/) (npm is in
 
 ## Download Project Files
 To get project files you will need to either clone this repository (run `git clone https://github.com/applebaum/open-cryptofolio.git` in terminal),
-which will create a new `coin-till` folder, or [download ZIP](https://github.com/applebaum/open-cryptofolio/archive/master.zip)
+which will create a new `open-cryptofolio` folder, or [download ZIP](https://github.com/applebaum/open-cryptofolio/archive/master.zip)
 and extract it using archive manager of your choice.
 
 ## Install Dependencies
-After downloading project repository navigate to `coin-till` directory and in terminal
+After downloading project repository navigate to `open-cryptofolio` directory and in terminal
 run `npm install` which will automatically install all of the project dependencies (including `react` and `react-dom`).
 
 ## Building scripts
@@ -51,6 +51,6 @@ After successfully starting the server, navigate to [`http://localhost:3000/`](h
 
 If you wish to, you can buy me a cup of coffee :)
 
-BTC: `1GXQMBvqz6UovTRb87i89whBhJEtsADN2Z` 
-XMR: `472xmiPYuSPYP4Aj4ESJh5UYpE86FwEuULd3vY9qFBSFfkkScKSdBnz29QBEuZtym1WAhMpFZBx54cBYESxcAUnZJKvbTFM`
-DOGE: `D8aaCCZB6rMzE7JKQQ4nad9pwfCucLnMTE`
+* **BTC**: `1GXQMBvqz6UovTRb87i89whBhJEtsADN2Z` 
+* **XMR**: `472xmiPYuSPYP4Aj4ESJh5UYpE86FwEuULd3vY9qFBSFfkkScKSdBnz29QBEuZtym1WAhMpFZBx54cBYESxcAUnZJKvbTFM`
+* **DOGE**: `D8aaCCZB6rMzE7JKQQ4nad9pwfCucLnMTE`
