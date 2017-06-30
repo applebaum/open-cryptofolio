@@ -14,7 +14,8 @@ The project is currently under development, stay tuned for updates.
 
 ## Build Instructions
 The project is based on Node.js Express server with React.js front-end.
-If you wish to contribute:
+
+**If you wish to contribute:**
 
 ## Download Dependencies
 To build this project you will need
