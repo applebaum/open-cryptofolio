@@ -1,14 +1,17 @@
-## Coin Till
+## Open Cryptofolio
 Open-source cryptocurrency portfolio manager written using React.js. Capable
 of handling multiple portfolios, showing chart data on portfolio performance
 and live value in BTC and major fiats, exporting/importing portfolio data,
 as well as displaying all major cryptocurrencies live trading
 data and historical performance chart.
 
-The project is currently under development.
+All of the data is handled client-side, nothing is sent to server. If you choose to wipe cookies at the end of browsing session you can save your portfolio locally and later easily import it. 
+
+The project is currently under development, stay tuned for updates.
 
 ## Build Instructions
 The project is based on Node.js Express server with React.js front-end.
+If you wish to contribute:
 
 ## Download Dependencies
 To build this project you will need
@@ -19,8 +22,8 @@ To build this project you will need
 which you can download from [Node.js website](https://nodejs.org/en/) (npm is included in Node.JS).
 
 ## Download Project Files
-To get project files you will need to either clone this repository (run `git clone https://github.com/applebaum/coin-till.git` in terminal),
-which will create a new `coin-till` folder, or [download ZIP](https://github.com/applebaum/coin-till/archive/master.zip)
+To get project files you will need to either clone this repository (run `git clone https://github.com/applebaum/open-cryptofolio.git` in terminal),
+which will create a new `coin-till` folder, or [download ZIP](https://github.com/applebaum/open-cryptofolio/archive/master.zip)
 and extract it using archive manager of your choice.
 
 ## Install Dependencies
@@ -43,3 +46,11 @@ Note, that entry point of the app is `bin/www` and not `server.js`.
 ## Run the App
 
 After successfully starting the server, navigate to [`http://localhost:3000/`](http://localhost:3000/).
+
+## Donate
+
+If you wish to, you can buy me a cup of coffee :)
+
+BTC: `1GXQMBvqz6UovTRb87i89whBhJEtsADN2Z` 
+XMR: `472xmiPYuSPYP4Aj4ESJh5UYpE86FwEuULd3vY9qFBSFfkkScKSdBnz29QBEuZtym1WAhMpFZBx54cBYESxcAUnZJKvbTFM`
+DOGE: `D8aaCCZB6rMzE7JKQQ4nad9pwfCucLnMTE`
