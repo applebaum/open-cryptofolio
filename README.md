@@ -1,8 +1,8 @@
-## Open Cryptofolio
+## OpenCryptofolio
 
-![alt text](https://raw.githubusercontent.com/applebaum/open-cryptofolio/master/public/logo-bg.png "Open Cryptofolio - open-soruce cryptocurrency portfolio manager")
+![alt text](https://raw.githubusercontent.com/applebaum/open-cryptofolio/master/public/logo-bg.png "OpenCryptofolio - open-soruce cryptocurrency portfolio manager")
 
-Open-source cryptocurrency portfolio manager written using React.js. Capable
+Free and Open Source cryptocurrency portfolio manager written using React.js. Capable
 of handling multiple portfolios, showing chart data on portfolio performance
 and live value in BTC and major fiats, exporting/importing portfolio data,
 as well as displaying all major cryptocurrencies live trading
