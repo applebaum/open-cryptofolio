@@ -94,13 +94,17 @@ export default class PortfolioContainer extends Component {
         else { this.setState({portfolios: []}) }
     }
 
-    editName(edited){
-        console.log(edited);
+    editName(id, name){
+        this.state.portfolios.forEach(function(portfolio) {
+            if (portfolio.id === id)
+                portfolio.name = name
+
+        })
     }
 
     render() {
         return (
-            <Grid fluid={true}>
+            <Grid fluid={true} className="port-cont">
                 <Row className="showGrid">
                     <Col md={8} >
                         <MultiplePortfolios portfolios={this.state.portfolios}
@@ -114,7 +118,7 @@ export default class PortfolioContainer extends Component {
 
                     </Col>
                     <Col md={4} >
-                        <PortfolioPerformance data={this.state.activePortfolio.data}/>
+                        <PortfolioPerformance  data={this.state.activePortfolio.data}/>
                     </Col>
                 </Row>
             </Grid>

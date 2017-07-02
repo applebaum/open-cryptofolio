@@ -35,7 +35,7 @@ export default class MultiplePortfolios extends Component {
         this.props.createNewPortfolio(getId, 'Portfolio', 'Select date', []);
         console.log('and now getId is ' + getId);
         //focus on new portfolio tab
-        this.setState({chosen: this.props.portfolios.length})
+        // this.setState({chosen: this.props.portfolios.length})
     }
 
     //send portfolio removing function id os chosen portfolio
@@ -46,8 +46,8 @@ export default class MultiplePortfolios extends Component {
         this.setState({chosen: id === 0 ? 0 : id-1})
     }
 
-    editName(edited){
-        this.props.editName(edited)
+    editName(id, name){
+        this.props.editName(id, name)
     }
 
     handleSelect() {
@@ -60,7 +60,9 @@ export default class MultiplePortfolios extends Component {
         let portfolioTabNav = this.props.portfolios.map((portfolios) => {
             return (
                 <NavItem eventKey={portfolios.id} key={portfolios.id} onSelect={() => this.setState({chosen: portfolios.id})}>
+                    <div className={this.state.chosen === portfolios.id ? 'tab-chosen' : 'tab'}>
                     {portfolios.name}
+                    </div>
                 </NavItem>
 
             )
@@ -74,20 +76,23 @@ export default class MultiplePortfolios extends Component {
                                  showCoinChart={this.showCoinChart.bind(this)}
                                  key={portfolios.id}
                                  handleRemovePortfolio={this.handleRemovePortfolio.bind(this)}
+                                 editName={this.editName.bind(this)}
             />
         });
 
         return (
+            <div className="portfolio-roster-app">
             <Tab.Container
                 onSelect={this.handleSelect.bind(this)}
                 activeKey={this.state.chosen}
-                id="portfolio-tabs" >
+                id="portfolio-tabs"
+            >
                 <Row className="clearfix">
                     <Col sm={12}>
-                        <Nav bsStyle="tabs">
+                        <Nav className="tabs-nav" bsStyle="tabs">
                             {portfolioTabNav}
-                            <NavItem onClick={() => this.createNewPortfolio()}>
-                                <Glyphicon glyph="plus"/>
+                            <NavItem className="add-port-btn" onClick={() => this.createNewPortfolio()}>
+                                <Glyphicon className="add-port-gl" glyph="plus"/>
                             </NavItem>
                         </Nav>
                     </Col>
@@ -98,6 +103,7 @@ export default class MultiplePortfolios extends Component {
                     </Col>
                 </Row>
             </Tab.Container>
+            </div>
         )
     }
 }

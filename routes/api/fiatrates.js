@@ -13,7 +13,6 @@ var client = new Client();
 // listen for request
 router.get('/', function(req, res) {
     console.log('received user request');
-
     // make HTTP GET request to external API
     client.get("https://api.fixer.io/latest?base=USD", function (data) {
         // parsed response body as js object
@@ -22,6 +21,13 @@ router.get('/', function(req, res) {
         // send received object to client
         res.send(data);
         console.log('success!');
+    }).on('error', function (err) {
+        console.log('something went wrong on the request', err.request.options);
+    });
+
+// handling client error events
+    client.on('error', function (err) {
+        console.error('Something went wrong on the client', err);
     });
 });
 

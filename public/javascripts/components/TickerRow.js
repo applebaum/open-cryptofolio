@@ -48,7 +48,7 @@ export default class TickerEntry extends Component {
             return null
         } else {
             return (
-                <tr
+                <tr className="ticker-row"
                     onClick={() => this.displayChart('http://localhost:3000/hist/' + this.props.coin, this.props.coin, false)}
                 >
                     <td><strong>{this.props.coin}</strong></td>

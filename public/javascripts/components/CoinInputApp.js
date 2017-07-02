@@ -27,7 +27,8 @@ export default class CoinInputApp extends Component {
             // date: cookie.load("tracking-date") || null,
             data: this.props.portfolio.data,
             date: this.props.portfolio.date,
-            showPortfolioChart: true
+            showPortfolioChart: true,
+            sameCoinWarn: false
         }
     }
 
@@ -45,15 +46,23 @@ export default class CoinInputApp extends Component {
 
     // add coin handler
     addCoin(name, quantity){
-        // assemble data, id is coin abbreviation taken from first three letters of input
-        let coin = {name: name, id: name, quantity: quantity, portfolioId: this.props.portfolio.id};
-        // update data - push JS object to state
-        this.state.data.push(coin);
-        // update state
-        this.setState({data: this.state.data});
-        // save data to cookies
-        cookie.save("data", this.state.data, {path: "/", maxAge: 631138520});
-        this.sendToParent(this.state.data, this.state.date, this.state.showPortfolioChart);
+        if (this.state.data.filter(e => e.id === name).length > 0) {
+            // this.setState({sameCoinWarn: true})
+        } else {
+            // assemble data, id is coin abbreviation taken from first three letters of input
+            let coin = {name: name, id: name, quantity: quantity, portfolioId: this.props.portfolio.id};
+            // update data - push JS object to state
+            this.state.data.push(coin);
+            // update state
+            this.setState({data: this.state.data});
+            // save data to cookies
+            cookie.save("data", this.state.data, {path: "/", maxAge: 631138520});
+            this.sendToParent(this.state.data, this.state.date, this.state.showPortfolioChart);
+        }
+    }
+
+    dismissWarn(boolean){
+        this.setState({sameCoinWarn: boolean})
     }
 
     // handle remove
@@ -132,11 +141,15 @@ export default class CoinInputApp extends Component {
         this.props.handleRemovePortfolio(id)
     }
 
+    editName(name){
+        this.props.editName(this.props.portfolio.id, name)
+    }
+
     render(){
         // render JSX, pass props
         return (
             <Tab.Pane eventKey={this.props.portfolio.id}>
-                <Jumbotron style={{height: '425px', overflowY: 'scroll', overflowX: 'contain'}}>
+                <div className="portfolio-app">
                     <CoinForm
                         addCoin={this.addCoin.bind(this)}
                         data={this.state.data}
@@ -146,14 +159,18 @@ export default class CoinInputApp extends Component {
                         showPortfolioChart={this.showPortfolioChart.bind(this)}
                         portfolio={this.props.portfolio}
                         removePortfolio={this.handleRemovePortfolio.bind(this)}
+                        sameCoinWarn={this.state.sameCoinWarn}
+                        dismissWarn={this.dismissWarn.bind(this)}
+                        editName={this.editName.bind(this)}
                     />
                     <CoinList
+                        className="coin-list"
                         coins={this.state.data}
                         remove={this.handleRemove.bind(this)}
                         returnData={this.getReturnedData.bind(this)}
                         showCoinChart={this.showCoinChart.bind(this)}
                     />
-                </Jumbotron>
+                </div>
             </Tab.Pane>
         );
     }

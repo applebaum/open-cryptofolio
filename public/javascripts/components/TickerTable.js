@@ -21,9 +21,9 @@ export default class TickerTable extends Component {
         });
 
         // return list
-        return (<Well className="ticker-container">
+        return (<div className="ticker-container">
 
-            <Table striped condensed hover>
+            <Table condensed hover>
 
                 <thead>
                 <tr
@@ -43,6 +43,6 @@ export default class TickerTable extends Component {
 
             </Table>
 
-        </Well>);
+        </div>);
     }
 }

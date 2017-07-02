@@ -1,19 +1,344 @@
+/**{    border: thin solid red !important;  }*/
+
+
+.html {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: #000;
+}
+
+.body {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: #000;
+}
+
+.layout {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: #000;
+
+}
+
+
+.port-cont{
+
+}
+
+.portfolio-roster-app {
+    height: 425px;
+    border: thin solid whitesmoke !important;
+
+    margin: 2.7% 0 0 0;
+}
+
+.portfolio-app {
+    background-color: rgba(0,0,0,0);
+    border-radius: 1px;
+    /*     border: thin solid whitesmoke !important; */
+}
+
+.coin-form{
+    padding: 1%;
+    /*display: flex;*/
+    /*justify-content: flex-start;*/
+}
+
+.remove-edit-btns{
+    /*justify-self: flex-end;*/
+    display: inline-block;
+    right: 2%;
+}
+
+.coin-list {
+    background-color: rgba(0,0,0,0);
+    border-radius: 1px;
+    /*border: thin solid whitesmoke !important;*/
+    /*height: 200px;*/
+    overflow-y: scroll;
+    overflow-x: hidden;
+
+}
+
+
+.sum-container {
+    height: 425px;
+    margin: 5.5% 0 0 0;
+    background-color: rgba(0,0,0,0);
+    border-radius: 1px;
+    border: thin solid whitesmoke !important;
+}
+
+.sum {
+    padding: 0% 1% 2.5% 1%;
+    width: 100%;
+    text-align: center;
+    font-size: 350%;
+    color: whitesmoke;
+    display: inline-block;
+}
+
+.graph-container {
+    background-color: rgba(0,0,0,0);
+    border-radius: 1px;
+    border: thin solid whitesmoke !important;
+}
+
+.fiat-table-container {
+    color: whitesmoke;
+    background-color: rgba(0,0,0,0);
+    border-radius: 1px;
+    /*border: thin solid whitesmoke !important;*/
+
+}
+
 .navbar {
-    background-color: #252830;
+    /*display: flex;*/
+    /*justify-content: flex-start;*/
+    position: fixed;
+    left: 0.7%;
+    /*top: 2.7%;*/
+    color: whitesmoke;
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.logo {
+    width: 20%;
+}
+
+.ticker-button {
+    /*     display: inline-block !important; */
+         top: 1.7%;
+         right: 1.7%;
+    font-size: 170% !important;
+    position: fixed;
+    background-color: #000 !important;
+    color: #fff !important;
+
+
+}
+
+.ticker-button:hover {
+    background-color: #fff !important;
+    color: #000 !important;
+}
+
+/*.coinEntryHeader{*/
+    /*width: 100% !important;*/
+    /*height: 100% !important;*/
+    /*margin: auto;*/
+    /*display: inline-flex;*/
+    /*justify-content: space-between;*/
+
+/*}*/
+
+.tabs-nav {
+    border: thin solid whitesmoke !important;
+}
+
+.tab {
+    color: whitesmoke;
+    font-size: 150%;
+    -webkit-transition-duration: color 0.1s linear; /* Safari */
+    transition: color 0.1s linear;
+}
+
+.tab-chosen {
+    color: #000;
+    font-size: 150%;
+}
+
+.tab:hover{
+    color: #000 !important;
+
+}
+
+.coin-entry {
+    /*display: flex;*/
+    /*justify-content: space-between;*/
+    /*align-content: center;*/
+    border: thin solid whitesmoke !important;
+    background-color: rgba(0, 0, 0, 0) !important;
 }
 
 .coinEntryHeader{
+    color: whitesmoke;
+    background-color: rgba(0, 0, 0, 0) !important;
     width: 100% !important;
-    height: 100% !important;
-    margin: auto;
-    display: inline-flex;
-    justify-content: space-between;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-content: center !important;
+}
+
+.coinNameLong{
+    font-size: 150%;
+}
+
+.allHeaderData {
+    font-size: 150%;
+}
+
+.add-coin-btn {
+    background-color: #000 !important;
+    border: thin solid whitesmoke !important;
+    -webkit-transition-duration: background-color 0.1s linear; /* Safari */
+    transition: background-color 0.1s linear;
+}
+
+.add-port-btn {
+    background-color: #000 !important;
+    border: none;
+    /*-webkit-transition-duration: background-color 0.1s linear; !* Safari *!*/
+    /*transition: background-color 0.1s linear;*/
+}
+
+/*.add-port-btn:hover {*/
+    /*background-color: rgba(0, 255, 0, 0.5) !important;*/
+    /*border: thin solid whitesmoke !important;*/
+/*}*/
+
+
+.fiat-btn {
+    width: 100%;
+    height: 12%;
+    text-align: auto;
+    background-color: #000 !important;
+    color: whitesmoke !important;
+    -webkit-transition-duration: background-color 0.1s linear; /* Safari */
+    transition: background-color 0.1s linear;
+}
+
+.fiat-btn:hover {
+    background-color: #fff !important;
+    color: #000 !important;
+}
+
+.add-port-gl {
+    color: whitesmoke;
+    -webkit-transition-duration: color 0.1s linear; /* Safari */
+    transition: color 0.1s linear;
+}
+
+.add-port-gl:hover {
+    color: #000 !important;
+}
+
+.add-coin-btn {
+    background-color: #000 !important;
+    border: thin solid whitesmoke !important;
+    -webkit-transition-duration: background-color 0.1s linear; /* Safari */
+    transition: background-color 0.1s linear;
+}
+
+.add-coin-btn:hover {
+    background-color: rgba(0, 255, 0, 0.5) !important;
+}
+
+.add-coin-gl {
+    color: whitesmoke;
+    -webkit-transition-duration: color 0.1s linear; /* Safari */
+    transition: color 0.1s linear;
+}
+
+.export-btn {
+    background-color: #000 !important;
+    border: thin solid whitesmoke !important;
+    -webkit-transition-duration: background-color 0.1s linear; /* Safari */
+    transition: background-color 0.1s linear;
+}
+
+.export-btn:hover{
+    background-color: rgba(43, 144, 143, 0.86) !important;
 
 }
 
-.coinEntry {
-    /*display: inline-block;*/
-    align-content: center;
+.edit-name-btn{
+    background-color: #000 !important;
+    border: thin solid whitesmoke !important;
+    -webkit-transition-duration: background-color 0.1s linear; /* Safari */
+    transition: background-color 0.1s linear;
+}
+
+.edit-name-btn:hover{
+    background-color: rgba(43, 144, 143, 0.86) !important;
+}
+
+.edit-name-gl {
+    color: whitesmoke;
+
+}
+
+.remove-port-btn {
+    background-color: #000 !important;
+    border: thin solid whitesmoke !important;
+    -webkit-transition-duration: background-color 0.1s linear; /* Safari */
+    transition: background-color 0.1s linear;
+}
+
+.remove-port-btn:hover {
+    background-color: rgba(255, 0, 0, 0.63) !important;
+}
+
+.remove-port-gl{
+    color: whitesmoke;
+}
+
+.export-gl {
+    color: whitesmoke;
+}
+
+.coin-header-menu-down {
+    margin: 1.5% 0.5% 1% 0.4%;
+    color: whitesmoke;
+}
+
+.tracking-label{
+    color: whitesmoke;
+}
+
+.remove-button {
+    margin: 0.3% 0.5% 0.5% 0.5%;
+    background-color: #000 !important;
+    border: thin solid whitesmoke !important;
+    border-radius: 0;
+    -webkit-transition-duration: background-color 0.1s linear; /* Safari */
+    transition: background-color 0.1s linear;
+}
+
+.remove-button:hover{
+    background-color: rgba(255, 0, 0, 0.63) !important;
+}
+
+.show-coin-chart-portfolio-button {
+    margin: 0.3% 0.5% 0.5% 0.5%;
+    border: thin solid whitesmoke !important;
+    background-color: rgba(0, 0, 0, 0) !important;
+    -webkit-transition-duration: background-color 0.1s linear; /* Safari */
+    transition: background-color 0.1s linear;
+}
+
+.show-coin-chart-portfolio-button:hover{
+    background-color: rgba(43, 144, 143, 0.86) !important;
+
+}
+
+.show-chart-gl{
+    color: whitesmoke !important;
+}
+
+.coin-content{
+    color: whitesmoke;
+    width: 100% !important;
+    border-radius: 1px !important;
+    border: thin solid whitesmoke !important;
+    background-color: rgba(0, 0, 0, 0) !important;
+    display: flex !important;
+    justify-content: flex-end !important;
+    font-size: 120%;
+    padding: 0.5%
 }
 
 .coinName {
@@ -67,53 +392,58 @@
     display: inline-block;
 }
 
-p:hover {
-    text-decoration: none !important;
-}
-
 .coinEntryChangeDown {
     display: inline-block;
-    color: darkred !important;
+    color: #ff0000 !important;
 }
 
 .coinEntryChangeUp {
     display: inline-block;
-    color: green !important;
-}
-
-.ticker-button {
-    height: 845px !important;
-    right: 0 !important;
-    position: fixed;
-    z-index: 1;
+    color: #00ff00 !important;
 }
 
 .ticker-container {
-    height: 845px;
+    border-radius: 1px !important;
+    border: thin solid whitesmoke !important;
+    background-color: rgba(0, 0, 0, 0) !important;
+    color: whitesmoke;
+    height: 850px;
     overflow-y: scroll;
     overflow-x: hidden;
 }
 
+.ticker-row{
+    color: whitesmoke;
+}
+
+.ticker-row:hover{
+    color: #000 !important;
+}
+
 .ticker-change-up {
-    color: green;
+    color: #00ff00;
 }
 
 .ticker-change-down {
-    color: darkred;
-}
-
-.chart-container-big {
-    height: 400px;
-}
-
-.chart-container-small {
-    height: 400px;
-    width: 1350px;
+    color: #ff0000;
 }
 
 .chosen-fiat{
-    background-color: #4A90E2;
-    color: whitesmoke;
+    text-align: center;
+
+    background-color: #ffffff;
+    color: #000000;
+}
+
+.available-fiats{
+    background-color: #000;
+    text-align: center;
+
+}
+
+.available-fiats:hover{
+    background-color: #fff !important;
+    color: #000 !important;
 }
 
 /*.ticker-head {*/
@@ -124,6 +454,7 @@ p:hover {
 /* DayPicker styles */
 /*i know this is a hack please dont hate me*/
 .DayPicker {
+    z-index:4;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -305,163 +636,3 @@ p:hover {
     -webkit-box-shadow: 0 2px 5px rgba(0, 0, 0, .15);
     box-shadow: 0 2px 5px rgba(0, 0, 0, .15);
 }
-/*body {*/
-  /*padding: 50px;*/
-  /*font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;*/
-/*}*/
-
-/*a {*/
-  /*color: #1b1c1c;*/
-/*}*/
-
-/*.header-container {*/
-  /*width: 100%;*/
-  /*height: 7%;*/
-  /*background-color: #1d1d1d;*/
-  /*position: fixed;*/
-  /*top: 0;*/
-  /*left: 0;*/
-    /*-webkit-box-shadow: 0px 3px 6px 0px rgba(0,0,0,0.77);*/
-    /*-moz-box-shadow: 0px 3px 6px 0px rgba(0,0,0,0.77);*/
-    /*box-shadow: 0px 3px 6px 0px rgba(0,0,0,0.77);*/
-    /*z-index: 2;*/
-/*}*/
-
-/*.logo {*/
-    /*left: 0.5%;*/
-    /*top: 0.3%;*/
-    /*width: 5%;*/
-    /*position: fixed;*/
-
-/*}*/
-
-/*.ticker-container {*/
-    /*width: 20%;*/
-    /*height: 93%;*/
-    /*top: 7%;*/
-    /*right: 0;*/
-    /*background-color: #484848;*/
-    /*position: fixed;*/
-    /*overflow-y: scroll;*/
-    /*overflow-x: hidden;*/
-    /*font-family: 'Open Sans', sans-serif;*/
-    /*color: whitesmoke;*/
-/*}*/
-
-/*Tr:hover {*/
-    /*background-color: #393939;*/
-/*}*/
-
-
-/*.graph-container {*/
-    /*top: 7%;*/
-    /*height: 37%;*/
-    /*width: 80%;*/
-    /*right: 20%;*/
-    /*background-color: #D5D5D5;*/
-    /*position: fixed;*/
-/*}*/
-
-/*.graph {*/
-    /*width: 78%;*/
-    /*height: 33%;*/
-    /*top: 9%;*/
-    /*left: 1%;*/
-    /*background-color: whitesmoke;*/
-    /*position: fixed;*/
-/*}*/
-
-/*.graph-placeholder {*/
-    /*width: 78%;*/
-    /*height: 33%;*/
-    /*top: 9%;*/
-    /*left: 1%;*/
-    /*background-color: whitesmoke;*/
-    /*position: fixed;*/
-    /*color: #1d1d1d;*/
-    /*display: flex;*/
-    /*justify-content: center;*/
-    /*align-items: center;*/
-    /*font-family: 'Open Sans', sans-serif;*/
-    /*font-size: 24px;*/
-    /*z-index: 1;*/
-/*}*/
-
-/*.activePortfolio-toolbar {*/
-    /*top: 44%;*/
-    /*width: 80%;*/
-    /*height: 5%;*/
-    /*background-color: #1d1d1d;*/
-    /*right: 20%;*/
-    /*position: fixed;*/
-/*}*/
-
-/*.activePortfolio-performance {*/
-    /*top: 49%;*/
-    /*right: 20%;*/
-    /*width: 20%;*/
-    /*height: 100%;*/
-    /*background-color: #303030;*/
-    /*position: fixed;*/
-
-/*}*/
-
-/*!*.activePortfolio-container {*!*/
-    /*!*top: 49%;*!*/
-    /*!*right: 40%;*!*/
-    /*!*width: 100%;*!*/
-    /*!*height: 100%;*!*/
-    /*!*background-color: #a6a3a9;*!*/
-    /*!*position: fixed;*!*/
-/*!*}*!*/
-
-
-/*.activePortfolio-input {*/
-    /*top: 49%;*/
-    /*height: 100%;*/
-    /*right: 40%;*/
-    /*width: 100%;*/
-    /*background-color: #a6a3a9;*/
-    /*!*z-index: 4;*!*/
-    /*position: fixed;*/
-    /*font-family: 'Open Sans', sans-serif;*/
-    /*color: #1d1d1d;*/
-/*}*/
-
-/*!*.input-form {*!*/
-    /*!*left: 2%;*!*/
-    /*!*bottom: 3%;*!*/
-    /*!*width: 15%;*!*/
-    /*!*position: fixed;*!*/
-    /*!*z-index: 5;*!*/
-/*!*}*!*/
-
-/*!*.activePortfolio-entry {*!*/
-    /*!*position: fixed;*!*/
-    /*!*top: 49%;*!*/
-    /*!*left: 0;*!*/
-    /*!*right: 40%;*!*/
-    /*!*height: 7%;*!*/
-    /*!*background-color: #cacaca;*!*/
-    /*!*font-family: 'Open Sans', sans-serif;*!*/
-    /*!*color: #1d1d1d;*!*/
-/*!*z-index: 6;*!*/
-/*!*}*!*/
-
-/*!*.entries-cont {*!*/
-    /*!*position: fixed;*!*/
-    /*!*margin-top: 7%;*!*/
-    /*!*top: 49%;*!*/
-    /*!*bottom: 15%;*!*/
-    /*!*height: 100%;*!*/
-    /*!*right: 40%;*!*/
-    /*!*width: 100%;*!*/
-    /*!*background-color: #a6a3a9;*!*/
-
-/*!*}*!*/
-
-/*.list-group{*/
-    /*color: #1d1d1d;*/
-    /*background-color: #484848;*/
-/*}*/
-

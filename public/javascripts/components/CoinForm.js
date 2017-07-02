@@ -13,16 +13,23 @@ export default class CoinForm extends Component {
         this.handleDayClick = this.handleDayClick.bind(this);
         this.state = {
             name: '',
+            portfolioName: '',
             quantity: 0,
             selectedDay: this.props.date ? this.props.date : 'Select date',
             disabledButton: false,
-            noDateWarning: false
+            noDateWarning: false,
+            sameCoinWarn: this.props.sameCoinWarn,
+            editModal: false
         };
     }
 
     // sets coin chosen by user as state to display and send to CoinInputApp for handling on submit
     handleNameChange(e) {
         this.setState({ name: e.target.value });
+    }
+
+    handlePortfolioNameChange(e) {
+        this.setState({ portfolioName: e.target.value });
     }
 
     //sets quantity specified by user as state to display and send to CoinInputApp for handling on submit
@@ -61,7 +68,8 @@ export default class CoinForm extends Component {
     reset(){
         this.setState({
             name: '',
-            quantity: 0});
+            quantity: 0,
+        portfolioName: ''});
     }
 
     // CSV export functionality:
@@ -130,6 +138,11 @@ export default class CoinForm extends Component {
         }
     }
 
+    handleSameCoinWarn(){
+        this.setState({sameCoinWarn:false});
+        this.props.dismissWarn(false)
+    }
+
 
 // render JSX
     render () {
@@ -146,18 +159,18 @@ export default class CoinForm extends Component {
 
         return (
             // form rendering JSX
-            <div>
+            <div className="coin-form">
                 <OverlayTrigger placement="top"
                                 overlay={<Tooltip id="tooltip">Add coin to portfolio</Tooltip>}>
-                    <Button onClick={ ()=> this.setState({ open: !this.state.open })}>
-                        <Glyphicon glyph="plus"/>
+                    <Button className="add-coin-btn" onClick={ ()=> this.setState({ open: !this.state.open })}>
+                        <Glyphicon className="add-coin-gl" glyph="plus"/>
                     </Button>
                 </OverlayTrigger>
                 {' '}
                 <OverlayTrigger placement="top"
                                 overlay={<Tooltip id="tooltip">Download portfolio locally as CSV</Tooltip>}>
-                    <Button onClick={ () => this.downloadCSV({ filename: "portfolio-data.csv" }) }>
-                        <Glyphicon glyph='save'/>
+                    <Button className="export-btn" onClick={ () => this.downloadCSV({ filename: "portfolio-data.csv" }) }>
+                        <Glyphicon className="export-gl" glyph='save'/>
                     </Button>
                 </OverlayTrigger>
                 {' '}
@@ -167,8 +180,8 @@ export default class CoinForm extends Component {
                                 overlay={uploadPopover}>
                     <OverlayTrigger placement="top"
                                     overlay={<Tooltip id="tooltip">Upload portfolio CSV</Tooltip>}>
-                        <Button>
-                            <Glyphicon glyph="open"/>
+                        <Button className="export-btn">
+                            <Glyphicon className="export-gl" glyph="open"/>
                         </Button>
                     </OverlayTrigger>
                 </OverlayTrigger>
@@ -176,8 +189,8 @@ export default class CoinForm extends Component {
 
                 <OverlayTrigger placement="top"
                                 overlay={<Tooltip id="tooltip">Show portfolio performance chart</Tooltip>}>
-                    <Button onClick={this.showPortfolioChart.bind(this)}>
-                        <Glyphicon glyph="signal"/>
+                    <Button className="show-coin-chart-portfolio-button" onClick={this.showPortfolioChart.bind(this)}>
+                        <Glyphicon className="show-chart-gl" glyph="signal"/>
                     </Button>
                 </OverlayTrigger>
 
@@ -228,9 +241,28 @@ export default class CoinForm extends Component {
 
                 </Modal>
 
+                {' '}
+
+                <Modal className="modal" keyboard show={this.state.sameCoinWarn} bsSize="small">
+                    <Modal.Header className="modal-header">
+                        <Modal.Title className="modal-title" id="contained-modal-title-sm"><strong>Coin already in portfolio</strong></Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body className="modal-body">
+                        <h4>Coin already in portfolio!</h4>
+                    </Modal.Body>
+                    <Modal.Footer className="modal-footer">
+                            <Button className="modal-close-button" bsSize="large"
+                                    onClick={() => this.handleSameCoinWarn.bind(this)} >
+                                <Glyphicon glyph="menu-left"/>
+                                {' '}
+                                Return
+                            </Button>
+                        </Modal.Footer>
+                </Modal>
+
 
                 {' '}
-                <p style={{display: 'inline-block'}}>Tracking portfolio from:</p>
+                <p className="tracking-label" style={{display: 'inline-block'}}>Tracking portfolio from:</p>
                 {' '}
                 <DayPickerInput
                     style={{display: 'inline-block'}}
@@ -238,13 +270,55 @@ export default class CoinForm extends Component {
                     onDayChange={day => this.handleDayClick(day)}
                 />
                 {' '}
-                <Button>
-                    <Glyphicon glyph="pencil" />
+                <div className="remove-edit-btns">
+                <Button className="edit-name-btn"
+                onClick={() => this.setState({editModal: !this.state.editModal})}>
+                    <Glyphicon className="edit-name-gl" glyph="pencil" />
                 </Button>
                 {' '}
-                <Button onClick={() => this.props.removePortfolio(this.props.portfolio.id)}>
-                    <Glyphicon glyph="trash"/>
+                <Button className="remove-port-btn" onClick={() => this.props.removePortfolio(this.props.portfolio.id)}>
+                    <Glyphicon className="remove-port-gl" glyph="trash"/>
                 </Button>
+                </div>
+
+
+                <Modal className="modal" keyboard show={this.state.editModal} bsSize="small">
+
+                    <Modal.Header className="modal-header">
+                        <Modal.Title className="modal-title" id="contained-modal-title-sm"><strong>Edit portfolio name</strong></Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body className="modal-body">
+                        <h4>Please type in new portfolio name</h4>
+                        <Form
+                            // this function takes user input data and runs it through handling function,
+                            // and then clears input window (and entered value itself) on submit
+                            onSubmit={(e) => {
+                                e.preventDefault();
+                                this.props.editName(this.state.portfolioName);
+                                this.reset();
+                                this.setState({editModal: false});
+                            }}>
+                        <FormControl
+                            bsSize="sm"
+                            type="text"
+                            placeholder="Enter name"
+                            value={this.state.portfolioName}
+                            onChange={this.handlePortfolioNameChange.bind(this)}
+                        />
+                        </Form>
+                        {this.state.portfolioName !== '' ? <HelpBlock> When done, hit Enter </HelpBlock> : null}
+                    </Modal.Body>
+                        <Modal.Footer className="modal-footer">
+                            <Button className="modal-close-button" bsSize="large" onClick={() => {
+                                this.setState({editModal: false, portfolioName: ''})}}>
+                                <Glyphicon glyph="menu-left"/>
+                                {' '}
+                                Return
+                            </Button>
+                        </Modal.Footer>
+
+                </Modal>
+
                 {' '}
                 <Collapse in={this.state.open}>
                     <div>
@@ -348,11 +422,12 @@ export default class CoinForm extends Component {
                                 />
                             </FormGroup>
                             {' '}
-                            <Button type="submit" disabled={this.disableButton()}> Submit </Button>
+                            <Button className='sumbit-btn' type="submit" disabled={this.disableButton()}> Submit </Button>
 
                         </Form>
                     </div>
                 </Collapse>
+
             </div>
         );
     }

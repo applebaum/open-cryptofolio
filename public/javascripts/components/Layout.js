@@ -3,7 +3,7 @@ import cookie from "react-cookies";
 import GraphContainer from './GraphContainer';
 import Ticker from './TickerTable';
 import PortfolioContainer from './PortfolioContainer';
-import { Button, OverlayTrigger, Tooltip, Glyphicon, Grid, Col, Row,  Navbar } from 'react-bootstrap';
+import { Button, OverlayTrigger, Tooltip, Glyphicon, Grid, Col, Row,  Image } from 'react-bootstrap';
 
 /**This is a layout component utilising bootstrap grid system*/
 //TODO: cookies
@@ -55,22 +55,33 @@ export default class Layout extends Component {
 
                     <Row className="show-grid">
                         <Col md={12}>
-                            <Navbar className="navbar"><h1 className="nav-name">Coin till</h1></Navbar>
+                            <div className="navbar">
+                                <Image responsive className="logo" src="../../logo.png" alt="OpenCryptofolio - Free and Open Source cryptocurrency portfolio manager app" />
+                            </div>
+                            <OverlayTrigger placement="bottom"
+                                            overlay={this.state.showTicker ?
+                                                <Tooltip id="tooltip">Hide ticker</Tooltip> :
+                                                <Tooltip id="tooltip">Show ticker for all available coins (consumes bandwidth)</Tooltip>}>
+                                <Button  className="ticker-button" onClick={ () => this.showTicker() }>
+                                    {this.state.showTicker ?
+                                        <div>
+                                            Hide Ticker
+                                            {' '}
+                                            <Glyphicon glyph="menu-right"/>
+                                        </div>
+                                        :
+                                        <div>
+                                            <Glyphicon glyph="menu-left"/>
+                                            {' '}
+                                            Show Ticker
+                                        </div>}
+                                </Button>
+                            </OverlayTrigger>
                         </Col>
                     </Row>
 
                     <Row className="show-grid">
                         <Col md={this.state.columnSize}>
-
-                            <OverlayTrigger placement="left"
-                                            overlay={this.state.showTicker ?
-                                                <Tooltip id="tooltip">Hide ticker</Tooltip> :
-                                                <Tooltip id="tooltip">Show ticker for all available coins (consumes bandwidth)</Tooltip>}>
-                                <Button  className="ticker-button" onClick={ () => this.showTicker() }>
-                                    <Glyphicon glyph="list"/>
-                                </Button>
-
-                            </OverlayTrigger>
 
                             <GraphContainer
                                 portfolio={this.state.portfolio}
@@ -84,6 +95,7 @@ export default class Layout extends Component {
                             />
 
                             <PortfolioContainer
+                                className="port-cont"
                                 passPortfolioMetadata={this.passPortfolioToChart.bind(this)}
                                 showPortfolioChart={this.state.showPortfolioChart}
                                 showCoinChart={this.showChart}

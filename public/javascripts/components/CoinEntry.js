@@ -1,6 +1,8 @@
 import React, {Component} from "react";
 
-import { Modal, Tooltip, OverlayTrigger, Glyphicon, Panel, Button } from 'react-bootstrap';
+import { Modal, Tooltip, OverlayTrigger, Glyphicon, Panel, Button, ListGroupItem, Collapse } from 'react-bootstrap';
+import ReactFitText from 'react-fittext';
+
 
 //connect to Node.js server via socket.io
 import io from 'socket.io-client';
@@ -17,6 +19,7 @@ export default class Coin extends Component {
         this.updatePrice = this.updatePrice.bind(this);
         // set initial empty state for each coin available for tracking
         this.state = {
+            open: false,
             removeWarning: false,
             data: {
                 price: 0,
@@ -132,7 +135,7 @@ export default class Coin extends Component {
         //otherwise return string placeholder
         if (this.state.data.price !== 0 && this.state.BTC.price !== 0) {
             return (
-                <div className="allContentData" style={{display: 'inline-block'}}>
+                <div className="coin-content" style={{display: 'inline-block'}}>
                     <div style={{display: 'inline-block'}} className="btcPriceFull">
                         <p className="toBTCRatioName"> {this.props.coin.id}/BTC: </p>
                         {' '}
@@ -147,16 +150,16 @@ export default class Coin extends Component {
                         <p className="toBTCRatioValue">{(this.state.data.price).toFixed(2)} </p>
                     </div>
                     {' '}
-                    <Button className="show-coin-chart-portfolio-button"
+                    <Button bsSize="sm" className="show-coin-chart-portfolio-button"
                             onClick={() => this.displayChart('http://localhost:3000/hist/' + this.props.coin.id, this.props.coin.id, false)}>
-                        <Glyphicon glyph="signal" />
+                        <Glyphicon className="show-chart-gl" glyph="signal" />
                     </Button>
                     {' '}
                     {/*render remove coin entry from portfolio button*/}
                     <OverlayTrigger delayShow={500} placement="right" overlay={<Tooltip id="tooltip">Remove coin from portfolio</Tooltip>}>
-                        <Button bsStyle="danger" className="remove-button"
+                        <Button bsSize="sm" bsStyle="danger" className="remove-button"
                                 onClick={()=>this.setState({ removeWarning: true })}>
-                            <Glyphicon glyph="remove"/>
+                            <Glyphicon className="remove-coin-gl" glyph="remove"/>
                         </Button>
                     </OverlayTrigger>
                     {/*render delete coin confirmation controlled by this.state.removeWarning boolean*/}
@@ -232,9 +235,7 @@ export default class Coin extends Component {
                     </div>
                     {' '}
                     <OverlayTrigger placement="right" overlay={<Tooltip id="tooltip">Show more</Tooltip>}>
-                        <Button>
-                            <Glyphicon glyph="menu-down"/>
-                        </Button>
+                            <Glyphicon className="coin-header-menu-down" glyph="menu-down"/>
                     </OverlayTrigger>
 
                 </div>
@@ -250,15 +251,19 @@ export default class Coin extends Component {
     render() {
         return (
             <div>
-                <Panel
-                    className="coinEntry"
-                    collapsible
-                    // data displayed in header
-                    header={this.showHeader()}
-                    key={this.props.coin.id} >
-                    {/*data displayed under cat*/}
-                    {this.showContent()}
-                </Panel>
+                <ListGroupItem
+                    className="coin-entry"
+                    onClick={() => this.setState({open: !this.state.open})}>
+                    {/*<ReactFitText maxFontSize='14px'>*/}
 
+                    {this.showHeader()}
+                    {/*</ReactFitText>*/}
+                </ListGroupItem>
+
+                <Collapse in={this.state.open}>
+                    <div>
+                    {this.showContent()}
+                    </div>
+                </Collapse>
             </div>);
     }}

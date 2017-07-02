@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import { Accordion } from 'react-bootstrap';
+import { ListGroup } from 'react-bootstrap';
 import CoinEntry from './CoinEntry';
 
 //list creating function
@@ -29,6 +29,9 @@ export default class CoinList extends Component {
         />
     });
     // return list
-    return (<Accordion> {coinNode} </Accordion>);
+    return (
+        <div>
+            <ListGroup> {coinNode} </ListGroup>
+        </div>);
     }
 };

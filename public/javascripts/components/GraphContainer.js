@@ -142,12 +142,12 @@ export default class GraphContainer extends Component {
     render() {
         return (
                 <Col md={12}>
-                        <Well>
+                        <div className="graph-container">
                             <Graph chosenCoinData={this.state.chosenCoinData}
                                    chosenCoinName={this.state.chosenCoinName}
                                    key={this.state.key}
                             />
-                        </Well>
+                        </div>
                 </Col>
 
             );

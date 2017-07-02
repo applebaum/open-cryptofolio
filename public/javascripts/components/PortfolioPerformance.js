@@ -1,6 +1,7 @@
 import React, {Component} from "react";
-import { Table, Jumbotron, Button, Collapse } from 'react-bootstrap';
+import { Table, Well, Button, Collapse } from 'react-bootstrap';
 import axios from 'axios';
+import ReactFitText from 'react-fittext';
 
 /*This will be a component for displaying overall value of user's activePortfolio*/
 
@@ -151,18 +152,22 @@ export default class Performance extends Component {
     render() {
 
         return (
-            <Jumbotron style={{height: '425px'}}>
+            <div className="sum-container" >
 
-                <Button  onClick={() => this.setState({open: !this.state.open})}>
+                <Button className="fiat-btn" onClick={() => this.setState({open: !this.state.open})}>
                     <h4>{this.state.fiat}</h4>
                 </Button>
 
-                <h1 style={{display: 'inline-block'}}>
-                    {this.state.fiat === 'USD' ? (this.state.sum).toFixed(2) : (this.state.converted).toFixed(2)}
-                </h1>
+                <div className="sum">
+                    <ReactFitText>
+                        <h1>
+                            {this.state.fiat === 'USD' ? (this.state.sum).toFixed(2) : (this.state.converted).toFixed(2)}
+                        </h1>
+                    </ReactFitText>
+                </div>
 
                 <Collapse in={this.state.open}>
-                    <div>
+                    <div className="fiat-table-container">
                         <Table condensed responsive>
                             <tbody>
                             <tr>
@@ -314,7 +319,7 @@ export default class Performance extends Component {
                     </div>
                 </Collapse>
 
-            </Jumbotron>
+            </div>
         );
     }
 }
