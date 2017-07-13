@@ -10,7 +10,7 @@ data and historical performance chart.
 
 All of the data is handled client-side, nothing is sent to server. If you choose to wipe cookies at the end of browsing session you can save your portfolio locally and later easily import it. 
 
-The project is currently under development, stay tuned for updates.
+The project is currently on temporary hold. However, if you wish to contrubute, please do so!
 
 ## Build Instructions
 The project is based on Node.js Express server with React.js front-end.
